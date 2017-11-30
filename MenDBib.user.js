@@ -11,7 +11,7 @@
 // @grant       GM_setValue
 // @grant       GM_getValue
 // @grant       GM_xmlhttpRequest
-// @version     1.3
+// @version     1.4
 // @supportURL  https://mendbib.wordpress.com/contact/
 // ==/UserScript==
 
@@ -43,6 +43,7 @@ var dbKey         = localStorage["dbKey"];
 var dbAuth        = "https://www.dropbox.com/oauth2/authorize?";
 var bibFile       = "mendbib.bib";
 var problemBib    = "mendbib_prob.bib";
+var informationBib = "mendbib_info.README";
 var dbApiBase     = "https://content.dropboxapi.com/2/files/";
 // see https://www.dropbpx.com/developers-v1/core/docs#oa2-authorize; also see https://jsfiddle.net/seppe/eve5c72n
 // https://stackoverflow.com/questions/41186899/script-to-read-write-a-file-that-is-
@@ -57,7 +58,7 @@ var barLength = 400; // length in pixels of the status bar while downloading/upl
 // www.sharelatex.com/project), then this button should NOT appear.  The test is whether or not the URL
 // has anything past the "project" part of the url.  Do the test:
 var projMatch = /https:\/\/www.sharelatex.com\/project\/\S+/;
-if (!iconImg) {var iconImg = getIcon() }; // loads up the MenDBib logo data to construct the button below
+if (!iconImg) {var iconImg = getIcon(); } // loads up the MenDBib logo data to construct the button below
 if (projMatch.test(document.location.href) && document.location.href.indexOf("access_token") == -1) {
 // we are down in a project directory (there are characters to the right of "project" in the url, and we
 // are not on the login redirect page), so present the button
@@ -437,10 +438,17 @@ function writeBib(remainingBib, nChunks, chunkCnt, sessionID, byteAccum)
         loginAndGetAndWriteBib();
     } else { // token is fine, proceed with writing the file
         var dbToken = GM_getValue("StoredDbToken");
-// take the bib and separate the good from the bad
+// take the bib and separate the good from the bad from the informational section
         var clipHere = remainingBib.indexOf("CLIP-HERE");
-        var goodBib = remainingBib.slice(0,clipHere); // get the first part of string up to but not including the CLIP-HERE
-        var badBib  = remainingBib.slice(clipHere + 9); // get everything past the last "e" in CLIP-HERE
+        if (clipHere != -1) {
+            var goodBib = remainingBib.slice(0,clipHere); // get the first part of string up to but not including the CLIP-HERE
+        } else { var goodBib = ''; }
+        var clipInfo = remainingBib.indexOf("CLIP-INFO");
+        if (clipInfo != -1) {
+            var badBib  = remainingBib.slice(clipHere + 9, clipInfo);
+        } else { var badBib = ''; }
+// above says: get everything past the last "e" in CLIP-HERE and just before the "c" in CLIP-INFO
+        var infoBib = remainingBib.slice(clipInfo + 9);
 // in the event that goodBib or badBib were to end with a "SNIPSNIP", the code below breaks because it
 // anticipates that the file continues beyond a SNIPSNIP (a chunk divider). Remove any SNIPSNIPs that end
 // up being the last item in a goodBib or badBib, the result of the file being an integer number of chunks,
@@ -451,14 +459,21 @@ function writeBib(remainingBib, nChunks, chunkCnt, sessionID, byteAccum)
         if (endTest.trim() == "SNIPSNIP") {badBib = badBib.substring(0,badBib.length-8); }
 // clip out the next chunk, indicated by either the text up to the words "SNIPSNIP", or to the end of the file,
 // whichever is the situation:
-        if (goodBib) { // if there is still some remaining chunks in the good bib section, grab the topmost chunk:
+        if (goodBib) { // if there still are some remaining chunks in the good bib section, grab the topmost chunk:
             var bibName = bibFile;
 // search for the preamble, which would indicate a prestine, as-of-yet unaltered bibtex file
             var atTop = goodBib.indexOf("%top");
             if (atTop != -1) {
-                var nChunks = (goodBib.match(/SNIPSNIP/g) || []).length + (badBib.match(/SNIPSNIP/g) || []).length + 1;
+// Need to make a special consideration if the processBib was commented out and the file is one big block
+// without SNIPSNIP and CLIP-HERE
+                if (!badBib && !infoBib) {
+                    var nChunks = 1;
+                } else {
+                    var nChunks = ((goodBib.match(/SNIPSNIP/g) || []).length + 1) + ((badBib.match(/SNIPSNIP/g) || []).length + 1) + 1;
+                }
+// The additional +1 above is to account for the very last chunk that is the informational section
                 var chunkCnt = 1;
-                var barFixed = makeBar(bibFile+","+problemBib+" saving to Dropbox in: /"+docTitle,"uploadBar1",
+                var barFixed = makeBar("saving bibtex to /dropbox/Apps/ShareLaTeX/"+docTitle,"uploadBar1",
 				                       barLength+"px", "lightgrey", "1.0");
 // The passed parameters are the words to appear in the bar, the ID of the bar, the length of the bar, color, and opacity
 // Now add the moving bar that will move along on top of this fixed background bar, as file is retrieved
@@ -470,23 +485,30 @@ function writeBib(remainingBib, nChunks, chunkCnt, sessionID, byteAccum)
             if (snipHere != -1) { // this chunk is one of multiple chunks
                 var partBib = goodBib.slice(0,snipHere); // one of multiple chunks
 // remove this chunk from remainingBib
-                remainingBib = goodBib.slice(snipHere + 8) + "CLIP-HERE" + badBib;
+                remainingBib = goodBib.slice(snipHere + 8) + "CLIP-HERE" + badBib + "CLIP-INFO" + infoBib;
             } else { // this chunk is either the only chunk or the last chunk
                 var partBib = goodBib;
-                remainingBib = "CLIP-HERE" + badBib;
+                remainingBib = "CLIP-HERE" + badBib + "CLIP-INFO" + infoBib;
             }
-        } else { // if all the text in the good bib section has been whittled out, then bad bib is left
-            var bibName = problemBib;
-            var atTop = badBib.indexOf("%top");
+        } else if (badBib) { // after all the goodBib has been whittled out, if there are some remaining chunks in badbib section, get the top chunk
+            bibName = problemBib;
+            atTop = badBib.indexOf("%top");
             chunkCnt = chunkCnt + 1;
-            var snipHere = badBib.indexOf("SNIPSNIP");
+            snipHere = badBib.indexOf("SNIPSNIP");
             if (snipHere != -1) {
-                var partBib = badBib.slice(0,snipHere);
-                remainingBib = "CLIP-HERE" + badBib.slice(snipHere + 8);
+                partBib = badBib.slice(0,snipHere);
+                remainingBib = "CLIP-HERE" + badBib.slice(snipHere + 8) + "CLIP-INFO" + infoBib;
             } else {
-                var partBib = badBib;
-                remainingBib = "";
+                partBib = badBib;
+                remainingBib = "CLIP-INFO" + infoBib;
             }
+        } else { // all that's left is the informational section
+            var bibName = informationBib;
+            partBib = infoBib;
+            atTop = 0;
+            snipHere = -1;
+            remainingBib = '';
+            chunkCnt = chunkCnt + 1;
         }
 
 // Now define the header information that gets passed to the API:
@@ -514,8 +536,8 @@ function writeBib(remainingBib, nChunks, chunkCnt, sessionID, byteAccum)
         } else if (atTop == -1 && snipHere == -1) {
 // the fact that atTop is -1 means that the remainingBib has already been chopped, so this
 // iteration is not the first time through. Either this iteration is appending or finishing.
-// The fact that "SNIPSNIP" was no longer present in the bibtex (snipHere == -1) means that
-// clarifies that the situation is that this chunk is the last one, so we are finishing the file.
+// The fact that "SNIPSNIP" was no longer present in the bibtex (snipHere == -1)  clarifies
+// that the situation is that this chunk is the last one, so we are finishing the file.
             var appendAPI = 'upload_session/finish';
             var hdr = {"Authorization": "Bearer " + dbToken,
                        "Dropbox-API-Arg": JSON.stringify({
@@ -594,7 +616,7 @@ function writeBib(remainingBib, nChunks, chunkCnt, sessionID, byteAccum)
                             var offMatch = /"correct_offset":\s(\d+)}}/;
                             if (offMatch.test(reply.responseText)) {
                                  var newOff = offMatch.exec(reply.responseText)[1];
-// restore remainingBib by attacking the current partBib back to it, then throw back to writeBib to re-do.
+// restore remainingBib by attaching the current partBib back to it, then throw back to writeBib to re-do.
                                  if (appendAPI == 'upload_session/append_v2') {
                                      remainingBib = partBib + "SNIPSNIP" + remainingBib;
                                  } else remainingBib = partBib + remainingBib;
@@ -711,15 +733,11 @@ function processBib(bib){
 //     by \n as we have done in the above pattern), and the u says there may be unicode and just grab it with everything else.
   var entryList = newBib.match(getEntry);
   var goodBib = '%top\n'
-                +'% File created on: '+new Date()+'\n'
-                +'% The entries in this bib file have citekey formats using the following pattern:\n'
-                +'%      journal:  \[lastname\]\[year\]\[journal abbrev\]\[volume\]_\[page\]\n'
-                +'%         book:  \[lastname\]\[year\]\[1st sig. word of title\]\[1st sig. word of publisher\]\n'
-                +'%  proceedings:  \[lastname\]\[year\]\[1st sig. word of article title\]\[1st sig. word of book title\]\n';
+                +'% File created on: '+new Date()+'\n';
   var badBib =  '%top\n'
                 +'% File created on: '+new Date()+'\n'
                 +'% The entries in this bib file were found to have missing information that makes\n'
-                +'% them unviable. Use this file to help correct the entries in Mendeley (be sure to sync\n'
+                +'% them nonviable. Use this file to help correct the entries in Mendeley (be sure to sync\n'
                 +'% after you make any changes in the desktop Mendeley). The citekeys below help inform\n'
                 +'% regarding what critical info is missing. Below is a guideline to help understand the format:\n'
                 +'%      article:  Au? - missing name, Yr? - missing year, Jl? - missing journal name,\n'
@@ -730,6 +748,22 @@ function processBib(bib){
                 +'%                Tb? - missing book title\n'
                 +'% Note that in addition to missing information, the entry type could be wrong, such as\n'
                 +'% needing to be stated as article rather than book or thesis\n';
+  var infoBib1 = ' This file provides additional information for the bibtex file(s) that were just downloaded.\n\n'
+                +'  **********************************  M E N D B I B . B I B ***********************************\n'
+                +' The file called "mendbib.bib" is the file of usable bibtex entries.  Those entries have been\n'
+                +' checked for missing data, corrections have been made where possible, and every entry in there\n'
+                +' should be usable. The "citekey" format follows a pattern consistent with its reference type:\n\n'
+                +'   Ref. Type                                      Format\n'
+                +' -------------  ------------------------------------------------------------------------------------\n'
+                +'  @article      \[lastname\]\[year\]\[journal abbrev\]\[volume\]_\[page\]\n'
+                +'  @book         \[lastname\]\[year\]\[1st sig. word of title\]\[1st sig. word of publisher\]\n'
+                +'  @proceedings  \[lastname\]\[year\]\[1st sig. word of article title\]\[1st sig. word of book title\]\n';
+   var infoBib2 = '\n\n  *******************************  M E N D B I B _ P R O B. B I B **********************************\n'
+                +' The file called "mendbib_prob.bib" is a file of NONusable bibtex entries.  These entries have at\n'
+                +' least 1 serious problem, rendering them nonviable. Usually the problem is missing information, like\n'
+                +' a year, journal name, author name, etc.  The identified problem can easily be seen, as there are\n'
+                +' question marks in the citekey field beside each component of the citekey that is missing info.\n'
+                +' See mendbib_probs.bib for more details.';
 // Useful info at https://tex.stackexchange.com/questions/31394/how-to-enter-publications
 // -in-press-or-submitted-to-in-bibtex/ and http://jblevins.org/log/forthcoming
 
@@ -888,7 +922,7 @@ function processBib(bib){
        if (journalMatch.test(asciiBib)) {
            var origAscii = journalMatch.exec(asciiBib)[1];
            var origLatex = journalMatch.exec(latexBib)[1];
-// Get the first letter of each word in the journal name, ignoring any characters that are not letters
+// Get the first 2 letters of each word in the journal name, ignoring any characters that are not letters
            tmp = origAscii.replace(/[^a-zA-Z ]/g,"");  // replace any character that is NOT a letter, space or number with ""
            if (tmp.trim() != "") {
                tmp = tmp.split(" ");
@@ -896,16 +930,9 @@ function processBib(bib){
                for (var i=0; i < tmp.length; i++) { journal = journal + tmp[i].trim().substr(0,2).toLowerCase(); }
 // Now comment out the original title line in the bib and insert the pseudo abbreviation:
                asciiBib = asciiBib.replace(journalMatch, "    journal = \{"+journal+"\}$2");
-               latexBib = latexBib.replace(journalMatch, "%    journal = \{$1\},\n"
-                                                        +"% WARNING: Journal name unrecognized by MenDBib. Correct any typos in the journal name\n"
-                                                        +"% (eg, extraneous words at the end?) using Mendeley (don't forget to sync changes!) then\n"
-                                                        +"% re-run MenDBib. If journal name is correct, see note at top of this file regarding usage\n"
-                                                        +"% of the manually-edited supplememental file (abbreviations.bib). The @preamble line in\n"
-                                                        +"% abbreviations.bib that should represent this entry is:\n"
-                                                        +"% @preamble\{ \"\\newcommand\{\\"+journal+"\}\{put-official-designation-here\}\" \}\n"
-                                                        +"    journal = \{\\"+journal+"\}$2");
-// Now add a note at the top of the bib file informing user how to deal with this undefined journal entry:
-               noJournalAbbrev = noJournalAbbrev + "%@preamble\{ \"\\newcommand\{\\"+journal+"\}\{"+origLatex+"\}\" \}\n";
+               latexBib = latexBib.replace(journalMatch, "    journal = \{\\"+journal+"\}$2");
+// Now add a note in mendbib_info.README informing user how to deal with this undefined journal entry:
+               noJournalAbbrev = noJournalAbbrev + "\\newcommand\\"+journal+"\{put-abbreviation-here\} %"+origLatex+"\n";
                citeKey = firstAuthor + year + journal + volume + "_" + page;
            }
        }
@@ -963,28 +990,32 @@ function processBib(bib){
 // abbreviations, then note that information here at the top of the goodbib file:
 
   if (noJournalAbbrev != "") {
-       goodBib = goodBib + "% ******************** W A R N I N G ********* unrecognized journal name(s) ****************************\n"
-                         + "% Some @article entries have unrecognized journal names; formal abbreviations could not be \n"
-                         + "% provided for those entries. The journal name may have a typo (correct the info in Mendeley,\n"
-                         + "% not in this file, be sure to sync any changes in Mendeley before hitting the MenDBib button again).\n"
-                         + "% If a case of a less-commonly-used journal, then do the following to incorporate its designated abbreviation:\n"
-                         + "%     (1) create a new file called abbreviations.bib in same directory as this file\n"
-                         + "%          (you only have to create this file once and edit as needed).\n"
-                         + "%     (2) copy/paste the '@preamble' lines below into the newly created file abbreviations.bib,\n"
-                         + "%          (entries associated with these abbreviation place-holders are flagged in file below)\n"
-                         + "%     (3) uncomment the copied lines within abbreviations.bib,\n"
-                         + "%     (4) look up the proper abbreviation for each entry using one of the below websites:\n"
-                         + "%            http://adsabs.harvard.edu/abs_doc/non_refereed.html#\n"
-                         + "%            http://adsabs.harvard.edu/abs_doc/refereed.html\n"
-                         + "%     (5) edit abbreviations.bib by replacing the full journal name that is in the **far right** pair of\n"
-                         + "%         curly brackets with the looked-up abbreviation. This new text will be the abbreviation used\n"
-                         + "%         in the rendering of your latex document.\n"
-                         + "%     (6) in your latex paper, incorporate the abbreviations.bib file by including it in the\n"
-                         + "%         following line: \bibliography{abbreviations,mendbib}\n"
-                         + "%     See http://latex.org/forum/viewtopic.php?t=690 for extensive discussion on this approach.\n"
-                         + "% ********************  C O P Y   L I N E S   B E L O W   I N T O   abreviations.bib *********************\n"
-                         + noJournalAbbrev
-                         + "% ********************************************************************************************************\n";
+       infoBib1 = infoBib1
+                + "\n ******************** W A R N I N G ********* unrecognized journal name(s) ****************************\n"
+                + " Some @article entries in mendbib.bib do not have journal names that are listed among the most commonly cited\n"
+                + " journals hardwired into MenDBib (taken from aastex style file), so formal abbreviations could not be\n"
+                + " assigned to those entries. One possible reason:\n"
+                + "     Perhaps the journal name has a typo.  If such the case, correct the info in Mendeley,\n"
+                + "     do NOT edit mendbib.bib, as the file will just get overwritten when you press the MenDBib button again!,\n"
+                + "     be sure to sync any changes you make to the reference library using Mendeley desktop, and then\n"
+                + "     hit the MenDBib button again to re-download bibtex.\n\n"
+                + " If indeed the case is one of a less-commonly-cited journal, then do the following to incorporate its designated abbreviation:\n"
+                + "     (1) Copy/paste the appropriate '\\newcommand' line(s) below near the top of your LaTeX document,\n"
+                + "         preferably in the section where you have set up other personal \\newcommand definitions.\n"
+                + "     (2) Look up the 'santioned' abbreviation for each entry using one of the below websites:\n"
+                + "            http://adsabs.harvard.edu/abs_doc/non_refereed.html#\n"
+                + "            http://adsabs.harvard.edu/abs_doc/refereed.html\n"
+                + "     (3) Insert the abbreviation in the curly brackets within the associated \\newcommand line that you just\n"
+                + "         copy/pasted, replacing the words 'put-abbreviation-here'.\n"
+                + "         The text now inside the curly brackets will be the abbreviation used in the rendering of your LaTeX\n"
+                + "         document's bibliography as if this journal's abbreviation had been listed in the aastex style file.\n"
+                + "     See http://latex.org/forum/viewtopic.php?t=690 for extensive discussion related to this approach.\n"
+                + " *********** C O P Y   L I N E S   B E L O W   I N T O   \\newcommand block in your LaTeX document *************\n"
+                + noJournalAbbrev
+                + " ********************************************************************************************************\n";
+  } else {
+      infoBib1 = infoBib1
+                + "\n ***************************  All Journal Names Were Recognized ! *************************************\n";
   }
   var indices = sortIndices(authorOrder, 's', yearOrder, 'n');
   var badCnt = 1;
@@ -1019,7 +1050,11 @@ function processBib(bib){
        }
   } // ============= end of second loop =============
 
-  newBib = goodBib + "CLIP-HERE" + badBib;
+  infoBib1 = '%top\n'  // a file that just provides information on the overall bibtex status.
+            +' File created on: '+new Date()+'\n'
+            +' There are '+goodCnt+' entries in "mendbib.bib" and '+badCnt+' entries in "mendbib_prob.bib"\n\n'
+            +infoBib1;
+  newBib = goodBib + "CLIP-HERE" + badBib + "CLIP-INFO" + infoBib1 + infoBib2;
 // The above provides a marker between the good and bad bibtex.  writeBib snips the file here and constructs 2
 // separate files on Dropbox
   return newBib;

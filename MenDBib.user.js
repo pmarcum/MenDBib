@@ -11,7 +11,7 @@
 // @grant       GM_setValue
 // @grant       GM_getValue
 // @grant       GM_xmlhttpRequest
-// @version     1.4
+// @version     1.5
 // @supportURL  https://mendbib.wordpress.com/contact/
 // ==/UserScript==
 
@@ -1032,7 +1032,7 @@ function processBib(bib){
 // into "badBib", viable ones into "goodBib".
 // Don't record this entry if it is redundant with the previous entry (remember that the organization
 // is alphabetical, so duplicates will appear next to each other.
-       if (tmpEntry != prevGoodEntry) { // if not redundant with previous entry ...
+       if (tmpCiteKey != prevGoodEntry) { // if not redundant with previous entry ...
 // The below is to determine if the current entry is one for the good or the bad (problem) file:
            if (tmpCiteKey.indexOf("?") != -1) { // a "bad" bib entry
                if (Math.floor(badCnt/chunkSize) == Math.ceil(badCnt/chunkSize)) {
@@ -1045,7 +1045,7 @@ function processBib(bib){
                         tmpEntry = tmpEntry + "SNIPSNIP";}
                goodCnt = goodCnt + 1;
                goodBib = goodBib + tmpEntry;
-               prevGoodEntry = tmpEntry;
+               prevGoodEntry = tmpCiteKey;
            }
        }
   } // ============= end of second loop =============

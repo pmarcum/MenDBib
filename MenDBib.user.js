@@ -11,7 +11,8 @@
 // @grant       GM_setValue
 // @grant       GM_getValue
 // @grant       GM_xmlhttpRequest
-// @version     1.5
+// @version     1.6
+// @icon        https://i2.wp.com/mendbib.files.wordpress.com/2017/11/tm-icon.png?ssl=1&w=450
 // @supportURL  https://mendbib.wordpress.com/contact/
 // ==/UserScript==
 
@@ -65,7 +66,7 @@ if (projMatch.test(document.location.href) && document.location.href.indexOf("ac
     var input = document.createElement("img");
     input.setAttribute('id', 'MendbibIcon');
     input.setAttribute('src', iconImg);
-    input.setAttribute("style", "position:absolute; bottom:10px; left:10px; height:50px;");
+    input.setAttribute("style", "position:absolute; bottom:20px; left:20px; height:50px;");
     input.onclick = loginAndGetAndWriteBib;
 // Note:  interesting, if the above is "loginAndGetAndWriteBib()", ie with the () included, when the page
 // loads up, it automatically starts executing the function loginAndGetAndWriteBib without any button-clicking.
@@ -576,6 +577,11 @@ function writeBib(remainingBib, nChunks, chunkCnt, sessionID, byteAccum)
                                if (b1) {b1.parentNode.removeChild(b1); }//the progress bar exists, remove it
   			                   var b2 = document.getElementById("uploadBar2");
                                if (b2) {b2.parentNode.removeChild(b2); }//the progress bar exists, remove it
+// need to reload the ShareLaTex window - I discovered this necessity by accident.  ShareLaTeX apparently isn't aware
+// of the updated bibtex file until it is refreshed (and preferably, with the cache cleared ... odd things happen if the
+// cache is not cleared, such as old bibtex entries that are no longer in the current bibtex file present themselves as
+// options when you start typing "\citep" in your ShareLaTeX document.
+                               window.location.reload(true);  // the "true" forces page reload from server rather than from cache
                           }
 // right here, assess what is left of wholebib, if we are at end of goodbib or of babdbib, what next call should be
 // reset url to the base url if goodbib is done and badbib is about to begin

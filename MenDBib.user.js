@@ -11,7 +11,7 @@
 // @grant       GM_setValue
 // @grant       GM_getValue
 // @grant       GM_xmlhttpRequest
-// @version     1.6
+// @version     2.0
 // @icon        https://i2.wp.com/mendbib.files.wordpress.com/2017/11/tm-icon.png?ssl=1&w=450
 // @supportURL  https://mendbib.wordpress.com/contact/
 // ==/UserScript==
@@ -820,7 +820,7 @@ function processBib(bib){
 // does not end up with latex-unfriendly content (e.g., citekeys should not have curly brackets and
 // other such latex mark-up in it).
      var asciiBib = fixSpecialChars(entryList[cnt], "ascii");
-/// make an attempt to normalize the journal names, and consolidate to a syntax that is used by
+// make an attempt to normalize the journal names, and consolidate to a syntax that is used by
 // aastex, e.g., "\apj".  Then compare the before and after bib.  If different, then a journal match
 // was made and the journal name was modified.  if not different, then no match was found, suggesting
 // that the journal name could have been entered incorrectly in Mendeley and should be checked/corrected.
@@ -828,7 +828,7 @@ function processBib(bib){
 // in order to process it into an abbreviation, so that this error won't happen again.
      var tmp = fixJournal(asciiBib, "ascii");
         asciiBib = tmp[0];
-        var journalList = tmp[1];
+        var journalFound = tmp[1];
 // In addition to the special-character-turned-ascii version, we need a special-character-turned-latex
 // version as well. Up until now, all the processing we've done (removing unnecessary sections, double
 // curly brackets, etc) needed to be done no matter if the bib entry was an ascii versus latex version.
@@ -848,11 +848,12 @@ function processBib(bib){
      var paperTitle = getPaperTitle(asciiBib);
      var bookTitle = getBookTitle(asciiBib);
      var publisher = getPublisherName(asciiBib);
-     tmp = getPaperStatus(asciiBib, latexBib, journal); // problem in here
+      tmp = getPaperStatus(asciiBib, latexBib, journal, journalFound); // problem in here
         var pubStatus = tmp[0];
         asciiBib = tmp[1]; // in the course of extracting the paper status, the journal field may have
         latexBib = tmp[2]; // changed (if the status was originally included in the journal field, the status
         journal =  tmp[3]; // will have been removed to give a "pure" journal name, also resulting in change in bib itself)
+        journalFound = tmp[4];
      tmp = getRefType(asciiBib, latexBib, journal, paperTitle, bookTitle, year, page, volume, firstAuthor);
         var refType = tmp[0];
         asciiBib = tmp[1];
@@ -920,10 +921,9 @@ function processBib(bib){
 // will be constructed by taking the first letter of each word in the journal name title, and the original
 // title will be commented out.  Additionally, at the very top of the bib file, a comment will be made
 // describing how a separate bib file needs to be constructed using a @string command to link the pseudo
-// abbreviation to the real abbreviation. If the name in the journal field entry does not match one of
-// the entries in journalList, then the journal is not among the more common journal names that are hardcoded
-// in fixJournal.  Do that check right now:
-   if (refType.toLowerCase() == "article" && citeKey.indexOf("?") == -1 && journalList.indexOf(journal) == -1) {
+// abbreviation to the real abbreviation. If "journalFound" is null, then the journal is not among
+// the more common journal names that are hardcoded in fixJournal.  Do that check right now:
+    if (refType.toLowerCase() == "article" && citeKey.indexOf("?") == -1 && journalFound == "") {
        var journalMatch = /\s{4}journal\s=\s\{(.+)\}(,?\n?)/i; // need to go back and get the full journal name
        if (journalMatch.test(asciiBib)) {
            var origAscii = journalMatch.exec(asciiBib)[1];
@@ -982,7 +982,6 @@ function processBib(bib){
 // Now store the processed bib into the array:
     entryList[cnt] = latexBib+"\n";  // add that final line break to the end of the entry that had been truncated during extraction
  }  // ===========  end of first loop =====================
-
 // The entries by now should all be fixed up as well as they can be, with the provided information.
 // At this point, re-order them so that the firstauther last names are in ascending alphabetical
 // order.  If multiple entries have same first author, organize by year (don't worry beyond that in terms
@@ -1055,7 +1054,6 @@ function processBib(bib){
            }
        }
   } // ============= end of second loop =============
-
   infoBib1 = '%top\n'  // a file that just provides information on the overall bibtex status.
             +' File created on: '+new Date()+'\n'
             +' There are '+goodCnt+' entries in "mendbib.bib" and '+badCnt+' entries in "mendbib_prob.bib"\n\n'
@@ -1284,7 +1282,7 @@ function getPublisherName(aBib) {
 // it was cleaned of the status verbiage.  The bibtex will handle entries with a "in press"
 // or "submitted" status a bit differently, as in recognizing that the absence of a page
 // or volume number is acceptable and not a deficiency of the entry.
-function getPaperStatus(aBib, lBib, jrnl) {
+function getPaperStatus(aBib, lBib, jrnl, jFound) {
   var pubStatus = "";  // is non-null only when a reference is a paper that is submitted, in press, etc.
   var statInPress = /\(\s*in\s*press\s*\)/i;
   var statSubmitted = /\(\s*submitted\s*\)/i;
@@ -1299,9 +1297,7 @@ function getPaperStatus(aBib, lBib, jrnl) {
       var statText = "Submitted";
       var statMatch = statSubmitted;
   }
-
-    // The parenthes arpound the status is not getting removed.  Need to go to regex
-
+  var foundJournal = jFound;
   if (statMatch) {
 // Now that this status has been recorded, remove the occurance of the status from the bib so that the
 // status can go in appropriate place (eg, if it was written by the journal name, the journal name will
@@ -1309,7 +1305,9 @@ function getPaperStatus(aBib, lBib, jrnl) {
 // fixJournal again so that the appropriate abbreviation and latex markup can be inserted, and so that
 // the correct journal notation can be inserted into the citeKey.
       aBib = aBib.replace(statMatch, "");
-      aBib = fixJournal(aBib, "ascii")[0];
+      var tmp = fixJournal(aBib, "ascii");
+      aBib = tmp[0];
+      foundJournal = tmp[1];
       aBib = aBib.trim();
       lBib = lBib.replace(statMatch, "");
       lBib = fixJournal(lBib, "latex")[0];
@@ -1333,7 +1331,7 @@ function getPaperStatus(aBib, lBib, jrnl) {
 // variables that go into the citeKey, as these 2 fields will be completely ignored once the
 // publication status is seen to be "in press" or "submitted".
   }
-  return [pubStatus, aBib, lBib, jrnl];
+  return [pubStatus, aBib, lBib, jrnl, foundJournal];
 }
 // //////////////////////////// END (GETPAPERSTATUS) //////////////////////////////////
 
@@ -1357,11 +1355,12 @@ function getRefType(aBib, lBib, jrnl, ptitle, btitle, yr, pg, vol, fAuthor) {
 // See if there is a match with a common journal name.  We can easily figure this out
 // by making a temporary bib entry that has the journal field set to whatever contents are
 // curently listed as being the title, and sending the bib entry to fixJournal, then
-// seeing if there are any changes between the temp bib entry and the original
-// (indicating that the journal got changed into an abbreviation).
+// seeing if the journal was actually identified.
             var tmp = aBib.replace("title", "journal");
-            var tmpCompare = fixJournal(tmp, "ascii")[0];
-	        if (tmp != tmpCompare) {
+            var res = fixJournal(tmp, "ascii")[0];
+            var tmpCompare = res[0];
+            var jFound = res[1];
+	        if (jFound != "") {
 // If indeed the journal name was in the wrong field, change the field name to be journal and make
 // the reference type be "article" to match the information provided in the ref. Make these
 // changes both in the latex and ascii versions of the bib (in the latex, to insure the final
@@ -1372,8 +1371,9 @@ function getRefType(aBib, lBib, jrnl, ptitle, btitle, yr, pg, vol, fAuthor) {
 	            aBib = tmpCompare;
 	            refType = "article";
 // Need to change the bib to reflect this change in the refType
-//                var firstCurly = aBib.indexOf("\{");
-//                aBib = aBib. COME BACK
+                var curly = aBib.indexOf("{");
+                var part2 = aBib.slice(curly).trim();  // everything from the curly bracket to end of entry
+                aBib = "@" + refType + part2;
 	            ptitle = "Tp?";
 // Now extract the journal name again from this modified bib:
                 jrnl = getJournalName(aBib);
@@ -1383,22 +1383,33 @@ function getRefType(aBib, lBib, jrnl, ptitle, btitle, yr, pg, vol, fAuthor) {
 // Now correct the record in the latex version of the bib:
 	            lBib = lBib.replace("title", "journal");
 	            lBib = fixJournal(lBib, "latex")[0];
+                curly = lBib.indexOf("{");
+                part2 = lBib.slice(curly).trim();
+                lBib = "@" + refType + part2;
 	        }
    }
 // repeat the above, but for book title instead:
    if (jrnl == "Jl?" && btitle != "Tb?" && yr != "Yr?" &&
 	   pg != "Pg?" && vol != "Vo?" && fAuthor != "Au?") {
                var tmp = aBib.replace("booktitle", "journal");
-               var tmpCompare = fixJournal(tmp, "ascii")[0];
-	           if (tmp != tmpCompare) {
+               res = fixJournal(tmp, "ascii")[0];
+               tmpCompare = res[0];
+               jFound = res[1];
+	           if (jFound != "") {
 	               aBib = tmpCompare;
 	               refType = "article";
 	               btitle = "Tb?";
                    jrnl = getJournalName(aBib);
                    pg = getPageNumber(aBib);
+                   var curly = aBib.indexOf("{");
+                   var part2 = aBib.slice(curly).trim();  // everything from the curly bracket to end of entry
+                   aBib = "@" + refType + part2;
                    lBib = lBib.replace("booktitle", "journal");
  	               lBib = fixJournal(lBib, "latex")[0];
-              }
+                   curly = lBib.indexOf("{");
+                   part2 = lBib.slice(curly).trim();
+                   lBib = "@" + refType + part2;
+               }
    }
    return [refType, aBib, lBib, jrnl, pg, ptitle, btitle];
 }
@@ -1421,773 +1432,242 @@ function getRefType(aBib, lBib, jrnl, ptitle, btitle, yr, pg, vol, fAuthor) {
 function fixJournal(bib, version) {
 // big help: https://stackoverflow.com/questions/1234712/javascript-replace-with-reference-to-matched-group
 // http://aramis.obspm.fr/~coulais/BibTeX/aas_macros.sty, https://cdsads.u-strasbg.fr/abs_doc/aas_macros.html
-    var str = bib;
-    var journalList = [];
-    if (version.toLowerCase() == "latex") {
-        var pref = "journal = \{\\";
-    } else { var pref = "journal = \{";}
-    var suff = "\}";
-// ----------------- ACTA ASTRONOMICA
-    var name = "actaa";
-    var abbrev = pref + name + suff;
-    journalList.push(name);
-    var getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bActa\s*A(?:s[tron]{0,4})?(?:om)?(?:ica)?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- ADVANCES IN SPACE RESEARCH
-    name = "asr";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bA(?:d[van]{0,3})?(?:ces)?\.?\s*(?:in\s+)?\s*S(?:p[ace]{0,3})?\.?\s*R(?:e[search]{0,6})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- AMERICAN ASTRONOMICAL SOCIETY MEETING ABSTRACTS
-    name = "aas";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bA(?:m[er]{0,2})?(?:ican)?\.?\s*A(?:s[tro]{0,3})?(?:n[om]{0,2})?(?:ical)?\.?\s*S(?:o[ciety]{0,5})?\.?\s*(?:M[eeting]{0,6})?\.?\s*(?:A[bstracts]{0,8})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- AMERICAN ASTRONOMICAL SOCIETY/ DIVISION FOR PLANETARY SCIENCES MEETING ABSTRACTS
-    name = "dps";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bA?(?:m[er]{0,2})?(?:ican)?\.?\s*A?(?:s[tro]{0,3})?(?:n[om]{0,2})?(?:ical)?\.?\s*S?(?:o[ciety]{0,5})?\.?\s*\/?\:?\s*/
-       ,/D(?:i[vis]{0,3})?(?:ion)?\.?\s*(?:for\s+)?P(?:la?)?(?:n[etary]{0,5})?\.?\s*S(?:c[iences]{0,6})?\.?\s*(?:M[eeting]{0,6})?\.?\s*(?:A[bstracts]{0,8})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- AMERICAN INSTITUTE OF PHYSICS CONFERENCE PROCEEDINGS
-    name = "aipconf";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bA(?:m[er]{0,2})?(?:ican)?\.?\s*I(?:n[st]{0,2})?(?:itute)?\.?\s*(?:of\s+)?P(?:hy?)?(?:s[ics]{0,3})?\.?\s*C(?:o[nf]{0,2})?(?:erence)?\.?\s*(?:P[roc]{0,3})?(?:eedings)?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- ANNUAL REVIEW OF ASTRONOMY AND ASTROPHYSICS
-    name = "araa";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bA(?:nn?)?(?:ual)?\.?\s*R(?:e[view]{0,4})?\.?\s*(?:of\s+)?A(?:s[tro]{0,3})?(?:n[omy]{0,3})?\.?\s*(?:and)?(?:\{\\&\})?(?:\\&)?(?:&)?\s*A(?:s[tro]{0,3})?(?:ph?)?(?:ys)?(?:ics)?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- APPLIED OPTICS
-    name = "ao";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bA(?:p[pl]{0,2})?(?:ied)?\.?\s*O(?:p[tics]{0,4})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- ASTROFIZIKA (english translation: ASTROPHYSICS)
-    name = "afz";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bAstrof[iz]{0,2}(?:i[ka]{0,2})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// Now look for the english translation: Astrophysics
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bAstrop[hy]{0,2}s?(?:ics)?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- ASTRONOMICHESKII ZHURNAL (english translation: ASTRONOMY LETTERS)
-    name = "azh";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bA(?:s[tro]{0,3})?(?:n[om]{0,2})?(?:i[ch]{0,2})?(?:eskii)?\.?\s*z(?:h[urn]{0,3})?(?:al)?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// now take care of any occurances of the english translation, ASTRONOMY LETTERS
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/i
-       ,/\bA(?:s[tro]{0,3})?(?:n[omy]{0,3})?\.?\s*L(?:e[tters]{0,5})?/i
-       ,/\.?\s*\}/i].map(function(r) {return r.source;}).join(''));
-    str = str.replace(getName, abbrev);
-// ----------------- THE ASTRONOMICAL JOURNAL
-    name = "aj";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bA(?:s[tro]{0,3})?(?:n[om]{0,2})?(?:ical)?\.?\s*J(?:o[urn]{0,3})?(?:al)?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- ASTRONOMICAL SOCIETY OF THE PACIFIC CONFERENCE SERIES
-    name = "aspconf";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bA(?:s[tro]{0,3})?(?:n[om]{0,2})?(?:ical)?\.?\s*S(?:o[ciety]{0,5})?\.?\s*(?:of\s+)?(?:the\s+)?P(?:ac?)?(?:ific)?\.?\s*C(?:o[nf]{0,2})?(?:erence)?\.?\s*(?:S[eries]{0,5})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- ASTRONOMISCHE NACHRICHTEN
-    name = "an";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bA(?:s[tro]{0,3})?(?:n[om]{0,2})?(?:ische)?\.?\s*N(?:a[ch]{0,2})?(?:r[ich]{0,3})?(?:ten)?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- ASTRONOMY REPORTS
-// until 1992, this journal was known as Soviet Astronomy
-    name = "arep";
-   abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bAst(?:ro?)?n?(?:omy)?\.?\s*R(?:e[ports]{0,5})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- ASTRONOMY & ASTROPHYSICS
-    name = "aap";
-    abbrev = pref + name +suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bA(?:s[tro]{0,3})?(?:n[omy]{0,3})?\.?\s*(?:and)?(?:\{\\&\})?(?:\\&)?(?:&)?\s*A(?:st)?(?:ro)?(?:ph?)?(?:ys)?(?:ics)?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- ASTRONOMY & ASTROPHYSICS LETTERS
-    name = "aap";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bA(?:s[tro]{0,3})?(?:n[omy]{0,3})?\.?\s*(?:and)?(?:\{\\&\})?(?:\\&)?(?:&)?\s*A(?:st)?(?:ro)?(?:ph?)?(?:ys)?(?:ics)?\.?\s*L(?:e[tters]{0,5})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    var testLetters = getName.test(str);
-    str = str.replace(getName, abbrev);
-// A mistake in the bibtex entry may have been made by entering the A&A Letters reference entry by designating "Letters" in the title.
-// Letters should be designated by having an "L" in front of the page number instead
-// See https://mirror.hmc.edu/ctan/macros/latex/contrib/mnras/mnras_guide.pdf
-// So use the correct abbreviation \aap, and insure than an "L" appears in front of the page number.
-// Now need to insure that the page number has an "L" in front of it. If a page range is given, be sure to correct
-// both numbers.
-    if (testLetters) {
-        var getFirstPage = /pages\s=\s\{\s*(\d+)/;
-        if (getFirstPage.test(str)) { str = str.replace(getFirstPage, "pages = \{L$1"); }
-        var getSecondPage = /pages\s=\s\{\s*(\S+)\s*-+\s*(\d+)/;
-        if (getSecondPage.test(str)) { str = str.replace(getSecondPage, "pages = \{$1--L$2"); }
-    }
-// ----------------- ASTRONOMY & ASTROPHYSICS REVIEWS
-    name = "aapr";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bA(?:s[tro]{0,3})?(?:n[omy]{0,3})?\.?\s*(?:and)?(?:\{\\&\})?(?:\\&)?(?:&)?\s*A(?:st)?(?:ro)?(?:ph?)?(?:ys)?(?:ics)?\.?\s*R(?:e[views]{0,5})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- ASTRONOMY & ASTROPHYSICS SUPPLEMENTAL (Series)
-    name = "aaps";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?(?!a\s*a\s*s\s*\})/
-       ,/\bA(?:s[tro]{0,3})?(?:n[omy]{0,3})?\.?\s*(?:and)?(?:\{\\&\})?(?:\\&)?(?:&)?\s*A(?:st)?(?:ro)?(?:ph?)?(?:ys)?(?:ics)?\.?\s*S(?:u[pplemental]{0,10})?\.?\s*(?:S[eries]{0,5})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- ASTROPHYSICS SPACE PHYSICS RESEARCH
-    name = "apspr";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bA(?:s[tro]{0,3})?(?:ph?)?(?:ys)?(?:ics)?\.?\s*(?:and)?(?:\{\\&\})?(?:\\&)?(?:&)?\s*S(?:p[ace]{0,3})?\.?\s*P(?:h[ysics]{0,5})?\.?\s*(?:R[esearch]{0,7})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- THE ASTROPHYSICAL JOURNAL
-    name = "apj";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bA(?:s[tro]{0,3})?p(?:h[ys]{0,2})?(?:ical)?\.?\s*J(?:o[urn]{0,3})?(?:al)?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- THE ASTROPHYSICAL JOURNAL LETTERS
-    name = "apjl";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bA(?:s[tro]{0,3})?(?:ph?)?(?:ys)?(?:ical)?\.?\s*J(?:o[urn]{0,3})?(?:al)?\.?\s*L(?:e[tters]{0,5})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    testLetters = getName.test(str);
-    str = str.replace(getName, abbrev);
-// the "al" needed to be broken out separately from "journ" to prevent "The AStrophysical Journal" from being a match. Essentially, we are
-// forcing the "l" at the end of journal to be assocaited with "journal" rather than with the "L" in letters.
-// Now need to insure that the page number has an "L" in front of it. If a page range is given, be sure to correct
-// both numbers.
-    if (testLetters) {
-        getFirstPage = /pages\s=\s\{\s*(\d+)/;
-        if (getFirstPage.test(str)) { str = str.replace(getFirstPage, "pages = \{L$1"); }
-        getSecondPage = /pages\s=\s\{\s*(\S+)\s*-+\s*(\d+)/;
-        if (getSecondPage.test(str)) { str = str.replace(getSecondPage, "pages = \{$1--L$2"); }
-    }
-// ----------------- THE ASTROPHYSICAL JOURNAL SUPPLEMENTAL (series)
-   name = "apjs";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bA(?:s[tro]{0,3})?(?:ph?)?(?:ys)?(?:ical)?\.?\s*J(?:o[urn]{0,3})?(?:al)?\.?\s*S(?:u[pplemental]{0,10})?\.?\s*(?:S[eries]{0,5})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- ASTROPHYSICS LETTERS
-    name = "aplett";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bA(?:s[tro]{0,3})?(?:ph?)?(?:ys)?(?:ics)?\.?\s*L(?:e[tters]{0,5})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- ASTROPHYSICS and SPACE SCIENCE
-    name = "apss";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bA(?:s[tro]{0,3})?(?:ph?)?(?:ys)?(?:ics)?\.?\s*(?:and)?(?:\{\\&\})?(?:\\&)?\s*S(?:p[ace]{0,3})?\.?\s*S(?:c[ience]{0,5})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- ASTROPHYSICS and SPACE SCIENCE LIBRARY CONFERENCE SERIES
-    name = "aaslconf";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bA(?:s[tro]{0,3})?(?:ph?)?(?:ys)?(?:ics)?\.?\s*(?:and)?(?:\{\\&\})?(?:\\&)?\s*S(?:p[ace]{0,3})?\.?\s*S(?:c[ience]{0,5})?\.?\s*L(?:i[brary]{0,5})?\.?\s*C(?:o[nference]{0,8})?\.?\s*(?:S[eries]{0,5})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- BULLETIN OF THE AAS
-    name = "baas";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bB(?:u[lletin]{0,6})?\.?\s*(?:of\s+)?(?:the\s+)?A(?:m[erican]{0,6})?\.?\s*A(?:s[tro]{0,3})?(?:n[om]{0,2})?(?:ical)?\.?\s*S(?:o[ciety]{0,5})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- BULLETIN OF THE ASTRONOMICAL INSTITUTES OF THE NETHERLANDS
-    name = "bain";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bB(?:u[lletin]{0,6})?\.?\s*(?:of\s+)?(?:the\s+)?A(?:s[tro]{0,3})?(?:n[om]{0,2})?(?:ical)?\.?\s*I(?:n[stitutes]{0,8})?\.?\s*(?:of\s+)?(?:the\s+)?N(?:e[therlands]{0,9})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- BULLETIN OF THE ASTRONOMICAL INSTITUTES OF CZECHOSLOVAKIA
-    name = "bac";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bB(?:u[lletin]{0,6})?\.?\s*(?:of\s+)?(?:the\s+)?A(?:s[tro]{0,3})?(?:n[om]{0,2})?(?:ical)?\.?\s*(?:I[nstitutes]{0,9})?\.?\s*(?:of\s+)?C(?:z[echoslovakia]{0,12})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- CHINESE ASTRONOMY AND ASTROPHYSICS
-    name = "caa";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bC(?:h[inese]{0,5})?\.?\s*A(?:s[tro]{0,3})?(?:n[omy]{0,3})?\.?\s*(?:and\s+)?(?:&)?(?:\\&)?(?:\{\\&\})?\s*A(?:s[tro]{0,3})?(?:ph?)?(?:ys)?(?:ics)?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- CHINESE JOURNAL OF ASTRONOMY AND ASTROPHYSICS
-    name = "cjaa";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bC(?:h[inese]{0,5})?\.?\s*J(?:o[urn]{0,3})?(?:al)?\.?\s*(?:of\s+)?A(?:s[tro]{0,3})?(?:n[omy]{0,3})?\.?\s*(?:and\s+)?(?:&)?(?:\\&)?(?:\{\\&\})?\s*A(?:s[tro]{0,3})?(?:ph?)?(?:ys)?(?:ics)?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- COMPTES RENDUS ACADEMIA SCIENCE PARIS
-    name = "crasp";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bC(?:o[mptes]{0,5})?\.?\s*R(?:e[ndus]{0,4})?\.?\s*A(?:c[ademia]{0,6})?\.?\s*S(?:c[ience]{0,5})?\.?\s*P(?:a[ris]{0,3})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- FUNDAMENTAL COSMIC PHYSICS
-    name = "fcp";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bF(?:u[ndamental]{0,9})?\.?\s*C(?:o[smic]{0,4})?\.?\s*P(?:h[ysics]{0,5})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- GEOCHIMICA COSMOCHIMICA ACTA
-    name = "gca";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bG(?:e[ochimica]{0,8})?\.?\s*C(?:o[smochimica]{0,10})?\.?\s*A(?:c[ta]{0,2})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- GEOPHYSICS RESEARCH LETTERS
-    name = "grl";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bG(?:e[ophysics]{0,8})?\.?\s*R(?:e[search]{0,6})?\.?\s*L(?:e[tters]{0,5})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- ICARUS
-    name = "icarus";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bIcar(?:us?)?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- INFORMATION BULLETIN OF VARIABLE STARS
-    name = "ibvs";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bI(?:n[formation]{0,9})?\.?\s*B(?:u[lletin]{0,6})?\.?\s*(?:of\s+)?V(?:a[riable]{0,6})?\.?\s*S(?:t[ars]{0,3})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- INTERNATIONAL ASTRONOMICAL UNION CIRCULARS
-    name = "iaucirc";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bI(?:n[ternational]{0,11})?\.?\s*A(?:s[tro]{0,3})?(?:n[om]{0,2})?(?:ical)?\.?\s*U(?:n[ion]{0,3})?\.?\s*C(?:i[rculars]{0,7})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- IRISH ASTRONOMICAL JOURNAL
-    name = "iaj";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bI(?:r[ish]{0,3})?\.?\s*A(?:s[tro]{0,3})?(?:n[om]{0,2})?(?:ical)?\.?\s*J(?:o[urn]{0,3})?(?:al)?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- JOURNAL OF ASTROPHYSICS AND ASTRONOMY (Indian publication)
-    name = "japa";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bJ(?:o[urn]{0,3})?(?:al)?\.?\s*(?:of\s+)?A(?:s[tro]{0,3})?(?:ph?)?(?:ys)?(?:ics)?\.?\s*(?:and)?(?:&)?(?:\\&)?(?:\{\\&\})?\s*A(?:s[tro]{0,3})?(?:n[omy]{0,3})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- JOURNAL OF COSMOLOGY AND ASTROPARTICLE PHYSICS
-    name = "jcap";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bJ(?:o[urn]{0,3})?(?:al)?\.?\s*(?:of\s+)?C(?:o[smology]{0,7})?\.?\s*(?:a[nd]{0,2})?(?:&)?(?:\\&)?(?:\{\\&\})?\s*A(?:s[tro]{0,3})?(?:part)?(?:icle)?\.?\s*P(?:h[ysics]{0,5})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- JOURNAL OF CHEMICAL PHYSICS
-    name = "jcp";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bJ(?:o[urn]{0,3})?(?:al)?\.?\s*(?:of\s+)?C(?:h[emical]{0,6})?\.?\s*P(?:h[ysics]{0,5})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- JOURNAL OF GEOPHYSICS RESEARCH  STOPPED HERE
-    name = "jgr";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bJ(?:o[urn]{0,3})?(?:al)?\.?\s*(?:of\s+)?G(?:e[ophysics]{0,8})?\.?\s*R(?:e[search]{0,6})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- JOURNAL OF QUANTITATIVE SPECTROSCOPY AND RADIATIVE TRANSFER
-    name = "jqsrt";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bJ(?:o[urn]{0,3})?(?:al)?\.?\s*(?:of\s+)?Q(?:u[ant]{0,3})?(?:itative)?\.?\s*S(?:p[ect]{0,3})?(?:ro?)?(?:scopy)?\.?\s*(?:and\s+)?R(?:a[diative]{0,7})?\.?\s*T(?:r[ansfer]{0,6})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- JOURNAL OF THE RAS OF CANADA
-    name = "jrasc";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bJ(?:o[urn]{0,3})?(?:al)?\.?\s*(?:of\s+)?(?:the\s+)?R[oyal]{0,4}\.?\s*A(?:s[tro]{0,3})?(?:n[om]{0,2})?(?:ical)?\.?\s*S(?:o[ciety]{0,5})?\.?\s*(?:of\s+)?C[anada]{0,5}/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- LECTURE NOTES IN PHYSICS
-    name = "lnp";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bL(?:e[cture]{0,5})?\.?\s*N(?:o[tes]{0,3})?\.?\s*(?:in?)?\.?\s*P(?:h[ys]{0,3})?(?:ics)?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- MEMOIRS OF THE RAS
-    name= "memras";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bMem[oirs]{0,4}\.?\s*(?:of\s+)?(?:the\s+)?R(?:o[yal]{0,3})?\.?\s*A(?:s[tro]{0,3})?(?:n[om]{0,2})?(?:ical)?\.?\s*S[ociety]{0,6}/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- MEMOIRE DELLA SOCIETA ASTRONOMICA ITALIANA
-    name = "memsai";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bMem[oire]{0,4}\.?\s*(?:d[ella]{0,4})?\.?\s*S(?:o[cieta]{0,5})?\.?\s*A(?:s[tronomica]{0,9})?\.?\s*I(?:t[aliana]{0,6})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- METEORITICS & PLANETARY SCIENCE
-    name = "maps";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bM(?:e[teor]{0,4})?(?:itics)?\.?\s*(?:a[nd]{0,2})?(?:&)?(?:\\&)?(?:\{\\&\})?\s*P(?:l[anetary]{0,7})?\.?\s*S(?:c[ience]{0,6})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- MONTHLY NOTES of the ASTRONOMICAL SOCIETY OF SOUTHERN AFRICA
-    name = "mnassa";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bM(?:o[nthly]{0,5})?\.?\s*N(?:o[tes]{0,3})?\.?\s*(?:of\s+)?(?:the\s+)?A(?:s[tro]{0,3})?(?:n[om]{0,2})?(?:ical)?\.?\s*S(?:o[ciety]{0,5})?\.?\s*(?:of\s+)?S(?:o[uthern]{0,6})?\.?\s*A(?:f[rica]{0,4})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- MONTHLY NOTICES of the ROYAL ASTRONOMICAL SOCIETY
-    name = "mnras";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bM(?:o[nthly]{0,5})?\.?\s*N(?:o[tices]{0,5})?\.?\s*(?:of\s+)?(?:the\s+)?R(?:o[yal]{0,3})?\.?\s*A(?:s[tro]{0,3})?(?:n[om]{0,2})?(?:ical)?\.?\s*S(?:o[ciety]{0,5})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- MONTHLY NOTICES of the ROYAL ASTRONOMICAL SOCIETY: LETTERS
-    name = "mnras"; // Not a mistake! The letters should be listed as just MNRAS but with L in front of page(s)
-    abbrev = pref + name + suff;
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bM(?:o[nthly]{0,5})?\.?\s*N(?:o[tices]{0,5})?\.?\s*(?:of\s+)?(?:the\s+)?R(?:o[yal]{0,3})?\.?\s*A(?:s[tro]{0,3})?(?:n[om]{0,2})?(?:ical)?\.?\s*S(?:o[ciety]{0,5})?\.?\s*:?\s*L(?:e[tters]{0,5})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    testLetters = getName.test(str);
-    str = str.replace(getName, abbrev);
-// Now need to insure that the page number has an "L" in front of it. If a page range is given, be sure to correct
-// both numbers.
-    if (testLetters) {
-        getFirstPage = /pages\s=\s\{\s*(\d+)/;
-        if (getFirstPage.test(str)) { str = str.replace(getFirstPage, "pages = \{L$1"); }
-        getSecondPage = /pages\s=\s\{\s*(\S+)\s*-+\s*(\d+)/;
-        if (getSecondPage.test(str)) { str = str.replace(getSecondPage, "pages = \{$1--L$2"); }
-    }
-// ----------------- NATURE
-    name = "nat";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bNat(?:ure)?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- NEW ASTRONOMY
-    name = "na";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?(?!n\s*a\S+)/
-       ,/\bN[ew]{0,2}\.?\s*A(?:s[tro]{0,3})?(?:n[omy]{0,3})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- NEW ASTRONOMY REVIEW
-    name = "nar";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bN[ew]{0,2}\.?\s*A(?:s[tro]{0,3})?(?:n[omy]{0,3})?\.?\s*R(?:e[view]{0,4})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- THE OBSERVATORY
-    name = "obs";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bObs(?:e[rv]{0,2})?(?:atory)?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- PHYSICA SCRIPTA
-    name = "physscr";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bPhys?(?:ica)?\.?\s*Scr(?:i[pta]{0,3})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- PHYSICAL REVIEW A:
-    name = "pra";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bP(?:h[ys]{0,2})?(?:ical)?\.?\s*R(?:e[view]{0,4})?\.?\s*:?\s*A/
-       ,/\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- PHYSICAL REVIEW B:
-    name = "prb";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bP(?:h[ys]{0,2})?(?:ical)?\.?\s*R(?:e[view]{0,4})??\.?\s*:?\s*B/
-       ,/\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- PHYSICAL REVIEW C
-    name = "prc";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bP(?:h[ys]{0,2})?(?:ical)?\.?\s*R(?:e[view]{0,4})?\.?\s*:?\s*C/
-       ,/\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- PHYSICAL REVIEW D
-    name = "prd";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bP(?:h[ys]{0,2})?(?:ical)?\.?\s*R(?:e[view]{0,4})?\.?\s*:?\s*D/
-       ,/\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- PHYSICAL REVIEW E
-    name = "pre";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bP(?:h[ys]{0,2})?(?:ical)?\.?\s*R(?:e[view]{0,4})?\.?\s*:?\s*E/
-       ,/\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- PHYSICAL REVIEW LETTERS
-    name = "prl";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bP(?:h[ys]{0,2})?(?:ical)?\.?\s*R(?:e[view]{0,4})?\.?\s*:?\s*L(?:e[tters]{0,5})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- PHYSICS REPORTS
-    name = "physrep";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bPhys(?:ics)?\.?\s*Rep(?:orts)?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- PIS'MA v ASTRONOMICHESKII ZHURNAL (English translation: Astronomy letters)
-    name = "paz";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bP(?:i[s'ma]{0,4})?\.?\s*v?\s*A(?:s[tronomicheskii]{0,14})?\.?\s*Z(?:h[urnal]{0,5})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- PLANETARY AND SPACE SCIENCE
-    name = "planss";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bPlan[etary]{0,5}\.?\s*(?:and\s+)?(?:&)?(?:\\&)?(?:\{\\&\})?\s*S[pace]{0,4}\.?\s*S[cience]{0,6}/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- PROCEEDINGS OF THE SOCIETY OF PHOTO-OPTICAL INSTRUMENTATION ENGINEERS
-    name = "procspie";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bProc[eedings]{0,7}\.?\s*(?:of\s+)?(?:the\s+)?\s*S[ociety]{0,6}\.?\s*(?:of\s+)?\s*P[hoto\-optical]{0,13}\.?\s*I[nstrumentation]{0,14}\.?\s*E[ngineers]{0,8}/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- PUBLICATIONS OF THE ASJ
-    name = "pasj";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bP(?:u[bli]{0,3})?(?:cations)?\.?\s*(?:of\s+)?(?:the\s+)?\s*A(?:s[tro]{0,3})?(?:n[om]{0,2})?(?:ical)?\.?\s*S[ociety]{0,6}\.?\s*(?:of\s+)?\s*J[apan]{0,4}/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- PUBLICATIONS OF THE ASP
-    name = "pasp";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bP(?:u[bli]{0,3})?(?:c[at]{0,2})?(?:ions)?\.?\s*(?:of\s+)?(?:the\s+)?\s*A(?:s[tro]{0,3})?(?:n[om]{0,2})?(?:ical)?\.?\s*S[ociety]{0,6}\.?\s*(?:of\s+)?(?:the\s+)?P[acific]{0,6}/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- PUBLICATIONS OF THE ASTRONOMICAL SOCIETY OF AUSTRALIA
-    name = "pasa";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bP(?:u[bli]{0,3})?(?:c[at]{0,2})?(?:ions)?\.?\s*(?:of\s+)?(?:the\s+)?\s*A(?:s[tro]{0,3})?(?:n[om]{0,2})?(?:ical)?\.?\s*S[ociety]{0,6}\.?\s*(?:of\s+)?A[ustralia]{0,8}/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- QUARTERLY JOURNAL OF THE RAS
-    name = "qjras";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bQ[uarterly]{0,8}\.?\s*J(?:o[urn]{0,3})?(?:al)?\.?\s*(?:of\s+)?(?:the\s+)?R(?:o[yal]{0,3})?\.?\s*A(?:s[tro]{0,3})?(?:n[om]{0,2})?(?:ical)?\.?\s*S[ociety]{0,6}/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- REVISTA MEXICANA DE ASTRONOMIA Y ASTROFISICA
-    name = "rmxaa";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bR[evista]{0,6}\.?\s*M[exicana]{0,7}\.?\s*(?:de\s+)?A[stronomia]{0,9}\.?\s*y?\s*A[strofisica]{0,10}/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- REVIEWS OF MODERN ASTRONOMY
-    name = "rma";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bR[eviews]{0,6}\.?\s*(?:of\s+)?M[odern]{0,5}\.?\s*A(?:s[tro]{0,3})?(?:n[omy]{0,3})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- REVIEWS OF MODERN PHYSICS
-    name = "rmp";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bR[eviews]{0,6}\.?\s*(?:of\s+)?M[odern]{0,5}\.?\s*P[hysics]{0,6}/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- SCIENCE
-    name = "sci";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bSci[ence]{0,4}/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- SKY AND TELESCOPE
-    name = "skytel";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bSky\s*(?:and\s+)?(?:&)?(?:\\&)?(?:\{\\&\})?\s*Tel[escope]{0,6}/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- SOLAR PHYSICS
-    name = "solphys";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bSol[ar]{0,2}\.?\s*Phys[ics]{0,3}/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- SOVIET ASTRONOMY
-    name = "sovast";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bSov[iet]{0,3}\.?\s*A(?:s[tro]{0,3})?(?:n[omy]{0,3})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- SPACE SCIENCE REVIEWS
-    name = "ssr";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:the\s+)?(?:\\)?/
-       ,/\bS[pace]{0,4}\.?\s*S[cience]{0,6}\.?\s*R[eviews]{0,6}/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- VISTAS IN ASTRONOMY
-    name = "via";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bV[istas]{0,5}\.?\s*In?\.?\s*A(?:s[tro]{0,3})?(?:n[omy]{0,3})?/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-// ----------------- ZEITSCHRIFT FUER ASTROPHYSIK
-    name = "zap";
-    abbrev = pref + name + suff;
-    journalList.push(name);
-    getName = new RegExp([
-        /journal\s=\s\{\s*(?:\\)?/
-       ,/\bZ[eitschrift]{0,10}\.?\s*(?:F[uer]{0,3})?\.?\s*A[stro]{0,4}p[hysik]{0,5}/
-       ,/\.?\s*\}/].map(function(r) {return r.source;}).join(''), "i");
-    str = str.replace(getName, abbrev);
-   return [str,journalList];
+  if (version.toLowerCase() == "latex") {
+       var pref = "\\";
+  } else { var pref = "";}
+// The format for the journal name is to spell out the full name, and to capitalize
+// the parts of the name that are "required" to be present for a match and/or that
+// compose the abbreviation for that journal. Note that to get all possible realistic variations of
+// a journal name, sometimes the journal name variations need to be explicitly stated as separate
+// entries.  for example, "Astronomical Society of the Pacific" might be stated as simply
+// ASP.  The code will match the "A" to Astronomical, the "S" to the "s" that comes right after
+// the A in Astronomical, and the "P" gets matched to the P in Pacific.  The code will set match to
+// "false", because the "S" in Society was not matched. To avoid this scenario, a second entry is
+// needed that just states the ASP explicitly.
+  var fullJournalName =
+   [
+     ["ACTa Astronomica", "actaa", ""],
+     ["Advances in Space Research", "asr", ""],
+     ["the American Astronomical Society meeting abstracts", "aas", ""],
+     ["the AAS meeting abstracts", "aas", ""],
+     ["the american astronomical society Division for Planetary Sciences meeting abstracts", "dps", ""],
+     ["the aas Division for Planetary Sciences meeting abstracts", "dps", ""],
+     ["the American Institute of Physics CONFerence proceedings", "aipconf", ""],
+     ["the AIP CONFerence proceedings", "aipconf", ""],
+     ["the Annual Review of Astronomy and Astrophysics", "araa", ""],
+     ["the Annual Review of AA", "araa", ""],
+     ["Applied Optics", "ao", ""],
+     ["AstroFiZika", "afz", ""], // (english translation: astrophysics)
+     ["ASTROPhysics", "afz", ""],// english translation of Astrofizika
+     ["Astronomicheskii ZHurnal", "azh", ""], // (english translation: ASTRONOMY LETTERS)
+     ["ASTRONomy Letters", "azh", ""], // engl translation of Astronomicheskii Zhurnal
+     ["the Astronomical Journal", "aj", ""],
+     ["the Astronomical Society of the Pacific CONFerence series", "aspconf", ""],
+     ["the ASP CONFerence series", "aspconf", ""],
+     ["Astronomische Nachrichten", "an", ""],
+     ["Astronomy REPorts", "arep", ""], // (until 1992, this journal was known as Soviet Astronomy)
+     ["Astronomy And Astrophysics", "aap", ""],
+     ["the Astronomy and AstroPhysics Letters", "aap", "L"], // aap with an "L" in front of page number
+     ["the Astronomy and AstroPhysics Reviews", "aapr", ""],
+     ["the Astronomy and AstroPhysics Supplemental series", "aaps", ""],
+     ["AstroPhysics Space Physics Research", "apspr", ""],
+     ["the AstroPhysical Journal", "apj", ""],
+     ["the AstroPhysical Journal Letters", "apjl", "L"], // be sure the page also has an "L" in front
+     ["the AstroPhysical Journal Supplemental series", "apjs", ""],
+     ["the AstroPhysics LETTers", "aplett", ""],
+     ["AstroPhysics and Space Science", "apss", ""],
+     ["the Bulletin of the American Astronomical Society", "baas", ""],
+     ["the Bulletin of the AAS", "baas", ""],
+     ["the Bulletin of the Astronomical Institutes of the Netherlands", "bain", ""],
+     ["the Bulletin of the AIN", "bain", ""],
+     ["the Bulletin of the Astronomical Institutes of Czechoslovakia", "bac", ""],
+     ["the Bulletin of the AIC", "bac", ""],
+     ["Chinese Astronomy and Astrophysics", "caa", ""],
+     ["the Chinese Journal of Astronomy and Astrophysics", "cjaa", ""],
+     ["Comptes Rendus Academia Science Paris", "crasp", ""],
+     ["Fundamental Cosmic Physics", "fcp", ""],
+     ["Geochimica Cosmochimica Acta", "gca", ""],
+     ["Geophysics Research Letters", "grl", ""],
+     ["ICARus", "icarus", ""],
+     ["the Information Bulletin of Variable Stars", "ibvs", ""],
+     ["the International Astronomical Union Circulars", "iaucirc", ""],
+     ["the IAU Circulars", "iaucirc", ""],
+     ["the Irish Astronomical Journal", "iaj", ""],
+     ["the Journal of AstroPhysics and Astronomy", "japa", ""], // Indian publication
+     ["the Journal of Cosmology and Astroparticle Physics", "jcap", ""],
+     ["the Journal of Chemical Physics", "jcp", ""],
+     ["the Journal of Geophysics Research", "jgr", ""],
+     ["the Journal of Quantitative Spectroscopy and Radiative Transfer", "jqsrt", ""],
+     ["the Journal of the Royal Astronomical Society of Canada", "jrasc", ""],
+     ["the Journal of the RAS of Canada", "jrasc", ""],
+     ["Lecture Notes in Physics", "lnp", ""],
+     ["the MEMoirs of the Royal Astronomical Society", "memras", ""],
+     ["the MEMoirs of the RAS", "memras", ""],
+     ["MEMoire della Societa Astronomica Italiana", "memsai", ""],
+     ["Meteoritics and Planetary Science", "maps", ""],
+     ["the Monthly Notes of the Astronomical Society of Southern Africa", "mnassa", ""],
+     ["the Monthly Notes of the ASSA", "mnassa", ""],
+     ["the Monthly Notices of the Royal Astronomical Society", "mnras", ""],
+     ["the Monthly Notices of the RAS", "mnras", ""],
+     ["the Monthly Notices of the Royal Astronomical Society: Letters", "mnras", "L"], // with "L" on page numbers
+     ["the Monthly Notices of the RAS: Letters", "mnras", "L"], // with "L" on page numbers
+     ["NATure", "nat", ""],
+     ["New Astronomy", "na", ""],
+     ["the New Astronomy Reviews", "nar", ""],
+     ["the OBServatory", "obs", ""],
+     ["PHYSica SCRipta", "physscr", ""],
+     ["the Physical Review A", "pra", ""],
+     ["the Physical Review B", "prb", ""],
+     ["the Physical Review C", "prc", ""],
+     ["the Physical Review D", "prd", ""],
+     ["the Physical Review E", "pre", ""],
+     ["the Physical Review Letters", "prl", ""],
+     ["the PHYSics REPorts", "physrep", ""],
+     ["Pis'ma v Astronomicheskii Zhurnal", "paz", ""], // (english tranlation: Astronomy Letters)
+     ["PLANetary and Space Science", "planss", ""],
+     ["the PROCeedings of the Society of Photo-optical Instrumentation Engineers", "procspie", ""],
+     ["the PROCeedings of the SPIE", "procspie", ""],
+     ["the Publications of the Astronomical Society of Japan", "pasj", ""],
+     ["the Publications of the ASJ", "pasj", ""],
+     ["the Publications of the Astronomical Society of the Pacific", "pasp", ""],
+     ["the Publications of the ASP", "pasp", ""],
+     ["the Publications of the Astronomical Society of Australia", "pasa", ""],
+     ["the Publications of the ASA", "pasa", ""],
+     ["the Quarterly Journal of the Royal Astronomical Society", "qjras", ""],
+     ["the Quarterly Journal of the RAS", "qjras", ""],
+     ["Revista MeXicana de Astronomia y Astrofisica", "rmxaa", ""],
+     ["the Reviews of Modern Astronomy", "rma", ""],
+     ["the Reviews of Modern Physics", "rmp", ""],
+     ["SCIence", "sci", ""],
+     ["SKY and TELescope", "skytel", ""],
+     ["SOLar PHYSics", "solphys", ""],
+     ["SOViet ASTronomy", "sovast", ""],
+     ["Space Science Reviews", "ssr", ""],
+     ["Vistas In Astronomy", "via", ""],
+     ["Zeitschrift fuer AstroPhysik", "zap", ""]
+  ];
+  var journalMatch = /journal\s=\s\{(.+)\}/i;
+  var jrnl = "";
+  var abbrevMatch = "";
+  if (journalMatch.test(bib)) {
+       jrnl = journalMatch.exec(bib)[1];
+       jrnl = jrnl.trim();
+       if (jrnl != "") {
+            indexMatch = matchPub(fullJournalName, jrnl);
+            if (indexMatch != -1) {
+                  abbrevMatch = fullJournalName[indexMatch][1];
+                  var lPage = fullJournalName[indexMatch][2];
+// put the abbreviation into the bib entry:
+                  abbrevMatch = pref+abbrevMatch;
+                  var newLine = "journal = \{"+abbrevMatch+"\}";
+                  bib = bib.replace(journalMatch, newLine);
+// If an "L" needs to go in front of the page numbers, put one in:
+                  if (lPage != "") {
+// See https://mirror.hmc.edu/ctan/macros/latex/contrib/mnras/mnras_guide.pdf regarding journal letters
+// that have a designation of "L" in front of the page numbers.
+                       var getFirstPage = /pages\s=\s\{\s*(\d+)/;
+                       if (getFirstPage.test(bib)) { bib = bib.replace(getFirstPage, "pages = \{"+lPage+"$1"); }
+                       var getSecondPage = /pages\s=\s\{\s*(\S+)\s*-+\s*(\d+)/;
+                       if (getSecondPage.test(bib)) { bib = bib.replace(getSecondPage, "pages = \{$1--"+lPage+"$2"); }
+                  }
+            }
+       }
+  }
+  return [bib,abbrevMatch];
 }
 // ////////////////////////////////// END (FIXJOURNAL) //////////////////////////////////////
 
+
+// ///////////////////////////////// M A T C H P U B ////////////////////////////////////////
+function matchPub(pubArr, pubTest) {
+  var indexMatch = -1;
+  var pubNames = [];
+  var pubAbbrev = [];
+  var pagePref = [];
+  for (i = 0; i < pubArr.length; i++) {
+      pubNames.push(pubArr[i][0]);
+      pubAbbrev.push(pubArr[i][1]);
+      pagePref.push(pubArr[i][2]);
+  }
+// Clean up the submitted name to be matched
+  pubTest = pubTest.replace(/\&/g, " and ");
+  pubTest = pubTest.replace(/\./g, " ");
+  pubTest = pubTest.replace(/\W/g, " ");
+  pubTest = pubTest.replace(/\s+/g, " ");
+  pubTest = pubTest.trim();
+  var matchArr = [];
+  for (j = 0; j < pubArr.length; j++) {
+      var pubFull = pubNames[j];
+// Clean up the full name
+      pubFull = pubFull.replace(/\&/g, " and ");
+      pubFull = pubFull.replace(/\./g, " ");
+      pubFull = pubFull.replace(/\W/g, " ");
+      pubFull = pubFull.replace(/\s+/g, " ");
+      pubFull = pubFull.trim();
+      var pubFullSave = pubFull;
+      var letterMatch = [];
+      fromHere = 0;
+      for (var i = 0; i < pubTest.length; i++) {
+// go through the submitted name, letter by letter, from left to right, matching
+// to pubFull:
+           var pos = pubFull.toLowerCase().indexOf(pubTest.toLowerCase().substr(i,1),fromHere);
+           letterMatch.push(pos);
+            if (pos != -1) {
+               fromHere = pos + 1;
+// force the letter in this position in pubFull to be lower case, to indicate that it has been
+// matched in pubTest.  If after this loop exits, there are remaining capital letters, then
+// the match failed because pubTest did not include all of the required letters.
+               if (pos > 0 && pos < pubFull.length-1) {
+                    pubFull = pubFull.slice(0,pos) + pubFull.toLowerCase().substr(pos,1) + pubFull.substr(pos+1);
+               } else if (pos == 0) {
+                    pubFull = pubFull.toLowerCase().substr(pos,1) + pubFull.substr(pos+1);
+               } else if (pos == pubFull.length-1) {
+                    pubFull = pubFull.slice(0,pos) + pubFull.toLowerCase().substr(pos,1);}
+           }
+      }
+// Now insure that all of the capital letters in pubFull, the required letters, are present in pubTest.
+// Go through posFull and see if any capital letters are still present (if all were matched to pubTest ,no
+// cap letters should remain in pubFull)
+      var cap = -1;
+      for (var i = 0; i < pubFull.length; i++) {
+           if (pubFull.substr(i,1) === pubFull.toUpperCase().substr(i,1) && pubFull.substr(i,1) != " ") {
+               cap = i;}
+      }
+// Now see if the match passed the tests.  If there are no -1's in letterMatch, then 1st test was passed. If
+// cap is still -1, then no remaining caps are in pubFull, and the 2nd test was passed and a match can be declared.
+      var match = true;
+      if (letterMatch.indexOf(-1) != -1 | cap != -1) {
+          match = false;}
+// in case the abbreviation would not be consistent with going from left to right and hitting all
+// the cap letters in pubFull, do a test to see if pubTest is equal to the abbreviation, in the event
+// that the above match test failed.  There is one caveat we have to worry about, however.  For a few
+// journals, the abbreviation is identical for both the regular journal AND its "Letters" edition. We
+// need to avoid the situation in which a regular journal (or the Letters version) gets matched to both
+// its regular journal name AND the Letters edition name. Example would be MNRAS and MNRAS Letters, both
+// having an official abbreviation of MNRAS (with the Letters version having an "L" by the page numbers).
+// To prevent this mis-identity, only allow the below test to occur if pagePref is equal to "".
+      if (pubTest.toLowerCase() == pubAbbrev[j].toLowerCase() && match == false && pagePref[j] == "") {
+          match = true;}
+      matchArr.push(match);
+  } // next pubFull to compare pubTest to
+// now go through and figure out which, if any, of the pubFull entries matched pubTest:
+  var matchCnt = 0;
+  var prevMatch = '';
+  for (j = 0; j < pubArr.length; j++) {
+       if (matchArr[j] == true) {
+           matchCnt = matchCnt + 1;
+           if (pubNames[j].length > prevMatch.length) {
+               indexMatch=j;
+               prevMatch = pubNames[j];
+           }
+       }
+  }
+  if (matchCnt > 1) {
+      indexMatch = -1;
+  }
+  return indexMatch; // return the abbreviation(s) that matched the input phrase
+}
+// //////////////////////////// E N D  (M A T C H P U B) //////////////////////////////////
 
 // /////////////////////////////////////////// STATUSMSG //////////////////////////////////////////////
 // Matches up the status code (passed argument) to the list of possibilities and alerts the user of what

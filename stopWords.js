@@ -134,4 +134,22 @@ var stopWords =
         'want|wanted|wanting|wants|was|we|well|welcome|welcomed|welcoming|welcomes|went|were|what|whatever|when|' +
             'whenever|where|whereas|whether|which|whichever|while|who|whole|whose|why|will|with|within|' +
             'without|word|worse|worst|would|wouldnt|www|' +
-        'yet|yield|yields|yielded|yielding|you|your|yours|year|yr|yy|';
+        'yet|yield|yields|yielded|yielding|you|your|yours|year|yr|yy|' +
+        'america|american|ames|arizona|' +
+        'baltimore|boston|' +
+        'california|caltech|cambridge|canada|chicago|china|chinese|columbia|' +
+        'dc|'
+        'england|europe|european|' +
+        'florida|france|french|' +
+        'germany|german|goddard|' +
+        'hawaii|hawaian|hopkins|' +
+        'ipac|irsa|italy|italian|' +
+        'korea|korean|' +
+        'japan|japanese|'
+        'mexico|mexican|mpa|' +
+        'nasa|naval|navy|' +
+        'observatory|ohio|' +
+        'philadelphia|pittsburgh|portsmouth|potsdam|princeton|' +
+        'stsci|' +
+        'tucson|' +
+        'washington|';

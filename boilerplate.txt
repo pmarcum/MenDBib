@@ -42,6 +42,7 @@ MN L TEX style file v \d+
 eprintid arXiv astro ph \d+
 ISBN doi \d+ s\d+
 ISBN doi \d+
+ISBN \d+
 DOI DOI \d+
 doi \d+ X \d+
 doi \d+ j \d+ x
@@ -72,7 +73,6 @@ q \d+ RAS MNRAS \d+
 c \d+ RAS
 C \d+ RAS
 q \d+ RAS
-RAS MNRAS \d+
 c [12]\d{3}
 q [12]\d{3}
 C [12]\d{3}

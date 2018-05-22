@@ -1,0 +1,227 @@
+lyman a                          lyman_alpha_far_ultraviolet_line
+ly alpha                         lyman_alpha_far_ultraviolet_line
+l alpha                          lyman_alpha_far_ultraviolet_line
+lyman b                          lyman_beta_far_ultraviolet_line
+ly beta                          lyman_beta_far_ultraviolet_line
+l beta                           lyman_beta_far_ultraviolet_line
+lyman g                          lyman_gamma_far_ultraviolet_line
+ly gamma                         lyman_gamma_far_ultraviolet_line
+l gamma                          lyman_gamma_far_ultraviolet_line
+lyman d                          lyman_delta_far_ultraviolet_line
+ly delta                         lyman_delta_far_ultraviolet_line
+l delta                          lyman_delta_far_ultraviolet_line
+hydrogen alpha                   balmer_hydrogen_alpha_recombination_line_optical_line
+hydrogen a                       balmer_hydrogen_alpha_recombination_line_optical_line
+h alpha                          balmer_hydrogen_alpha_recombination_line_optical_line
+hydrogen beta                    balmer_hydrogen_beta_recombination_line_optical_line
+hydrogen b                       balmer_hydrogen_beta_recombination_line_optical_line
+h beta                           balmer_hydrogen_beta_recombination_line_optical_line
+hydrogen gamma                   balmer_hydrogen_gamma_recombination_line_optical_line
+hydrogen g                       balmer_hydrogen_gamma_recombination_line_optical_line
+h gamma                          balmer_hydrogen_gamma_recombination_line_optical_line
+hydrogen delta                   balmer_hydrogen_delta_recombination_line_optical_line
+hydrogen d                       balmer_hydrogen_delta_recombination_line_optical_line
+h delta                          balmer_hydrogen_delta_recombination_line_optical_line
+balmer                           balmer_hydrogen_recombination_line_optical_line
+paschen alpha                    paschen_hydrogen_alpha_recombination_line_near_infrared_line
+paschen a                        paschen_hydrogen_alpha_recombination_line_near_infrared_line
+pa alpha                         paschen_hydrogen_alpha_recombination_line_near_infrared_line
+paschen beta                     paschen_hydrogen_beta_recombination_line_near_infrared_line
+paschen b                        paschen_hydrogen_beta_recombination_line_near_infrared_line
+pa beta                          paschen_hydrogen_beta_recombination_line_near_infrared_line
+paschen gamma                    paschen_hydrogen_gamma_recombination_line_near_infrared_line
+paschen g                        paschen_hydrogen_gamma_recombination_line_near_infrared_line
+pa gamma                         paschen_hydrogen_gamma_recombination_line_near_infrared_line
+paschen delta                    paschen_hydrogen_delta_recombination_line_near_infrared_line
+paschen d                        paschen_hydrogen_delta_recombination_line_near_infrared_line
+pa delta                         paschen_hydrogen_delta_recombination_line_near_infrared_line
+paschen                          paschen_hydrogen_recombination_line_near_infrared_line
+brackett alpha                   brackett_hydrogen_alpha_recombination_line_near_infrared_line
+brackett a                       brackett_hydrogen_alpha_recombination_line_near_infrared_line
+br alpha                         brackett_hydrogen_alpha_recombination_line_near_infrared_line
+brackett beta                    brackett_hydrogen_beta_recombination_line_near_infrared_line
+brackett b                       brackett_hydrogen_beta_recombination_line_near_infrared_line
+br beta                          brackett_hydrogen_beta_recombination_line_near_infrared_line
+brackett gamma                   brackett_hydrogen_gamma_recombination_line_near_infrared_line
+brackett g                       brackett_hydrogen_gamma_recombination_line_near_infrared_line
+br gamma                         brackett_hydrogen_gamma_recombination_line_near_infrared_line
+brackett delta                   brackett_hydrogen_delta_recombination_line_near_infrared_line
+brackett d                       brackett_hydrogen_delta_recombination_line_near_infrared_line
+br delta                         brackett_hydrogen_delta_recombination_line_near_infrared_line
+brackett                         brackett_hydrogen_recombination_line_near_infrared_line
+pfund alpha                      pfund_hydrogen_alpha_recombination_line_near_infrared_line
+pfund a                          pfund_hydrogen_alpha_recombination_line_near_infrared_line
+pf alpha                         pfund_hydrogen_alpha_recombination_line_near_infrared_line
+pfund beta                       pfund_hydrogen_beta_recombination_line_near_infrared_line
+pfund b                          pfund_hydrogen_beta_recombination_line_near_infrared_line
+pf beta                          pfund_hydrogen_beta_recombination_line_near_infrared_line
+pfund gamma                      pfund_hydrogen_gamma_recombination_line_near_infrared_line
+pfund g                          pfund_hydrogen_gamma_recombination_line_near_infrared_line
+pf gamma                         pfundt_hydrogen_gamma_recombination_line_near_infrared_line
+pfund delta                      pfund_hydrogen_delta_recombination_line_near_infrared_line
+pfund d                          pfund_hydrogen_delta_recombination_line_near_infrared_line
+pf delta                         pfund_hydrogen_delta_recombination_line_near_infrared_line
+pfund                            pfund_hydrogen_recombination_line_near_infrared_line
+OVI 1033                         OVI1033_ionized_oxygen_far_ultraviolet_line
+1215                             lyman_alpha_far_ultraviolet_line
+NV 1240                          NV1240_ionized_nitrogen_far_ultraviolet_line
+OII 3727                         OII3727_ionized_oxygen_optical_line
+OII 372629                       OII3726_OII3729_ionized_oxygen_optical_line
+OII 3729                         OII3729_ionized_oxygen_optical_line
+He I 3889                        HeI3889_neutral_helium_optical_line
+He  3889                         HeI3889_neutral_helium_optical_line
+Ca II K 3933                     CaIIK3933_ionized_carbon_optical_line
+Ca II K                          CaIIK3933_ionized_carbon_optical_line
+Ca II 3933                       CaIIK3933_ionized_carbon_optical_line
+Ca II H 3968                     CaIIH3968_ionized_carbon_optical_line
+Ca II H                          CaIIH3968_ionized_carbon_optical_line
+Ca II 3968                       CaIIH3968_ionized_carbon_optical_line
+Ca  3933                         CaIIK3933_ionized_carbon_optical_line
+Ca  3968                         CaIIH3968_ionized_carbon_optical_line
+Ca II H and K                    CaIIK3933_CaIIH3968_ionized_carbon_optical_line
+Ca H and K                       CaIIK3933_CaIIH3968_ionized_carbon_optical_line
+Ca II 393368                     CaIIK3933_CaIIH3968_ionized_carbon_optical_line
+Ca  393368                       CaIIK3933_CaIIH3968_ionized_carbon_optical_line
+Ne III 3869                      NeIII3869_ionized_neon_optical_line
+Ne 3869                          NeIII3869_ionized_neon_optical_line
+Ne III 3967                      NeIII3967_ionized_neon_optical_line
+Ne 3967                          NeIII3967_ionized_neon_optical_line
+4102                             balmer_hydrogen_delta_recombination_line_optical
+4341                             balmer_hydrogen_gamma_recombination_line_optical
+OIII 4363                        OIII4363_ionized_oxygen_optical_line
+O 4363                           OIII4363_ionized_oxygen_optical_line
+4862                             balmer_hydrogen_beta_recombination_line_optical
+OIII 4959                        OIII4959_ionized_oxygen_optical_line
+O 4959                           OIII4959_ionized_oxygen_optical_line
+OIII 5007                        OIII5007_ionized_oxygen_optical_line
+OI 5007                          OI5577_neutral_oxygen_optical_line
+O 5007                           OI5577_neutral_oxygen_optical_line
+OI 5577                          OI5007_neutral_oxygen_optical_line
+O 5577                           OI5007_neutral_oxygen_optical_line
+NII 5755                         NII5755_ionized_nitrogen_optical_line
+N 5755                           NII5755_ionized_nitrogen_optical_line
+HeI 5876                         HeI5876_neutral_helium_optical_line
+He 5876                          HeI5876_neutral_helium_optical_line
+Mg b 5167                        Mgb_neutral_magnesium_optical_line
+Mg I 5167                        Mgb_neutral_magnesium_optical_line
+Mg 5167                          Mgb_neutral_magnesium_optical_line
+Mg b 5173                        Mgb_neutral_magnesium_optical_line
+Mg I 5173                        Mgb_neutral_magnesium_optical_line
+Mg 5173                          Mgb_neutral_magnesium_optical_line
+Mg b 5184                        Mgb_neutral_magnesium_optical_line
+Mg I 5184                        Mgb_neutral_magnesium_optical_line
+Mg 5184                          Mgb_neutral_magnesium_optical_line
+NaI 589096                       NaI5890_NaI5896_neutral_sodium_optical_line
+Na 589096                        NaI5890_NaI5896_neutral_sodium_optical_line
+NaI 5890                         NaI5890_neutral_sodium_optical_line
+Na 589096                        NaI5890_NaI5896_neutral_sodium_optical_line
+Na 5890                          NaI5890_neutral_sodium_optical_line
+NaI 5896                         NaI5896_neutral_sodium_optical_line
+Na 5896                          NaI5896_neutral_sodium_optical_line
+OI 6300                          OI6300_neutral_oxygen_optical_line
+O 6300                           OI6300_neutral_oxygen_optical_line
+SIII 6312                        SII6312_ionized_sulfur_optical_line
+S 6312                           SII6312_ionized_sulfur_optical_line
+NII 654983                       NII6549_NII6583_ionized_nitrogen_optical_line
+N  654983                        NII6549_NII6583_ionized_nitrogen_optical_line
+NII 6549                         NII6549_ionized_nitrogen_optical_line
+N 6549                           NII6549_ionized_nitrogen_optical_line
+6564                             balmer_hydrogen_alpha_recombination_line_optical_line
+NII 6584                         NII6584_ionized_nitrogen_optical_line
+N 6584                           NII6584_ionized_nitrogen_optical_line
+HeI 6678                         HeI6678_neutral_helium_optical_line
+He 6678                          HeI6678_neutral_helium_optical_line
+SII 671731                       SII6717_SII6731_ionized_sulfur_optical_line
+SII 6717                         SII6717_ionized_sulfur_optical_line
+SII 6731                         SII6731_ionized_sulfur_optical_line
+ArIII 7136                       ArIII7136_ionized_argon_optical_line
+Ar 7136                          ArIII7136_ionized_argon_optical_line
+ArIII 7751                       ArIII7751_ionized_argon_optical_line
+Ar 7751                          ArIII7751_ionized_argon_optical_line
+CaII triplet                     CaII_triplet_ionized_calcium_optical_line
+CaII 8498                        CaII_triplet_ionized_calcium_optical_line
+CaII 8500                        CaII_triplet_ionized_calcium_optical_line
+CaII 8542                        CaII_triplet_ionized_calcium_optical_line
+CaII 8544                        CaII_triplet_ionized_calcium_optical_line
+CaII 8662                        CaII_triplet_ionized_calcium_optical_line
+CaII 8665                        CaII_triplet_ionized_calcium_optical_line
+SIII 9069                        SIII9069_ionized_sulfur_optical_line
+SIII 9531                        SIII9531_ionized_sulfur_optical_line
+CII 158                          CII158_ionized_carbon_far_infrared
+NII 122                          NII122_ionized_nitrogen_far_infrared
+NII 203                          NII203_ionized_nitrogen_far_infrared
+NIII 57                          NIII57_ionized_nitrogen_far_infrared_mid
+OI 63                            OI63_neutral_oxygen_far_infrared_mid
+OI 145                           OI145_neutral_oxygen_far_infrared
+OIII 52                          OIII52_ionized_oxygen_far_mid_infrared
+OIII 88                          OIII88_ionized_oxygen_far_infrared
+OIV 26                           OIV26_ionized_oxygen_mid_infrared
+NeII 12.8                        NeII12_ionized_neon_mid_infrared
+NeII 13                          NeII12_ionized_neon_mid_infrared
+NeIII 15.6                       NeIII15_ionized_neon_mid_infrared
+NeIII 16                         NeIII15_ionized_neon_mid_infrared
+NeIII 36                         NeIII36_ionized_neon_mid_infrared
+NeV 14.3                         NeV14_ionized_neon_mid_infrared
+NeV 14                           NeV14_ionized_neon_mid_infrared
+NeV 24.2                         NeV24_ionized_neon_mid_infrared
+NeV 24                           NeV24_ionized_neon_mid_infrared
+NeVI 7.6                         NeVI7_ionized_neon_mid_infrared
+NeVI 7                           NeVI7_ionized_neon_mid_infrared
+NeVI 8                           NeVI7_ionized_neon_mid_infrared
+MgIV 4.5                         MgIV4_ionized_magnesium_mid_near_infrared
+MgIV 4                           MgIV4_ionized_magnesium_mid_near_infrared
+MgIV 5                           MgIV4_ionized_magnesium_mid_near_infrared
+MgV 5.6                          MgV5_ionized_magnesium_mid_near_infrared
+MgV 5                            MgV5_ionized_magnesium_mid_near_infrared
+MgV 6                            MgV5_ionized_magnesium_mid_near_infrared
+MgV 13.5                         MgV13_ionized_magnesium_mid_infrared
+MgV 14                           MgV13_ionized_magnesium_mid_infrared
+MgV 13                           MgV13_ionized_magnesium_mid_infrared
+MgVIII 3.03                      MgVIII3_ionized_magnesium_near_infrared
+MgVIII 3.0                       MgVIII3_ionized_magnesium_near_infrared
+MgVIII 3                         MgVIII3_ionized_magnesium_near_infrared
+SiIII 35                         SiIII35_ionized_silicon_mid_infrared
+SiVI 1.96                        SiVI2_ionized_silicon_near_infrared       
+SiVI 2.0                         SiVI2_ionized_silicon_near_infrared       
+SiVI 2                           SiVI2_ionized_silicon_near_infrared
+SiVII 2.48                       SiVII2_ionized_silicon_near_infrared
+SiVII 2.5                        SiVII2_ionized_silicon_near_infrared
+SiVII 2                          SiVII2_ionized_silicon_near_infrared
+SiVII 6.49                       SiVII6_ionized_silicon_mid_near_infrared
+SiVII 6.5                        SiVII6_ionized_silicon_mid_near_infrared
+SiVII 6                          SiVII6_ionized_silicon_mid_near_infared
+SiIX 3.86                        SiIX3_ionized_silicon_near_infrared
+SiIX 3.9                         SiIX3_ionized_silicon_near_infrared
+SiIX 4                           SiIX3_ionized_silicon_near_infrared
+SiIX 2.84                        SiIX2_ionized_silicon_near_infrared
+SiIX 2.8                         SiIX2_ionized_silicon_near_infrared
+SiIX 3                           SiIX3_ionized_silicon_near_infrared
+SiX 1.43                         SiX1_ionized_silicon_near_infrared
+SiX 1.4                          SiX1_ionized_silicon_near_infrared
+SiX 1                            SiX1_ionized_silicon_near_infrared
+SIII 18                          SIII18_ionized_sulfur_mid_infrared
+SIII 34                          SIII34_ionized_sulfur_mid_infrared
+SIV 10.5                         SIV10_ionized_sulfur_mid_infrared
+SIV 10                           SIV10_ionized_sulfur_mid_infrared
+SIV 11                           SIV10_ionized_sulfur_mid_infrared
+ArII 7                           ArII7_ionized_argon_near_mid_infrared
+ArIII 9                          ArIII9_ionized_argon_mid_infrared
+ArIII 21.8                       ArIII21_ionized_argon_mid_infrared
+ArIII 22                         ArIII21_ionized_argon_mid_infrared
+ArV 7.9                          ArV7_ionized_argon_near_mid_infrared
+ArV 8                            ArV7_ionized_argon_near_mid_infrared
+ArV 13.09                        ArV13_ionized_argon_mid_infrared
+ArV 13.01                        ArV13_ionized_argon_mid_infrared
+ArV 13                           ArV13_ionized_argon_mid_infrared
+ArVI 4.53                        ArVI4_ionized_argon_near_infrared
+ArVI 4.5                         ArVI4_ionized_argon_near_infrared
+ArVI 4                           ArVI4_ionized_argon_near_infrared
+ArVI 5                           ArVI4_ionized_argon_near_infrared
+CaIV 3.2                         CaIV3_ionized_calcium_near_infrared
+CaIV 3                           CaIV3_ionized_calcium_near_infrared
+CaV 4.16                         CaV4_ionized_calcium_near_infrared
+CaV 4.2                          CaV4_ionized_calcium_near_infrared
+CaV 4                            CaV4_ionized_calcium_near_infrared
+CaV 11.47                        CaV11_ionized_calcium_mid_infrared
+CaV 11.5                         CaV11_ionized_calcium_mid_infrared
+CaV 11                           CaV11_ionized_calcium_mid_infrared

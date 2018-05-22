@@ -1,0 +1,225 @@
+r0.25([^0-9])                        deVauc$1
+r14([^0-9])                          deVauc$1
+de vaucouleurs                       deVauc
+de vauc                              deVauc
+r effective                          effective_radius
+r eff                                effective_radius
+rad effective                        effective_radius
+rad eff                              effective_radius
+h0                                   hubble_constant
+cz                                   distance
+m HI 21 cm                           neutral_hydrogen_mass
+m HI 21                              neutral_hydrogen_mass
+m HI                                 neutral_hydrogen_mass
+m  21 cm                             neutral_hydrogen_mass
+m  21                                neutral_hydrogen_mass
+l  H I 21 cm                         neutral_hydrogen_luminosity
+l  H I 21                            neutral_hydrogen_luminosity
+l  21 cm                             neutral_hydrogen_luminosity
+l 21                                 neutral hydrogen_luminosity
+f  H I  21 cm                        neutral_hydrogen_flux
+f  H I  21                           neutral_hydrogen_flux
+f  21 cm                             neutral_hydrogen_flux
+f  21                                neutral_hydrogen_flux
+m  H 2                               molecular_hydrogen_mass
+f  H 2                               molecular_hydrogen_flux
+H 2                                  molecular_hydrogen
+H I 21 cm                            neutral hydrogen
+H I 21                               neutral hydrogen
+HI                                   neutral_hydrogen
+21 cm                                neutral_hydrogen
+o stars?                             Ostar_massive_main_sequence_star
+b stars?                             Bstar_massive_main_sequence_star
+o  b stars?                          Ostar_Bstar_massive_main_sequence_star
+o and b stars?                       Ostar_Bstar_massive_main_sequence_star
+o & b stars?                         Ostar_Bstar_massive_main_sequence_star
+o  b associations?                   Ostar_Bstar_massive_main_sequence_star
+a stars?                             Astar_intermediate_mass_main_sequence_star
+f stars?                             Fstar_intermediate_mass_main_sequence_star
+g stars?                             Gstar_solar_mass_main_sequence_star
+k stars?                             Kstar_low_mass_cool_dwarf_main_sequence_star
+m stars?                             Mstar_low_mass_cool_dwarf_main_sequence_star
+agns?                                active_galactic_nucleus
+agbs?                                asymptotic_giant_branch
+cdms?                                cold_dark_matter
+dms?                                 dark_matter
+dwfs?                                dwarf
+ews?                                 equivalent_width
+etgs?                                early_type_galaxy
+e type galaxies                      elliptical_early_type_galaxy
+e type galaxys?                      elliptical_early_type_galaxy
+e types                              elliptical_early_type_galaxy
+e-types?                             elliptical_early_type_galaxy
+ell galaxies                         elliptical_early_type_galaxy
+ell galaxys?                         elliptical_early_type_galaxy
+ells?                                elliptical_early_type_galaxy
+fir                                  far_infrared
+far infra red                        far_infrared
+fuv                                  far_ultraviolet
+far ultra violet                     far_ultraviolet
+ir                                   infrared
+infra red                            infrared
+imfs?                                initial_mass_function
+lfs?                                 luminosity_function
+inter cluster mediums?               intergalactic_intercluster_intracluster_medium
+icms?                                intergalactic_intercluster_intracluster_medium
+igms?                                intergalactic_intercluster_intracluster_medium
+iseds?                               integrated_spectral_energy_distribution
+seds?                                spectral_energy_distribution
+isms?                                interstellar_medium
+irregular galaxys?                   irregular_late_type_galaxy
+irregular galaxies                   irregular_late_type_galaxy
+irr galaxys?                         irregular_late_type_galaxy
+irr galaxies?                        irregular_late_type_galaxy
+irrs?                                irregular_late_type_galaxy
+ieg galaxys?                         isolated_early_type_elliptical_lenticular_galaxy
+ieg galaxies                         isolated_early_type_elliptical_lenticular_galaxy
+iegs?                                isolated_early_type_elliptical_lenticular galaxy
+s0 galaxys?                          early_type_lenticular_galaxy
+s0 galaxies                          early_type_lenticular_galaxy
+s0s?                                 early_type_lenticular_galaxy
+lenticular galaxys?                  early_type_lenticular_galaxy
+lenticular galaxies                  early_type_lenticular_galaxy
+lenticulars?                         early_type_lenticular_galaxy
+MS                                   main_sequence
+main sequence                        main_sequence
+main seq                             main_sequence
+mir                                  mid_infrared
+mid ir                               mid infrared
+mid infra red                        mid_infrared
+muv                                  mid_ultraviolet
+mid uv                               mid_ultraviolet
+mid ultra violet                     mid_ultraviolet
+n body                               Nbody
+mass light ratios?                   mass_light_ratio
+mass to light ratios?                mass_light_ratio
+mass light                           mass_light_ratio
+msun lsun                            mass_light_ratio
+msolar lsolar                        mass_light_ratio
+msol lsol                            mass_light_ratio
+nir                                  near_infrared
+nuv                                  near_ultraviolet
+near ir                              near_infrared
+near infra red                       near_infrared
+near uv                              near_ultraviolet
+near ultra violet                    near_ultraviolet
+point spread function                point_spread_function
+psfs?                                point_spread_function
+qsos?                                active_galactic_nucleus_quasar
+quasars?                             active_galactic_nucleus_quasar
+rgbs?                                red_giant_branch
+seyfert galaxys?                     active_galactic_nucleus_seyfert
+seyfert galaxies                     active_galactic_nucleus_seyfert
+seyferts?                            active_galactic_nucleus_seyfert
+seys?                                active_galactic_nucleus_seyfert
+s n r                                signal_noise_ratio
+signal to noise ratio                signal_noise_ratio
+signal to noise                      signal_noise_ratio
+sloan digital sky survey             sdss
+sloan digitized sky survey           sdss
+sloan survey                         sdss
+sloan sky survey                     sdss
+specific star formation rate         specific_star_formation_rate
+s s f r                              specific_star_formation_rate
+star formation rate                  star_formation_rate
+s f r                                star_formation_rate
+specific star formation history      specific_star_formation_history_rate
+s s f h                              specific_star_formation_history_rate
+star formation history               star_formation_history_rate
+s f h                                star_formation_history_rate
+single stellar population            single_stellar_population
+s s p                                single_stellar_population
+simple stellar population            single_stellar_population
+single burst stellar population      single_stellar_population
+s b s p                              single_stellar_population
+single generation stellar population single_stellar_population
+surface brightness                   surface_brightness
+lsb                                  low_surface_brightness
+hsb                                  high_surface_brightness
+sb                                   surface_brightness
+supernova type Iab                   supernova_typeIab
+supernova type Ia                    supernova_typeIa
+supernova type Ib                    supernova_typeIb
+supernova type I                     supernova_typeI
+type Iab                             supernova_typeIab
+type Ia                              supernova_typeIa
+type Ib                              supernova_typeIb
+type I                               supernova_typeI
+sn iabs?                             supernova_typeIab
+sn ias?                              supernova_typeIa
+sn ibs?                              supernova_typeIb
+sn is?                               supernova_typeI
+sn IIabs?                            supernova_typeIIab
+sn IIas?                             supernova_typeIIa
+sn IIbs?                             supernova_typeIIb
+sn IIs?                              supernova_typeII
+super nova                           supernova
+super novae                          supernova
+novae                                nova
+super massive black hole             supermassive_blackhole_active_galactic_nucleus
+s m b h                              supermassive_blackhole_active_galactic_nucleus
+black hole                           blackhole
+tip of the red giant branch          red_giant_branch_tip
+tip red giant branch                 red_giant_branch_tip
+red giant-branch tip                 red_giant_branch_tip
+t r g b                              red_giant_branch_tip
+tully fisher                         tully_fisher
+t f                                  tully_fisher
+uv                                   ultraviolet
+ultra violet                         ultraviolet
+v circular                           circular_velocity_rotation_speed
+v circ                               circular_velocity_rotation_speed
+circular velocity                    circular_velocity_rotation_speed
+circ velocity                        circular_velocity_rotation_speed
+rotational speed                     circular_velocity_rotation_speed
+rotation speed                       circular_velocity_rotation_speed
+rotational velocity                  circular_velocity_rotation_speed
+rotation velocity                    circular_velocity_rotation_speed
+v rotation                           circular_velocity_rotation_speed
+v rot                                circular_velocity_rotation_speed
+circular speed                       circular_velocity_rotation_speed
+v  observed                          radial_velocity
+vel  observed                        radial_velocity
+velocity  observed                   radial_velocity
+v  obs                               radial_velocity
+vel  obs                             radial_velocity
+velocity obs                         radial_velocity
+v  pecular                           peculiar_velocity
+vel  pecular                         peculiar_velocity
+velocity  pecular                    peculiar_velocity
+v pec                                pecular_velocity
+vel  pec                             peculiar_velocity
+velocity  pec                        peculiar_velocity
+v  radial                            radial_velocity
+vel radial                           radial_velocity
+velocity radial                      radial_velocity
+v  rad                               radial_velocity
+vel rad                              radial_velocity
+velocity rad                         radial_velocity
+v  res                               spectral_velocity_resolution
+vel  res                             spectral_velocity_resolution
+velocity  res                        spectral_velocity_resolution
+v  resolution                        spectral_velocity_resolution
+vel resolution                       spectral_velocity_resolution
+velocity  resolution                 spectral_velocity_resolution
+w 10                                 neutral_hydrogen_profile_width_w10
+w 20                                 neutral_hydrogen_profile_width_w20
+w 30                                 neutral_hydrogen_profile_width_w30
+w 40                                 neutral_hydrogen_profile_width_w40
+w 50                                 neutral hydrogen profile width w50
+w 55                                 neutral_hydrogen_profile_width_w55
+w 60                                 neutral_hydrogen_profile_width_w60
+w 65                                 neutral_hydrogen_profile_width_w65
+w 70                                 neutral_hydrogen_profile_width_w70
+w 75                                 neutral_hydrogen_profile_width_w75
+w 80                                 neutral_hydrogen_profile_width_w80
+w 85                                 neutral_hydrogen_profile_width_w85
+w 90                                 neutral_hydrogen_profile_width_w90
+w 95                                 neutral_hydrogen_profile_width_w95
+warm dark matter                     warm_dark_matter
+w d m                                warm_dark_matter
+wd stars?                            white_dwarf_star
+wds?                                 white_dwarf_star
+white dwarf stars?                   white_dwarf_star
+white dwarfs?                        white_dwarf
+x rays?                              xray

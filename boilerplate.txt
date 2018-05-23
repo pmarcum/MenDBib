@@ -1,123 +1,122 @@
-The Authors
-Published by Oxford University Press
-on behalf of the Royal Astronomical Society
-RAS MNRAS \d+
-Journal compilation
-European Southern Observatory
 is not responsible for the content or functionality of any supporting materials supplied by the authors
 Any queries other than missing material should be directed to the corresponding author for the paper
-Journal compilation
-This paper has been typeset from a TEX L E
-This paper has been typeset from a TEX L TEX file prepared by the author
-A Preprint typeset using L TEX style emulateapj v \d+
-A Preprint typeset using L TEX style AASTeX\d v \d+
 Additional Supporting Information may be found in the online version of this article
-A A \d+
-Annu Rev Astron Astrophys \d+
-Article published by
-Downloaded from
+This paper has been typeset from a TEX L TEX file prepared by the author
+A\d+ page \d+ of \d+ Article published by EDP Sciences
+A Preprint typeset using L TEX style emulateapj v \d+
+Link to publication on Research at Birmingham portal
+A Preprint typeset using L TEX style AASTeX\d v \d+
+This article has been accepted for publication in
+Page \d+ of \d+ Article published by EDP Sciences
+Access provided by NASA Ames Research Center on
+Publishers PDF also known as Version of record
+Provided by the NASA Astrophysics Data System
+astro ph [A-Z]{2,3} \d+ [[Month]] [12]\d{3}
+In original form [12]\d{3} [[Month]] \d{1,2}
+in_original_form [12]\d{3} [[Month]] \d{1,2}
+in original form [12]\d{3} [[Month]] \d{1,2}
+on behalf of the Royal Astronomical Society
+This paper has been typeset from a TEX L E
+Other please specify with Rights Statement
+Department of Astronomy and Astrophysics
+Department of Physics and Astrophysics
+Department of Astronomy & Astrophysics
+Citation for published version Harvard
 c World Scientific Publishing Company
 C World Scientific Publishing Company
 q World Scientific Publishing Company
-For personal use only
-EDP Sciences
-and available at
-Printed in the U S A 
+Department of Physics & Astrophysics
+Department of Physics and Astronomy
+Department of Physics & Astronomy
+Published by Oxford University Press
+Accepted [12]\d{3} [[Month]] \d{1,2}
+Received [12]\d{3} [[Month]] \d{1,2}
+Published [12]\d{3} [[Month]] \d{1,2}
+accepted [12]\d{3} [[Month]] \d{1,2}
+received [12]\d{3} [[Month]] \d{1,2}
+published [12]\d{3} [[Month]] \d{1,2}
+owner as specified on the article
+Advance Access publication \d+
+Article number page \d+ of \d+
 American Astronomical Society
+Annu Rev Astron Astrophys \d+
+In original form [[Month]] \d+
+European Southern Observatory
+Page intentionally left blank
+back of preceeding plate page
+[12]\d{3} [[Month]] \d{1,2}
+eprintid arXiv astro ph \d+
+A MN L TEX style file v \d+
+Advance Access publication
+Publisher Rights Statement
 Send offprint requests to
-Provided by the NASA Astrophysics Data System
-Copyright
-by Annual Reviews
-All rights reserved
-Access provided by NASA Ames Research Center on
-Online only material
+MN L TEX style file v \d+
+Printed \d+ [[Month]] \d+
+Department of Astrophysics
+\d+ pp [12]\d{3} [[Month]]
+Mon Not R Astron Soc \d+
 First published online
 as a Review in Advance
-Mon Not R Astron Soc \d+
 Mon Not R astr Soc \d+
-Printed \d+ [[Month]] \d+
 A T X style file v \d+
-A MN L TEX style file v \d+
-MN L TEX style file v \d+
-eprintid arXiv astro ph \d+
-ISBN doi \d+ s\d+
-ISBN doi \d+
-ISBN \d+
-DOI DOI \d+
-doi \d+ X \d+
-doi \d+ j \d+ x
-doi \d+ L \d+
-doi \d+ S \d+
+Accepted [[Month]] \d+
+Published [[Month]] \d+
+Received [[Month]] \d+
+accepted [[Month]] \d+
+received [[Month]] \d+
+published [[Month]] \d+
+Department of Astronomy
+For personal use only
 doi \d+ mnras stt \d+
 doi \d+ mnras sts \d+
 doi \d+ mnras stu \d+
 doi \d+ mnras stv \d+
-doi \d+ j cad \d+
-DOI \d+
-doi \d+
-Advance Access publication \d+
-Advance Access publication
-License
-Other please specify with Rights Statement
-Document Version
-Publishers PDF also known as Version of record
-Citation for published version Harvard
-Link to publication on Research at Birmingham portal
-Publisher Rights Statement
-This article has been accepted for publication in
-Journal Title
-owner as specified on the article
+Printed in the U S A 
+Article published by
+\d{2} \d{2} [12]\d{3}
+Department of Physics
+Astronomy Department
+Online only material
+Journal compilation
 c \d+ RAS MNRAS \d+
 C \d+ RAS MNRAS \d+
 q \d+ RAS MNRAS \d+
-c \d+ RAS
-C \d+ RAS
-q \d+ RAS
+All rights reserved
+by Annual Reviews
+and available at
+ISBN doi \d+ s\d+
+doi \d+ j cad \d+
+doi \d+ j \d+ x
+on [[Month]] \d+
+Document Version
+Downloaded from
+c ESO [12]\d{3}
+C ESO [12]\d{3}
+doi \d+ X \d+
+doi \d+ L \d+
+doi \d+ S \d+
+RAS MNRAS \d+
+Journal Title
+EDP Sciences
+ISBN doi \d+
+DOI DOI \d+
+arXiv \d+ v \d
+[[Month]] \d+
+web page \d+
+\d+ L \d+ pp
 c [12]\d{3}
 q [12]\d{3}
 C [12]\d{3}
-c ESO [12]\d{3}
-C ESO [12]\d{3}
+The Authors
+Copyright
+c \d+ RAS
+C \d+ RAS
+q \d+ RAS
+ISBN \d+
+A A \d+
+DOI \d+
+doi \d+
+License
 c year
 C year
 q year
-\d+ pp [12]\d{3} [[Month]]
-\d+ L \d+ pp
-on [[Month]] \d+
-[[Month]] \d+
-\d{2} \d{2} [12]\d{3}
-arXiv \d+ v \d
-astro ph [A-Z]{2,3} \d+ [[Month]] [12]\d{3}
-[12]\d{3} [[Month]] \d{1,2}
-Accepted [12]\d{3} [[Month]] \d{1,2}
-Received [12]\d{3} [[Month]] \d{1,2}
-Published [12]\d{3} [[Month]] \d{1,2}
-In original form [12]\d{3} [[Month]] \d{1,2}
-accepted [12]\d{3} [[Month]] \d{1,2}
-received [12]\d{3} [[Month]] \d{1,2}
-published [12]\d{3} [[Month]] \d{1,2}
-in_original_form [12]\d{3} [[Month]] \d{1,2}
-Accepted [[Month]] \d+
-Received [[Month]] \d+
-Published [[Month]] \d+
-In original form [[Month]] \d+
-accepted [[Month]] \d+
-received [[Month]] \d+
-published [[Month]] \d+
-in original form [12]\d{3} [[Month]] \d{1,2}
-A\d+ page \d+ of \d+ Article published by EDP Sciences
-Page \d+ of \d+ Article published by EDP Sciences
-Article number page \d+ of \d+
-web page \d+
-Page intentionally left blank
-back of preceeding plate page
-Department of Astronomy & Astrophysics
-Department of Astronomy and Astrophysics
-Department of Physics & Astronomy
-Department of Physics and Astronomy
-Department of Physics & Astrophysics
-Department of Physics and Astrophysics
-Department of Astrophysics
-Department of Physics
-Department of Astronomy
-Astronomy Department

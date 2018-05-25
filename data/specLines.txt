@@ -1,3 +1,4 @@
+COMMENTS: only include letters, numbers and regex. Capitalized letters are taken literally, otherwise case-independent matching.
 lyman a                          lyman_alpha_far_ultraviolet_line
 ly alpha                         lyman_alpha_far_ultraviolet_line
 l alpha                          lyman_alpha_far_ultraviolet_line

@@ -28,59 +28,101 @@ H I 21 cm                            neutral hydrogen
 H I 21                               neutral hydrogen
 HI                                   neutral_hydrogen
 21 cm                                neutral_hydrogen
-o stars?                             Ostar_massive_main_sequence_star
-b stars?                             Bstar_massive_main_sequence_star
-o  b stars?                          Ostar_Bstar_massive_main_sequence_star
-o and b stars?                       Ostar_Bstar_massive_main_sequence_star
-o & b stars?                         Ostar_Bstar_massive_main_sequence_star
-o  b associations?                   Ostar_Bstar_massive_main_sequence_star
-a stars?                             Astar_intermediate_mass_main_sequence_star
-f stars?                             Fstar_intermediate_mass_main_sequence_star
-g stars?                             Gstar_solar_mass_main_sequence_star
-k stars?                             Kstar_low_mass_cool_dwarf_main_sequence_star
-m stars?                             Mstar_low_mass_cool_dwarf_main_sequence_star
-agns?                                active_galactic_nucleus
-agbs?                                asymptotic_giant_branch
-cdms?                                cold_dark_matter
-dms?                                 dark_matter
-dwfs?                                dwarf
-ews?                                 equivalent_width
-etgs?                                early_type_galaxy
+o stars                              Ostar_massive_main_sequence_star
+o star                               Ostar_massive_main_sequence_star
+b stars                              Bstar_massive_main_sequence_star
+b star                               Bstar_massive_main_sequence_star
+o  b stars                           Ostar_Bstar_massive_main_sequence_star
+o  b star                            Ostar_Bstar_massive_main_sequence_star
+o and b stars                        Ostar_Bstar_massive_main_sequence_star
+o and b star                         Ostar_Bstar_massive_main_sequence_star
+o & b stars                          Ostar_Bstar_massive_main_sequence_star
+o & b star                           Ostar_Bstar_massive_main_sequence_star
+o  b associations                    Ostar_Bstar_massive_main_sequence_star
+o  b association                     Ostar_Bstar_massive_main_sequence_star
+a stars                              Astar_intermediate_mass_main_sequence_star
+a star                               Astar_intermediate_mass_main_sequence_star
+f stars                              Fstar_intermediate_mass_main_sequence_star
+f star                               Fstar_intermediate_mass_main_sequence_star
+g stars                              Gstar_solar_mass_main_sequence_star
+g star                               Gstar_solar_mass_main_sequence_star
+k stars                              Kstar_low_mass_cool_dwarf_main_sequence_star
+k star                               Kstar_low_mass_cool_dwarf_main_sequence_star
+m stars                              Mstar_low_mass_cool_dwarf_main_sequence_star
+m star                               Mstar_low_mass_cool_dwarf_main_sequence_star
+agns                                 active_galactic_nucleus
+agn                                  active_galactic_nucleus
+agbs                                 asymptotic_giant_branch
+agb                                  asymptotic_giant_branch
+cdms                                 cold_dark_matter
+cdm                                  cold_dark_matter
+dms                                  dark_matter
+dm                                   dark_matter
+dwfs                                 dwarf
+dwf                                  dwarf
+ews                                  equivalent_width
+ew                                   equivalent_width
+etgs                                 early_type_galaxy
+etg                                  early_type_galaxy
 e type galaxies                      elliptical_early_type_galaxy
-e type galaxys?                      elliptical_early_type_galaxy
+e type galaxys                       elliptical_early_type_galaxy
+e type galaxy                        elliptical_early_type_galaxy
 e types                              elliptical_early_type_galaxy
-e-types?                             elliptical_early_type_galaxy
+e type                               elliptical_early_type_galaxy
 ell galaxies                         elliptical_early_type_galaxy
-ell galaxys?                         elliptical_early_type_galaxy
-ells?                                elliptical_early_type_galaxy
+ell galaxys                          elliptical_early_type_galaxy
+ell galaxy                           elliptical_early_type_galaxy
+ells                                 elliptical_early_type_galaxy
+ell                                  elliptical_early_type_galaxy
 fir                                  far_infrared
 far infra red                        far_infrared
 fuv                                  far_ultraviolet
 far ultra violet                     far_ultraviolet
 ir                                   infrared
 infra red                            infrared
-imfs?                                initial_mass_function
-lfs?                                 luminosity_function
-inter cluster mediums?               intergalactic_intercluster_intracluster_medium
-icms?                                intergalactic_intercluster_intracluster_medium
-igms?                                intergalactic_intercluster_intracluster_medium
-iseds?                               integrated_spectral_energy_distribution
-seds?                                spectral_energy_distribution
-isms?                                interstellar_medium
-irregular galaxys?                   irregular_late_type_galaxy
+imfs                                 initial_mass_function
+imf                                  initial_mass_function
+lfs                                  luminosity_function
+lf                                   luminosity_function
+inter cluster mediums                intergalactic_intercluster_intracluster_medium
+inter cluster medium                 intergalactic_intercluster_intracluster_medium
+intra cluster mediums                intergalactic_intercluster_intracluster_medium
+intra cluster medium                 intergalactic_intercluster_intracluster_medium
+inter galactic mediums               intergalactic_intercluster_intracluster_medium
+inter galactic medium                intergalactic_intercluster_intracluster_medium
+icms                                 intergalactic_intercluster_intracluster_medium
+icm                                  intergalactic_intercluster_intracluster_medium
+igms                                 intergalactic_intercluster_intracluster_medium
+igm                                  intergalactic_intercluster_intracluster_medium
+iseds                                integrated_spectral_energy_distribution
+ised                                 integrated_spectral_energy_distribution
+seds                                 spectral_energy_distribution
+sed                                  spectral_energy_distribution
+isms                                 interstellar_medium
+ism                                  interstellar_medium
+irregular galaxys                    irregular_late_type_galaxy
+irregular galaxy                     irregular_late_type_galaxy
 irregular galaxies                   irregular_late_type_galaxy
-irr galaxys?                         irregular_late_type_galaxy
-irr galaxies?                        irregular_late_type_galaxy
-irrs?                                irregular_late_type_galaxy
-ieg galaxys?                         isolated_early_type_elliptical_lenticular_galaxy
+irr galaxys                          irregular_late_type_galaxy
+irr galaxy                           irregular_late_type_galaxy
+irr galaxies                         irregular_late_type_galaxy
+irrs                                 irregular_late_type_galaxy
+irr                                  irregular_late_type_galaxy
+ieg galaxys                          isolated_early_type_elliptical_lenticular_galaxy
+ieg galaxy                           isolated_early_type_elliptical_lenticular_galaxy
 ieg galaxies                         isolated_early_type_elliptical_lenticular_galaxy
-iegs?                                isolated_early_type_elliptical_lenticular galaxy
-s0 galaxys?                          early_type_lenticular_galaxy
+iegs                                 isolated_early_type_elliptical_lenticular galaxy
+ieg                                  isolated_early_type_elliptical_lenticular galaxy
+s0 galaxys                           early_type_lenticular_galaxy
+s0 galaxy                            early_type_lenticular_galaxy
 s0 galaxies                          early_type_lenticular_galaxy
-s0s?                                 early_type_lenticular_galaxy
-lenticular galaxys?                  early_type_lenticular_galaxy
+s0s                                  early_type_lenticular_galaxy
+s0                                   early_type_lenticular_galaxy
+lenticular galaxys                   early_type_lenticular_galaxy
+lenticular galaxy                    early_type_lenticular_galaxy
 lenticular galaxies                  early_type_lenticular_galaxy
-lenticulars?                         early_type_lenticular_galaxy
+lenticulars                          early_type_lenticular_galaxy
+lenticular                           early_type_lenticular_galaxy
 MS                                   main_sequence
 main sequence                        main_sequence
 main seq                             main_sequence
@@ -91,8 +133,10 @@ muv                                  mid_ultraviolet
 mid uv                               mid_ultraviolet
 mid ultra violet                     mid_ultraviolet
 n body                               Nbody
-mass light ratios?                   mass_light_ratio
-mass to light ratios?                mass_light_ratio
+mass light ratios                    mass_light_ratio
+mass light ratio                     mass_light_ratio
+mass to light ratios                 mass_light_ratio
+mass to light ratio                  mass_light_ratio
 mass light                           mass_light_ratio
 msun lsun                            mass_light_ratio
 msolar lsolar                        mass_light_ratio
@@ -104,14 +148,21 @@ near infra red                       near_infrared
 near uv                              near_ultraviolet
 near ultra violet                    near_ultraviolet
 point spread function                point_spread_function
-psfs?                                point_spread_function
-qsos?                                active_galactic_nucleus_quasar
-quasars?                             active_galactic_nucleus_quasar
-rgbs?                                red_giant_branch
-seyfert galaxys?                     active_galactic_nucleus_seyfert
+psfs                                 point_spread_function
+psf                                  point_spread_function
+qsos                                 active_galactic_nucleus_quasar
+qso                                  active_galactic_nucleus_quasar
+quasars                              active_galactic_nucleus_quasar
+quasar                               active_galactic_nucleus_quasar
+rgbs                                 red_giant_branch
+rgb                                  red_giant_branch
+seyfert galaxys                      active_galactic_nucleus_seyfert
+seyfert galaxy                       active_galactic_nucleus_seyfert
 seyfert galaxies                     active_galactic_nucleus_seyfert
-seyferts?                            active_galactic_nucleus_seyfert
-seys?                                active_galactic_nucleus_seyfert
+seyferts                             active_galactic_nucleus_seyfert
+seyfert                              active_galactic_nucleus_seyfert
+seys                                 active_galactic_nucleus_seyfert
+sey                                  active_galactic_nucleus_seyfert
 s n r                                signal_noise_ratio
 signal to noise ratio                signal_noise_ratio
 signal to noise                      signal_noise_ratio
@@ -145,14 +196,22 @@ type Iab                             supernova_typeIab
 type Ia                              supernova_typeIa
 type Ib                              supernova_typeIb
 type I                               supernova_typeI
-sn iabs?                             supernova_typeIab
-sn ias?                              supernova_typeIa
-sn ibs?                              supernova_typeIb
-sn is?                               supernova_typeI
-sn IIabs?                            supernova_typeIIab
-sn IIas?                             supernova_typeIIa
-sn IIbs?                             supernova_typeIIb
-sn IIs?                              supernova_typeII
+sn iabs                              supernova_typeIab
+sn iab                               supernova_typeIab
+sn ias                               supernova_typeIa
+sn ia                                supernova_typeIa
+sn ibs                               supernova_typeIb
+sn ib                                supernova_typeIb
+sn is                                supernova_typeI
+sn i                                 supernova_typeI
+sn IIabs                             supernova_typeIIab
+sn IIab                              supernova_typeIIab
+sn IIas                              supernova_typeIIa
+sn IIa                               supernova_typeIIa
+sn IIbs                              supernova_typeIIb
+sn IIb                               supernova_typeIIb
+sn IIs                               supernova_typeII
+sn II                                supernova_typeII
 super nova                           supernova
 super novae                          supernova
 novae                                nova
@@ -218,8 +277,13 @@ w 90                                 neutral_hydrogen_profile_width_w90
 w 95                                 neutral_hydrogen_profile_width_w95
 warm dark matter                     warm_dark_matter
 w d m                                warm_dark_matter
-wd stars?                            white_dwarf_star
-wds?                                 white_dwarf_star
-white dwarf stars?                   white_dwarf_star
-white dwarfs?                        white_dwarf
-x rays?                              xray
+wd stars                             white_dwarf_star
+wd star                              white_dwarf_star
+wds                                  white_dwarf_star
+wd                                   white_dwarf_star
+white dwarf stars                    white_dwarf_star
+white dwarf star                     white_dwarf_star
+white dwarfs                         white_dwarf
+white dwarf                          white_dwarf
+x rays                               xray
+x ray                                xray

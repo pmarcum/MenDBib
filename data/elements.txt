@@ -11,6 +11,7 @@ buckyball                        fullerene                       m  0
 Buckyballs                       fullerene                       m  0
 Buckyball                        fullerene                       m  0
 cyanotriacetylene                cyanohexatriyne                 m  0
+Cyanotriacetylene                cyanohexatriyne                 m  0
 CH3CH2CHO                        propanal                        m  0
 CH3CHCH2O                        propylene_oxide                 m  0
 CH3OCH2OH                        methoxymethanol                 m  0

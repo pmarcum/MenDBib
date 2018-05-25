@@ -4,8 +4,12 @@ AlOH                             aluminum_hydroxide              m  0
 ArH+                             argonium                        m  0
 AlF                              aluminum_monofluoride           m  0
 AlO                              aluminum_monoxide               m  0
-[bB]uckministerfullerene         fullerene                       m  0
-[bB]uckyballs?                   fullerene                       m  0
+buckministerfullerene            fullerene                       m  0
+Buckministerfullerene            fullerene                       m  0
+buckyballs                       fullerene                       m  0
+buckyball                        fullerene                       m  0
+Buckyballs                       fullerene                       m  0
+Buckyball                        fullerene                       m  0
 cyanotriacetylene                cyanohexatriyne                 m  0
 CH3CH2CHO                        propanal                        m  0
 CH3CHCH2O                        propylene_oxide                 m  0
@@ -221,8 +225,10 @@ OCS                              carbonyl_sulfide                m  0
 OH+                              hydroxyl_radical                m  0
 O2                               molecular_oxygen                m  0
 O3                               ozone                           m  0
-[Pp]ropene                       propylene                       m  0
-PAHs?                            polycyclic_aromatic_hydrocarbon m  0
+Propene                          propylene                       m  0
+propene                          propylene                       m  0
+PAHs                             polycyclic_aromatic_hydrocarbon m  0
+PAH                              polycyclic_aromatic_hydrocarbon m  0
 PH3                              phosphine                       m  0
 PN                               phosphorus_mononitride          m  0
 PO                               phosphorus_monoxide             m  0

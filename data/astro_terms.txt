@@ -1,6 +1,6 @@
 COMMENTS: should only include letters, numbers, periods, slashes and regex. Literal periods and slashes need to be prefaced with a \
 r0\.25                               deVauc
-r1\/4                                deVauc
+r 1/4                                deVauc
 de vaucouleurs                       deVauc
 de vauc                              deVauc
 d 0 25                               galaxy_face_correct_isophote_diameter_d25

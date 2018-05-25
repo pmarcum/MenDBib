@@ -1,4 +1,4 @@
-r025([^0-9])                         deVauc$1
+r0.25([^0-9])                        deVauc$1
 r14([^0-9])                          deVauc$1
 de vaucouleurs                       deVauc
 de vauc                              deVauc
@@ -42,8 +42,6 @@ o  b stars                           Ostar_Bstar_massive_main_sequence_star
 o  b star                            Ostar_Bstar_massive_main_sequence_star
 o and b stars                        Ostar_Bstar_massive_main_sequence_star
 o and b star                         Ostar_Bstar_massive_main_sequence_star
-o & b stars                          Ostar_Bstar_massive_main_sequence_star
-o & b star                           Ostar_Bstar_massive_main_sequence_star
 o  b associations                    Ostar_Bstar_massive_main_sequence_star
 o  b association                     Ostar_Bstar_massive_main_sequence_star
 a stars                              Astar_intermediate_mass_main_sequence_star

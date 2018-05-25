@@ -1,3 +1,4 @@
+COMMENTS: include numbers, letters, +, - and regex. Literal pluses and minuses need to be prefaced with \\. The last 2 columns are m=molecule, a=atom and #electrons in atom
 AlCl                             aluminum_monochloride           m  0
 AlNC                             aluminum_isocyanide             m  0
 AlOH                             aluminum_hydroxide              m  0

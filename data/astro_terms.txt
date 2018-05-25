@@ -1,5 +1,5 @@
-COMMENTS: should only include letters, numbers, periods and regex. If you want a literal period, must include \\ in front of it
-r0\\.25([^0-9])                        deVauc$1
+COMMENTS: should only include letters, numbers, periods and regex.
+r0.25([^0-9])                        deVauc$1
 r14([^0-9])                          deVauc$1
 de vaucouleurs                       deVauc
 de vauc                              deVauc

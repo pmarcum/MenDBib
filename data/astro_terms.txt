@@ -227,6 +227,11 @@ tip of the red giant branch          red_giant_branch_tip
 tip red giant branch                 red_giant_branch_tip
 red giant branch tip                 red_giant_branch_tip
 t r g b                              red_giant_branch_tip
+metallicity                          abundance
+metalicity                           abundance
+metalicities                         abundance
+metallicities                        abundance
+abundances                           abundance
 tully fisher                         tully_fisher
 t f                                  tully_fisher
 uv                                   ultraviolet

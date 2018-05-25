@@ -1,263 +1,567 @@
 COMMENTS: include numbers, letters, +, - and regex. Literal pluses need to be prefaced with \. The last 2 columns are m=molecule, a=atom and #electrons in atom
-AlCl                             aluminum_monochloride           m  0
-AlNC                             aluminum_isocyanide             m  0
-AlOH                             aluminum_hydroxide              m  0
-ArH\+                           argonium                        m  0
-AlF                              aluminum_monofluoride           m  0
-AlO                              aluminum_monoxide               m  0
-buckministerfullerene            fullerene                       m  0
-Buckministerfullerene            fullerene                       m  0
-buckyballs                       fullerene                       m  0
-buckyball                        fullerene                       m  0
-Buckyballs                       fullerene                       m  0
-Buckyball                        fullerene                       m  0
-cyanotriacetylene                cyanohexatriyne                 m  0
-Cyanotriacetylene                cyanohexatriyne                 m  0
-CH3CH2CHO                        propanal                        m  0
-CH3CHCH2O                        propylene_oxide                 m  0
-CH3OCH2OH                        methoxymethanol                 m  0
-CH3COOCH3                        methyl_acetate                  m  0
-C2H5OCHO                         ethyl_formate                   m  0
-C2H5OCH3                         ethyl_methyl_ether              m  0
-CH2CCHCN                         cyanoallene                     m  0
-CH2CHCHO                         propenal                        m  0
-CH32CHCN                         isopropyl_cyanide               m  0
-CH3CH2CN                         propionitrile                   m  0
-CH3CH2OH                         ethanol                         m  0
-CH3CH2SH                         ethyl_mercaptan                 m  0
-CH3CHCH2                         propylene                       m  0
-CH3CONH2                         acetamide                       m  0
-COCH2OH2                         dihydroxyacetone                m  0
-CH2CHCN                          acrylonitrile                   m  0
-CH2DCCH                          deuterated_methylacetylene      m  0
-CH3COOH                          acetic_acid                     m  0
-CH3OCH3                          dimethyl_ether                  m  0
-c-C2H4O                        ethylene_oxide                  m  0
-c-H2C3O                        cyclopropenone                  m  0
-c-C3H2                         cyclopropenylidene              m  0
-c-SiC2                         silicon_dicarbide               m  0
-C14H10                           anthracene                      m  0
-C16H10                           pyrene                          m  0
-C3H7CN                           npropyl_cyanide                 m  0
-C6H5CN                           benxonitrile                    m  0
-cC2H4O                           ethylene_oxide                  m  0
-CH2CNH                           ketenimine                      m  0
-CH2OH2                           ethylene_glycol                 m  0
-CH3C2H                           methylacetylene                 m  0
-CH3CCD                           deuterated_methylacetylene      m  0
-CH3CHO                           acetaldehyde                    m  0
-CH3NCO                           methyl_isocyanate               m  0
-CH3C4H                           methyldiacetylene               m  0
-CH32CO                           acetone                         m  0
-CH3C5N                           methyl_cyano_diacetylene        m  0
-CH3C6H                           methyltriacetylene              m  0
-cH2C3O                           cyclopropenone                  m  0
-C10H8\+                         naphthalene_cation              m  0
-c-C3H                          cyclopropynylidyne              m  0
-C2H4O                            ethylene_oxide                  m  0
-CH3CN                            acetonitrile                    m  0
-CH3NC                            methyl_isocyanide               m  0
-CH3OH                            methanol                        m  0
-CH3SH                            methanethiol                    m  0
-cSiC2                            silicon_dicarbide               m  0
-cC3H2                            cyclopropenylidene              m  0
-cC3H                             cyclopropynylidyne              m  0
-C2H2                             acetylene                       m  0
-C2H4                             ethylene                        m  0
-C3H2                             cyclopropenylidene              m  0
-C3N-                           cyanoethynyl                    m  0
-C4H-                           butadiynyl                      m  0
-C6H6                             benzene                         m  0
-C6H-                           hexatriynyl_radical             m  0
-C8H-                           octatetraynyl_radical           m  0
-C60\+                           fullerene                       m  0
-CH3O                             methoxy_radical                 m  0
-C2H                              ethynyl_radical                 m  0
-C2O                              dicarbon_monoxide               m  0
-C2S                              thioxoethenylidene              m  0
-C3N                              cyanoethynyl                    m  0
-C3O                              tricarbon_monoxide              m  0
-C3S                              tricarbon_sulfide               m  0
-C4H                              butadiynyl                      m  0
-C5H                              pentynylidyne                   m  0
-C5N                              cyanobutadiynyl_radical         m  0
-C6H                              hexatriynyl                     m  0
-C7H                              heptatrienyl_radical            m  0
-C8H                              octatetraynyl                   m  0
-C24                              graphene                        m  0
-C60                              fullerene                       m  0
-C70                              fullerene                       m  0
-CCN                              cyanolethylidyne                m  0
-CH3                              methyl_radical                  m  0
-CH4                              methane                         m  0
-CO2                              carbon_dioxide                  m  0
-CF\+                            fluoromethylidynium             m  0
-CH\+                            methylidyne_radical             m  0
-CN\+                            cyanogen_radical                m  0
-CN\-                            cyanogen_radical                m  0
-C2                               diatomic_carbon                 m  0
-C3                               tricarbon                       m  0
-C5                               linear_carbon_chain             m  0
-CH                               methylidyne                     m  0
-CN                               cyanogen                        m  0
-CO                               carbon_monoxide                 m  0
-CP                               carbon_monophosphide            m  0
-CS                               carbon_monosulfide              m  0
-D2CO                             deuterated_formaldehyde         m  0
-DNCO                             deuterated_isocyanic_acid       m  0
-D2O                              deuterated_water                m  0
-DCN                              deuterated_hydrogen_cyanide     m  0
-DCO                              deuterated_formyl_radical       m  0
-DNC                              hydrogen_isocyanide             m  0
-E-HNCHCN                       ecyanomethanimine               m  0
-EHNCHCN                          ecyanomethanimine               m  0
-FeCN                             iron_cyanide                    m  0
-FeO                              iron_oxide                      m  0
-H2NH2CCOOH                       glycine                         m  0
-H2COHCHO                         glycolaldehyde                  m  0
-H3CC2CN                          methylcyanoacetylene            m  0
-HCOOCH3                          methyl_formate                  m  0
-H2CHCOH                          vinyl_alcohol                   m  0
-H2COH\+                         protonated_formaldehyde         m  0
-H3CNH2                           methylamine                     m  0
-HC10CN                           cyanopentaacetylene             m  0
-HC2CHO                           propynal                        m  0
-HC3NH\+                         protonated_cyanacetylene        m  0
-HCC-NC                         isocyanoacetylene               m  0
-HCONH2                           formamide                       m  0
-H2C2O                            ketene                          m  0
-H2C3O                            cyclopropenone                  m  0
-H2CCN                            cyanomethyl                     m  0
-H2CNH                            methylenimine                   m  0
-HCCNC                            isocyanoacetylene               m  0
-HCOCN                            cyanoformaldehyde               m  0
-HCOOH                            formic_acid                     m  0
-H2CN\+                          methylene_amidogen              m  0
-HC4CN                            cyanodiacetylene                m  0
-HC8CN                            cyanotetra_acetylene            m  0
-HCNH\+                          protonated_hydrogen_cyanide     m  0
-HMgNC                            hydromagnesium_isocyanide       m  0
-HNCNH                            carbodiimide                    m  0
-H2Cl\+                          chloronium                      m  0
-HOCO\+                          protonated_carbon_dioxide       m  0
-H2CO                             formaldehyde                    m  0
-H2C6                             hexapentaenylidene              m  0
-H2CN                             methylene_amidogen              m  0
-H2CS                             thioformaldehyde                m  0
-HC7N                             cyanohexatriyne                 m  0
-HCCO                             ketenyl                         m  0
-HCNO                             fulminic_acid                   m  0
-HNCO                             isocyanic_acid                  m  0
-HOCN                             cyanic_acid                     m  0
-HOOH                             hydrogen_peroxide               m  0
-H2C4                             diacetylene                     m  0
-H2D\+                           trihydrogen_cation              m  0
-H2O\+                           water                           m  0
-H3O\+                           hydronium                       m  0
-HCO\+                           formyl_radical                  m  0
-HD2\+                           trihydrogen_cation              m  0
-HD\+2                           trihydrogen_cation              m  0
-HN\+2                           diazenylium                     m  0
-HN2\+                           diazenylium                     m  0
-HOC\+                           isoformyl                       m  0
-H2C3                             propadienylidene                m  0
-HSCN                             thiocyanic_acid                 m  0
-HC3N                             cyanoacetylene                  m  0
-HDCO                             deuterated_formaldehyde         m  0
-HNCS                             isothiocyanic_acid              m  0
-H2C                              methylene_radical               m  0
-H2O                              water                           m  0
-H2S                              hydrogen_sulfide                m  0
-H\+3                            protonated_molecular_hydrogen   m  0
-H3\+                            protonated_molecular_hydrogen   m  0
-HCl                              hydrogen_chloride               m  0
-HCN                              hydrogen_cyanide                m  0
-HCO                              formyl                          m  0
-HCP                              phosphaethyne                   m  0
-HCS                              thioformyl                      m  0
-HDO                              deuterated_water                m  0
-HNC                              hydrogen_isocyanide             m  0
-HNO                              nitroxyl                        m  0
-HO2                              hydroperoxyl                    m  0
-HSC                              isothioformyl                   m  0
-H2                               molecular_hydrogen              m  0
-HD                               hydrogen_deuteride              m  0
-HF                               hydrogen_fluoride               m  0
-HO                               hydroxyl                        m  0
-i-C3H\+                       propynylidyne                   m  0
-i-H2C3                         propadienylidene                m  0
-i-H2C4                         diacetylene                     m  0
-iH2C3                            propadienylidene                m  0
-iH2C4                            diacetylene                     m  0
-i-C3H                          propynylidyne                   m  0
-iC3H\+                          propynylidyne                   m  0
-iC3H                             propynylidyne                   m  0
-KCl                              potassium_chloride              m  0
-KCN                              potassium_cyanide               m  0
-MgCCH                            magnesium_monoacetylide         m  0
-MgCN                             magnesium_cyanide               m  0
-MgH\+                           magnesium_monohydride_cation    m  0
-MgNC                             magnesium_isocyanide            m  0
-NH2CH2CN                         aminoacetonitrile               m  0
-NCCNH\+                         protonated_cyanogen             m  0
-NH2CDO                           deuterated_formamide            m  0
-NH22CO                           urea                            m  0
-NHDCHO                           deuterated_formamide            m  0
-NH2CN                            cyanamide                       m  0
-NH3D\+                          deuterated_ammonium_ion         m  0
-NaCl                             sodium_chloride                 m  0
-NaCN                             sodium_cyanide                  m  0
-NaOH                             sodium_hydroxide                m  0
-NCCP                             cyanophosphaethyne              m  0
-NH2D                             deuterated_ammonia              m  0
-NH4\+                           ammonium_ion                    m  0
-NH\+4                           ammonium_ion                    m  0
-NHD2                             deuterated_ammonia              m  0
-N2O                              nitrous_oxide                   m  0
-NaI                              sodium_iodide                   m  0
-ND3                              deuterated_ammonia              m  0
-NH2                              amino_radical                   m  0
-NH3                              ammonia                         m  0
-NO\+                            nitric_oxide                    m  0
-N2                               molecular_nitrogen              m  0
-NH                               nitrogen_monohydride            m  0
-NO                               nitric_oxide                    m  0
-NS                               nitrogen_sulfide                m  0
-OCS                              carbonyl_sulfide                m  0
-OH\+                            hydroxyl_radical                m  0
-O2                               molecular_oxygen                m  0
-O3                               ozone                           m  0
-Propene                          propylene                       m  0
-propene                          propylene                       m  0
-PAHs                             polycyclic_aromatic_hydrocarbon m  0
-PAH                              polycyclic_aromatic_hydrocarbon m  0
-PH3                              phosphine                       m  0
-PN                               phosphorus_mononitride          m  0
-PO                               phosphorus_monoxide             m  0
-SiH3CN                           silyl_cyanide                   m  0
-SiCSi                            disilicon_carbide               m  0
-SiC2                             silicon_dicarbide               m  0
-SiC3                             silicon_tricarbide              m  0
-SiC4                             silicon_carbide_cluster         m  0
-SiH4                             silane                          m  0
-SiCN                             silicon_carbonitride            m  0
-SiC                              carborundum                     m  0
-SiH                              silylidine                      m  0
-SiN                              silicon_mononitride             m  0
-SiO                              silicon_monoxide                m  0
-SiS                              silicon_monosulfide             m  0
-SO2                              sulfur_dioxide                  m  0
-SH                               sulfur_monohydride              m  0
-SO                               sulfur_monoxide                 m  0
-TiO2                             titanium_dioxide                m  0
-TiO                              titanium_oxide                  m  0
-Ac                               actinium                        a  89
-Ag                               silver                          a  47
-Al                               aluminum                        a  13
-Ar                               argon                           a  18
-As                               arsenic                         a  33
-At                               astatine                        a  85
-Au                               gold                            a  79
+AlCl                  aluminum_monochloride           m  0
+AlNC                  aluminum_isocyanide             m  0
+AlOH                  aluminum_hydroxide              m  0
+ArH\+                 argonium                        m  0
+AlF                   aluminum_monofluoride           m  0
+AlO                   aluminum_monoxide               m  0
+buckministerfullerene fullerene                       m  0
+buckyballs            fullerene                       m  0
+buckyball             fullerene                       m  0
+cyanotriacetylene     cyanohexatriyne                 m  0
+CH3CH2CHO             propanal                        m  0
+CH3CHCH2O             propylene_oxide                 m  0
+CH3OCH2OH             methoxymethanol                 m  0
+CH3COOCH3             methyl_acetate                  m  0
+C2H5OCHO              ethyl_formate                   m  0
+C2H5OCH3              ethyl_methyl_ether              m  0
+CH2CCHCN              cyanoallene                     m  0
+CH2CHCHO              propenal                        m  0
+CH32CHCN              isopropyl_cyanide               m  0
+CH3CH2CN              propionitrile                   m  0
+CH3CH2OH              ethanol                         m  0
+CH3CH2SH              ethyl_mercaptan                 m  0
+CH3CHCH2              propylene                       m  0
+CH3CONH2              acetamide                       m  0
+COCH2OH2              dihydroxyacetone                m  0
+CH2CHCN               acrylonitrile                   m  0
+CH2DCCH               deuterated_methylacetylene      m  0
+CH3COOH               acetic_acid                     m  0
+CH3OCH3               dimethyl_ether                  m  0
+c-C2H4O               ethylene_oxide                  m  0
+c-H2C3O               cyclopropenone                  m  0
+c-C3H2                cyclopropenylidene              m  0
+c-SiC2                silicon_dicarbide               m  0
+C14H10                anthracene                      m  0
+C16H10                pyrene                          m  0
+C3H7CN                npropyl_cyanide                 m  0
+C6H5CN                benxonitrile                    m  0
+cC2H4O                ethylene_oxide                  m  0
+CH2CNH                ketenimine                      m  0
+CH2OH2                ethylene_glycol                 m  0
+CH3C2H                methylacetylene                 m  0
+CH3CCD                deuterated_methylacetylene      m  0
+CH3CHO                acetaldehyde                    m  0
+CH3NCO                methyl_isocyanate               m  0
+CH3C4H                methyldiacetylene               m  0
+CH32CO                acetone                         m  0
+CH3C5N                methyl_cyano_diacetylene        m  0
+CH3C6H                methyltriacetylene              m  0
+cH2C3O                cyclopropenone                  m  0
+C10H8\+               naphthalene_cation              m  0
+c-C3H                 cyclopropynylidyne              m  0
+C2H4O                 ethylene_oxide                  m  0
+CH3CN                 acetonitrile                    m  0
+CH3NC                 methyl_isocyanide               m  0
+CH3OH                 methanol                        m  0
+CH3SH                 methanethiol                    m  0
+cSiC2                 silicon_dicarbide               m  0
+cC3H2                 cyclopropenylidene              m  0
+cC3H                  cyclopropynylidyne              m  0
+C2H2                  acetylene                       m  0
+C2H4                  ethylene                        m  0
+C3H2                  cyclopropenylidene              m  0
+C3N-                  cyanoethynyl                    m  0
+C4H-                  butadiynyl                      m  0
+C6H6                  benzene                         m  0
+C6H-                  hexatriynyl_radical             m  0
+C8H-                  octatetraynyl_radical           m  0
+C60\+                 fullerene                       m  0
+CH3O                  methoxy_radical                 m  0
+C2H                   ethynyl_radical                 m  0
+C2O                   dicarbon_monoxide               m  0
+C2S                   thioxoethenylidene              m  0
+C3N                   cyanoethynyl                    m  0
+C3O                   tricarbon_monoxide              m  0
+C3S                   tricarbon_sulfide               m  0
+C4H                   butadiynyl                      m  0
+C5H                   pentynylidyne                   m  0
+C5N                   cyanobutadiynyl_radical         m  0
+C6H                   hexatriynyl                     m  0
+C7H                   heptatrienyl_radical            m  0
+C8H                   octatetraynyl                   m  0
+C24                   graphene                        m  0
+C60                   fullerene                       m  0
+C70                   fullerene                       m  0
+CCN                   cyanolethylidyne                m  0
+CH3                   methyl_radical                  m  0
+CH4                   methane                         m  0
+CO2                   carbon_dioxide                  m  0
+CF\+                  fluoromethylidynium             m  0
+CH\+                  methylidyne_radical             m  0
+CN\+                  cyanogen_radical                m  0
+CN\-                  cyanogen_radical                m  0
+C2                    diatomic_carbon                 m  0
+C3                    tricarbon                       m  0
+C5                    linear_carbon_chain             m  0
+CH                    methylidyne                     m  0
+CN                    cyanogen                        m  0
+CO                    carbon_monoxide                 m  0
+CP                    carbon_monophosphide            m  0
+CS                    carbon_monosulfide              m  0
+D2CO                  deuterated_formaldehyde         m  0
+DNCO                  deuterated_isocyanic_acid       m  0
+D2O                   deuterated_water                m  0
+DCN                   deuterated_hydrogen_cyanide     m  0
+DCO                   deuterated_formyl_radical       m  0
+DNC                   hydrogen_isocyanide             m  0
+E-HNCHCN              ecyanomethanimine               m  0
+EHNCHCN               ecyanomethanimine               m  0
+FeCN                  iron_cyanide                    m  0
+FeO                   iron_oxide                      m  0
+H2NH2CCOOH            glycine                         m  0
+H2COHCHO              glycolaldehyde                  m  0
+H3CC2CN               methylcyanoacetylene            m  0
+HCOOCH3               methyl_formate                  m  0
+H2CHCOH               vinyl_alcohol                   m  0
+H2COH\+               protonated_formaldehyde         m  0
+H3CNH2                methylamine                     m  0
+HC10CN                cyanopentaacetylene             m  0
+HC2CHO                propynal                        m  0
+HC3NH\+               protonated_cyanacetylene        m  0
+HCC-NC                isocyanoacetylene               m  0
+HCONH2                formamide                       m  0
+H2C2O                 ketene                          m  0
+H2C3O                 cyclopropenone                  m  0
+H2CCN                 cyanomethyl                     m  0
+H2CNH                 methylenimine                   m  0
+HCCNC                 isocyanoacetylene               m  0
+HCOCN                 cyanoformaldehyde               m  0
+HCOOH                 formic_acid                     m  0
+H2CN\+                methylene_amidogen              m  0
+HC4CN                 cyanodiacetylene                m  0
+HC8CN                 cyanotetra_acetylene            m  0
+HCNH\+                protonated_hydrogen_cyanide     m  0
+HMgNC                 hydromagnesium_isocyanide       m  0
+HNCNH                 carbodiimide                    m  0
+H2Cl\+                chloronium                      m  0
+HOCO\+                protonated_carbon_dioxide       m  0
+H2CO                  formaldehyde                    m  0
+H2C6                  hexapentaenylidene              m  0
+H2CN                  methylene_amidogen              m  0
+H2CS                  thioformaldehyde                m  0
+HC7N                  cyanohexatriyne                 m  0
+HCCO                  ketenyl                         m  0
+HCNO                  fulminic_acid                   m  0
+HNCO                  isocyanic_acid                  m  0
+HOCN                  cyanic_acid                     m  0
+HOOH                  hydrogen_peroxide               m  0
+H2C4                  diacetylene                     m  0
+H2D\+                 trihydrogen_cation              m  0
+H2O\+                 water                           m  0
+H3O\+                 hydronium                       m  0
+HCO\+                 formyl_radical                  m  0
+HD2\+                 trihydrogen_cation              m  0
+HD\+2                 trihydrogen_cation              m  0
+HN\+2                 diazenylium                     m  0
+HN2\+                 diazenylium                     m  0
+HOC\+                 isoformyl                       m  0
+H2C3                  propadienylidene                m  0
+HSCN                  thiocyanic_acid                 m  0
+HC3N                  cyanoacetylene                  m  0
+HDCO                  deuterated_formaldehyde         m  0
+HNCS                  isothiocyanic_acid              m  0
+H2C                   methylene_radical               m  0
+H2O                   water                           m  0
+H2S                   hydrogen_sulfide                m  0
+H\+3                  protonated_molecular_hydrogen   m  0
+H3\+                  protonated_molecular_hydrogen   m  0
+HCl                   hydrogen_chloride               m  0
+HCN                   hydrogen_cyanide                m  0
+HCO                   formyl                          m  0
+HCP                   phosphaethyne                   m  0
+HCS                   thioformyl                      m  0
+HDO                   deuterated_water                m  0
+HNC                   hydrogen_isocyanide             m  0
+HNO                   nitroxyl                        m  0
+HO2                   hydroperoxyl                    m  0
+HSC                   isothioformyl                   m  0
+H2                    molecular_hydrogen              m  0
+HD                    hydrogen_deuteride              m  0
+HF                    hydrogen_fluoride               m  0
+HO                    hydroxyl                        m  0
+i-C3H\+               propynylidyne                   m  0
+i-H2C3                propadienylidene                m  0
+i-H2C4                diacetylene                     m  0
+iH2C3                 propadienylidene                m  0
+iH2C4                 diacetylene                     m  0
+i-C3H                 propynylidyne                   m  0
+iC3H\+                propynylidyne                   m  0
+iC3H                  propynylidyne                   m  0
+KCl                   potassium_chloride              m  0
+KCN                   potassium_cyanide               m  0
+MgCCH                 magnesium_monoacetylide         m  0
+MgCN                  magnesium_cyanide               m  0
+MgH\+                 magnesium_monohydride_cation    m  0
+MgNC                  magnesium_isocyanide            m  0
+NH2CH2CN              aminoacetonitrile               m  0
+NCCNH\+               protonated_cyanogen             m  0
+NH2CDO                deuterated_formamide            m  0
+NH22CO                urea                            m  0
+NHDCHO                deuterated_formamide            m  0
+NH2CN                 cyanamide                       m  0
+NH3D\+                deuterated_ammonium_ion         m  0
+NaCl                  sodium_chloride                 m  0
+NaCN                  sodium_cyanide                  m  0
+NaOH                  sodium_hydroxide                m  0
+NCCP                  cyanophosphaethyne              m  0
+NH2D                  deuterated_ammonia              m  0
+NH4\+                 ammonium_ion                    m  0
+NH\+4                 ammonium_ion                    m  0
+NHD2                  deuterated_ammonia              m  0
+N2O                   nitrous_oxide                   m  0
+NaI                   sodium_iodide                   m  0
+ND3                   deuterated_ammonia              m  0
+NH2                   amino_radical                   m  0
+NH3                   ammonia                         m  0
+NO\+                  nitric_oxide                    m  0
+N2                    molecular_nitrogen              m  0
+NH                    nitrogen_monohydride            m  0
+NO                    nitric_oxide                    m  0
+NS                    nitrogen_sulfide                m  0
+OCS                   carbonyl_sulfide                m  0
+OH\+                  hydroxyl_radical                m  0
+O2                    molecular_oxygen                m  0
+O3                    ozone                           m  0
+propene               propylene                       m  0
+pahs                  polycyclic_aromatic_hydrocarbon m  0
+pah                   polycyclic_aromatic_hydrocarbon m  0
+PH3                   phosphine                       m  0
+PN                    phosphorus_mononitride          m  0
+PO                    phosphorus_monoxide             m  0
+SiH3CN                silyl_cyanide                   m  0
+SiCSi                 disilicon_carbide               m  0
+SiC2                  silicon_dicarbide               m  0
+SiC3                  silicon_tricarbide              m  0
+SiC4                  silicon_carbide_cluster         m  0
+SiH4                  silane                          m  0
+SiCN                  silicon_carbonitride            m  0
+SiC                   carborundum                     m  0
+SiH                   silylidine                      m  0
+SiN                   silicon_mononitride             m  0
+SiO                   silicon_monoxide                m  0
+SiS                   silicon_monosulfide             m  0
+SO2                   sulfur_dioxide                  m  0
+SH                    sulfur_monohydride              m  0
+SO                    sulfur_monoxide                 m  0
+TiO2                  titanium_dioxide                m  0
+TiO                   titanium_oxide                  m  0
+Ac                    actinium_atom
+Ac I                  actinium_atom_neutral
+Ac II                 actinium_atom_ionize
+Ac III                actinium_atom_ionize
+Ac IV                 actinium_atom_ionize
+Ac V                  actinium_atom_ionize
+Ac VI                 actinium_atom_ionize
+Ac VII                actinium_atom_ionize
+Ac VIII               actinium_atom_ionize
+Ac IX                 actinium_atom_ionize
+Ac X                  actinium_atom_ionize
+Ac XI                 actinium_atom_ionize
+Ac XII                actinium_atom_ionize
+Ac XIII               actinium_atom_ionize
+Ac XIV                actinium_atom_ionize
+Ac XV                 actinium_atom_ionize
+[Ac I]                actinium_atom_neutral_forbid
+[Ac II]               actinium_atom_ionize_forbid
+[Ac III]              actinium_atom_ionize_forbid
+[Ac IV]               actinium_atom_ionize_forbid
+[Ac V]                actinium_atom_ionize_forbid
+[Ac VI]               actinium_atom_ionize_forbid
+[Ac VII]              actinium_atom_ionize_forbid
+[Ac VIII]             actinium_atom_ionize_forbid
+[Ac IX]               actinium_atom_ionize_forbid
+[Ac X]                actinium_atom_ionize_forbid
+[Ac XI]               actinium_atom_ionize_forbid
+[Ac XII]              actinium_atom_ionize_forbid
+[Ac XIII]             actinium_atom_ionize_forbid
+[Ac XIV]              actinium_atom_ionize_forbid
+[Ac XV]               actinium_atom_ionize_forbid
+Ac I]                 actinium_atom_neutral_semi_forbid
+Ac II]                actinium_atom_ionize_semi_forbid
+Ac III]               actinium_atom_ionize_semi_forbid
+Ac IV]                actinium_atom_ionize_semi_forbid
+Ac V]                 actinium_atom_ionize_semi_forbid
+Ac VI]                actinium_atom_ionize_semi_forbid
+Ac VII]               actinium_atom_ionize_semi_forbid
+Ac VIII]              actinium_atom_ionize_semi_forbid
+Ac IX]                actinium_atom_ionize_semi_forbid
+Ac X]                 actinium_atom_ionize_semi_forbid
+Ac XI]                actinium_atom_ionize_semi_forbid
+Ac XII]               actinium_atom_ionize_semi_forbid
+Ac XIII]              actinium_atom_ionize_semi_forbid
+Ac XIV]               actinium_atom_ionize_semi_forbid
+Ac XV]                actinium_atom_ionize_semi_forbid
+Ag                    silver
+Ag I                  silver_atom_neutral
+Ag II                 silver_atom_ionize
+Ag III                silver_atom_ionize
+Ag IV                 silver_atom_ionize
+Ag V                  silver_atom_ionize
+Ag VI                 silver_atom_ionize
+Ag VII                silver_atom_ionize
+Ag VIII               silver_atom_ionize
+Ag IX                 silver_atom_ionize
+Ag X                  silver_atom_ionize
+Ag XI                 silver_atom_ionize
+Ag XII                silver_atom_ionize
+Ag XIII               silver_atom_ionize
+Ag XIV                silver_atom_ionize
+Ag XV                 silver_atom_ionize
+[Ag I]                silver_atom_neutral_forbid
+[Ag II]               silver_atom_ionize_forbid
+[Ag III]              silver_atom_ionize_forbid
+[Ag IV]               silver_atom_ionize_forbid
+[Ag V]                silver_atom_ionize_forbid
+[Ag VI]               silver_atom_ionize_forbid
+[Ag VII]              silver_atom_ionize_forbid
+[Ag VIII]             silver_atom_ionize_forbid
+[Ag IX]               silver_atom_ionize_forbid
+[Ag X]                silver_atom_ionize_forbid
+[Ag XI]               silver_atom_ionize_forbid
+[Ag XII]              silver_atom_ionize_forbid
+[Ag XIII]             silver_atom_ionize_forbid
+[Ag XIV]              silver_atom_ionize_forbid
+[Ag XV]               silver_atom_ionize_forbid
+Ag I]                 silver_atom_neutral_semi_forbid
+Ag II]                silver_atom_ionize_semi_forbid
+Ag III]               silver_atom_ionize_semi_forbid
+Ag IV]                silver_atom_ionize_semi_forbid
+Ag V]                 silver_atom_ionize_semi_forbid
+Ag VI]                silver_atom_ionize_semi_forbid
+Ag VII]               silver_atom_ionize_semi_forbid
+Ag VIII]              silver_atom_ionize_semi_forbid
+Ag IX]                silver_atom_ionize_semi_forbid
+Ag X]                 silver_atom_ionize_semi_forbid
+Ag XI]                silver_atom_ionize_semi_forbid
+Ag XII]               silver_atom_ionize_semi_forbid
+Ag XIII]              silver_atom_ionize_semi_forbid
+Ag XIV]               silver_atom_ionize_semi_forbid
+Ag XV]                silver_atom_ionize_semi_forbid
+Al                    aluminum
+Al I                  aluminum_atom_neutral
+Al II                 aluminum_atom_ionize
+Al III                aluminum_atom_ionize
+Al IV                 aluminum_atom_ionize
+Al V                  aluminum_atom_ionize
+Al VI                 aluminum_atom_ionize
+Al VII                aluminum_atom_ionize
+Al VIII               aluminum_atom_ionize
+Al IX                 aluminum_atom_ionize
+Al X                  aluminum_atom_ionize
+Al XI                 aluminum_atom_ionize
+Al XII                aluminum_atom_ionize
+Al XIII               aluminum_atom_ionize
+[Al I]                aluminum_atom_neutral_forbid
+[Al II]               aluminum_atom_ionize_forbid
+[Al III]              aluminum_atom_ionize_forbid
+[Al IV]               aluminum_atom_ionize_forbid
+[Al V]                aluminum_atom_ionize_forbid
+[Al VI]               aluminum_atom_ionize_forbid
+[Al VII]              aluminum_atom_ionize_forbid
+[Al VIII]             aluminum_atom_ionize_forbid
+[Al IX]               aluminum_atom_ionize_forbid
+[Al X]                aluminum_atom_ionize_forbid
+[Al XI]               aluminum_atom_ionize_forbid
+[Al XII]              aluminum_atom_ionize_forbid
+[Al XIII]             aluminum_atom_ionize_forbid
+Al I]                 aluminum_atom_neutral_semi_forbid
+Al II]                aluminum_atom_ionize_semi_forbid
+Al III]               aluminum_atom_ionize_semi_forbid
+Al IV]                aluminum_atom_ionize_semi_forbid
+Al V]                 aluminum_atom_ionize_semi_forbid
+Al VI]                aluminum_atom_ionize_semi_forbid
+Al VII]               aluminum_atom_ionize_semi_forbid
+Al VIII]              aluminum_atom_ionize_semi_forbid
+Al IX]                aluminum_atom_ionize_semi_forbid
+Al X]                 aluminum_atom_ionize_semi_forbid
+Al XI]                aluminum_atom_ionize_semi_forbid
+Al XII]               aluminum_atom_ionize_semi_forbid
+Al XIII]              aluminum_atom_ionize_semi_forbid
+Ar                    argon
+Ar I                  argon_atom_neutral
+Ar II                 argon_atom_ionize
+Ar III                argon_atom_ionize
+Ar IV                 argon_atom_ionize
+Ar V                  argon_atom_ionize
+Ar VI                 argon_atom_ionize
+Ar VII                argon_atom_ionize
+Ar VIII               argon_atom_ionize
+Ar IX                 argon_atom_ionize
+Ar X                  argon_atom_ionize
+Ar XI                 argon_atom_ionize
+Ar XII                argon_atom_ionize
+Ar XIII               argon_atom_ionize
+Ar XIV                argon_atom_ionize
+Ar XV                 argon_atom_ionize
+[Ar I]                argon_atom_neutral_forbid
+[Ar II]               argon_atom_ionize_forbid
+[Ar III]              argon_atom_ionize_forbid
+[Ar IV]               argon_atom_ionize_forbid
+[Ar V]                argon_atom_ionize_forbid
+[Ar VI]               argon_atom_ionize_forbid
+[Ar VII]              argon_atom_ionize_forbid
+[Ar VIII]             argon_atom_ionize_forbid
+[Ar IX]               argon_atom_ionize_forbid
+[Ar X]                argon_atom_ionize_forbid
+[Ar XI]               argon_atom_ionize_forbid
+[Ar XII]              argon_atom_ionize_forbid
+[Ar XIII]             argon_atom_ionize_forbid
+[Ar XIV]              argon_atom_ionize_forbid
+[Ar XV]               argon_atom_ionize_forbid
+Ar I]                 argon_atom_neutral_semi_forbid
+Ar II]                argon_atom_ionize_semi_forbid
+Ar III]               argon_atom_ionize_semi_forbid
+Ar IV]                argon_atom_ionize_semi_forbid
+Ar V]                 argon_atom_ionize_semi_forbid
+Ar VI]                argon_atom_ionize_semi_forbid
+Ar VII]               argon_atom_ionize_semi_forbid
+Ar VIII]              argon_atom_ionize_semi_forbid
+Ar IX]                argon_atom_ionize_semi_forbid
+Ar X]                 argon_atom_ionize_semi_forbid
+Ar XI]                argon_atom_ionize_semi_forbid
+Ar XII]               argon_atom_ionize_semi_forbid
+Ar XIII]              argon_atom_ionize_semi_forbid
+Ar XIV]               argon_atom_ionize_semi_forbid
+Ar XV]                argon_atom_ionize_semi_forbid
+As                    arsenic
+As I                  arsenic_atom_neutral
+As II                 arsenic_atom_ionize
+As III                arsenic_atom_ionize
+As IV                 arsenic_atom_ionize
+As V                  arsenic_atom_ionize
+As VI                 arsenic_atom_ionize
+As VII                arsenic_atom_ionize
+As VIII               arsenic_atom_ionize
+As IX                 arsenic_atom_ionize
+As X                  arsenic_atom_ionize
+As XI                 arsenic_atom_ionize
+As XII                arsenic_atom_ionize
+As XIII               arsenic_atom_ionize
+As XIV                arsenic_atom_ionize
+As XV                 arsenic_atom_ionize
+[As I]                arsenic_atom_neutral_forbid
+[As II]               arsenic_atom_ionize_forbid
+[As III]              arsenic_atom_ionize_forbid
+[As IV]               arsenic_atom_ionize_forbid
+[As V]                arsenic_atom_ionize_forbid
+[As VI]               arsenic_atom_ionize_forbid
+[As VII]              arsenic_atom_ionize_forbid
+[As VIII]             arsenic_atom_ionize_forbid
+[As IX]               arsenic_atom_ionize_forbid
+[As X]                arsenic_atom_ionize_forbid
+[As XI]               arsenic_atom_ionize_forbid
+[As XII]              arsenic_atom_ionize_forbid
+[As XIII]             arsenic_atom_ionize_forbid
+[As XIV]              arsenic_atom_ionize_forbid
+[As XV]               arsenic_atom_ionize_forbid
+As I]                 arsenic_atom_neutral_semi_forbid
+As II]                arsenic_atom_ionize_semi_forbid
+As III]               arsenic_atom_ionize_semi_forbid
+As IV]                arsenic_atom_ionize_semi_forbid
+As V]                 arsenic_atom_ionize_semi_forbid
+As VI]                arsenic_atom_ionize_semi_forbid
+As VII]               arsenic_atom_ionize_semi_forbid
+As VIII]              arsenic_atom_ionize_semi_forbid
+As IX]                arsenic_atom_ionize_semi_forbid
+As X]                 arsenic_atom_ionize_semi_forbid
+As XI]                arsenic_atom_ionize_semi_forbid
+As XII]               arsenic_atom_ionize_semi_forbid
+As XIII]              arsenic_atom_ionize_semi_forbid
+As XIV]               arsenic_atom_ionize_semi_forbid
+As XV]                arsenic_atom_ionize_semi_forbid
+At                    astatine
+At I                  astatine_atom_neutral
+At II                 astatine_atom_ionize
+At III                astatine_atom_ionize
+At IV                 astatine_atom_ionize
+At V                  astatine_atom_ionize
+At VI                 astatine_atom_ionize
+At VII                astatine_atom_ionize
+At VIII               astatine_atom_ionize
+At IX                 astatine_atom_ionize
+At X                  astatine_atom_ionize
+At XI                 astatine_atom_ionize
+At XII                astatine_atom_ionize
+At XIII               astatine_atom_ionize
+At XIV                astatine_atom_ionize
+At XV                 astatine_atom_ionize
+[At I]                astatine_atom_neutral_forbid
+[At II]               astatine_atom_ionize_forbid
+[At III]              astatine_atom_ionize_forbid
+[At IV]               astatine_atom_ionize_forbid
+[At V]                astatine_atom_ionize_forbid
+[At VI]               astatine_atom_ionize_forbid
+[At VII]              astatine_atom_ionize_forbid
+[At VIII]             astatine_atom_ionize_forbid
+[At IX]               astatine_atom_ionize_forbid
+[At X]                astatine_atom_ionize_forbid
+[At XI]               astatine_atom_ionize_forbid
+[At XII]              astatine_atom_ionize_forbid
+[At XIII]             astatine_atom_ionize_forbid
+[At XIV]              astatine_atom_ionize_forbid
+[At XV]               astatine_atom_ionize_forbid
+At I]                 astatine_atom_neutral_semi_forbid
+At II]                astatine_atom_ionize_semi_forbid
+At III]               astatine_atom_ionize_semi_forbid
+At IV]                astatine_atom_ionize_semi_forbid
+At V]                 astatine_atom_ionize_semi_forbid
+At VI]                astatine_atom_ionize_semi_forbid
+At VII]               astatine_atom_ionize_semi_forbid
+At VIII]              astatine_atom_ionize_semi_forbid
+At IX]                astatine_atom_ionize_semi_forbid
+At X]                 astatine_atom_ionize_semi_forbid
+At XI]                astatine_atom_ionize_semi_forbid
+At XII]               astatine_atom_ionize_semi_forbid
+At XIII]              astatine_atom_ionize_semi_forbid
+At XIV]               astatine_atom_ionize_semi_forbid
+At XV]                astatine_atom_ionize_semi_forbid
+Au                    gold 
+Au I                  gold_atom_neutral
+Au II                 gold_atom_ionize
+Au III                gold_atom_ionize
+Au IV                 gold_atom_ionize
+Au V                  gold_atom_ionize
+Au VI                 gold_atom_ionize
+Au VII                gold_atom_ionize
+Au VIII               gold_atom_ionize
+Au IX                 gold_atom_ionize
+Au X                  gold_atom_ionize
+Au XI                 gold_atom_ionize
+Au XII                gold_atom_ionize
+Au XIII               gold_atom_ionize
+Au XIV                gold_atom_ionize
+Au XV                 gold_atom_ionize
+[Au I]                gold_atom_neutral_forbid
+[Au II]               gold_atom_ionize_forbid
+[Au III]              gold_atom_ionize_forbid
+[Au IV]               gold_atom_ionize_forbid
+[Au V]                gold_atom_ionize_forbid
+[Au VI]               gold_atom_ionize_forbid
+[Au VII]              gold_atom_ionize_forbid
+[Au VIII]             gold_atom_ionize_forbid
+[Au IX]               gold_atom_ionize_forbid
+[Au X]                gold_atom_ionize_forbid
+[Au XI]               gold_atom_ionize_forbid
+[Au XII]              gold_atom_ionize_forbid
+[Au XIII]             gold_atom_ionize_forbid
+[Au XIV]              gold_atom_ionize_forbid
+[Au XV]               gold_atom_ionize_forbid
+Au I]                 gold_atom_neutral_semi_forbid
+Au II]                gold_atom_ionize_semi_forbid
+Au III]               gold_atom_ionize_semi_forbid
+Au IV]                gold_atom_ionize_semi_forbid
+Au V]                 gold_atom_ionize_semi_forbid
+Au VI]                gold_atom_ionize_semi_forbid
+Au VII]               gold_atom_ionize_semi_forbid
+Au VIII]              gold_atom_ionize_semi_forbid
+Au IX]                gold_atom_ionize_semi_forbid
+Au X]                 gold_atom_ionize_semi_forbid
+Au XI]                gold_atom_ionize_semi_forbid
+Au XII]               gold_atom_ionize_semi_forbid
+Au XIII]              gold_atom_ionize_semi_forbid
+Au XIV]               gold_atom_ionize_semi_forbid
+Au XV]                gold_atom_ionize_semi_forbid
 Ba                               barium                          a  56
 Be                               berylium                        a  4
 Bi                               bismuth                         a  83

@@ -1,7 +1,13 @@
-r0.25([^0-9])                        deVauc$1
+r025([^0-9])                         deVauc$1
 r14([^0-9])                          deVauc$1
 de vaucouleurs                       deVauc
 de vauc                              deVauc
+d 0 25                               galaxy_face_correct_isophote_diameter_d25
+d 25                                 galaxy_isophote_diameter_d25
+mu 25                                galaxy_isophote_diameter_d25
+mu B 25                              galaxy_isophote_diameter_d25
+mu pg                                galaxy_isophote_diameter_d25
+R 25                                 galaxy isophote ratio
 r effective                          effective_radius
 r eff                                effective_radius
 rad effective                        effective_radius

@@ -1,0 +1,287 @@
+COLUMN 1: full symbol element (like "[NeII]") Note: if ionization level listed as "I", then a separate
+version using just the plain element symbol will also be constructed as a separate entry in the xLtr
+
+COLUMN 2: value of wavelength or frequency or energy of the line emission
+
+COLUMN 3: the uncertainty (plus/minus) allowed in a value to be considered a match to this line's wavelength/freq/energy 
+value
+
+COLUMN 4: the units for the values in COlUMNS 2-3
+
+COLUMN 5: all the alternative names for this spectral feature. Multiple names delimited by a vertical bar.  If there are
+no alternative names (like "lymanalpha"), just a bar appears.  Each of the names that appear here will be the regexp
+for separate entries in the xLtr, all having the same line information and word under which the info should be 
+indexed being the same (which are the several words assigned to a spectral line, like element name, ionization level, etc).
+
+COLUMN 6: words (delimited by vertical bars, phrases with words delimited by underscore) that, in their extended fields
+(".x") of xLtr, should list this spectral line
+
+COLUMN 7: words (delimited by vertical bars, words in phrases delimited by underscores) that should appear in the
+"extended" field (e.g, the ".x") of xLtr for this line.  These words are words that, if an extended search is desired later, would
+be included in the search of the index because they are either directly or indirectly related to the words for which they
+appear.  For example, if the spectral line is part of a doublet, then the other line might be listed here. 
+In Columms 6-7, words that are part of a phrase should be delimited by an underscore, eg "fine_structure", and separate 
+words or phrases delimited by vertical bar, eg "fine_structure|collisional_excitation|doublet".  The nuances of this 
+format are important:  by putting words together in a single phrase (e.g., delimiting those words with underscores), you 
+are instructing the index-searcher to  require those words to appear close together in proximity to each other (e.g., like 
+in the same sentence). Search results for fine_structure|collisional_excitation|doublet would be a subset of the results from 
+fine|structure|collisional|excitation|doublet. If these words are included in the ".x" field of the xLtr array object, then these 
+words and phrases would automatically be included in the search if the "extended search mode" was activated.
+
+NOTE: in the "index" itself, any word that would serve as the exact synonom of a primary word (the "root" word) would
+be listed as an "inflection" (synonyms would be considered to be an "inflection" although technically different tenses
+of a word are inflections, like fly, flew, flown). In the index, each of those inflections would be a separate entry, but
+the only content to those entries would be a single word:  the "root" word to which they all belong.  In the xLtr, each
+of these "inflections" are also separate entries, with an "indx" equalling the "root" word, and these separate entries 
+will end up being consolidated in the index under this root word, with no mention of the synonyms/inflections. To recap:
+      In the index itself, inflections are treated like this:
+           "inflection1": {"theRootWord"} <- the index redirects to the rootword
+           "inflection2": {"theRootWord"}
+           "theRootWord": {"infl":"inflection1|inflection2", ...}
+      In the xLtr, synonyms and inflections are treated like this:
+           "inflection1":{"indx":"theRootWord", ...}
+           "inflection2":{"indx":"theRootWord", ...}
+           "theRootWord":{"indx":"theRootWord", ...}
+       and the corresponding index will look like:
+           "theRootWord":{....}    <- knows nothing about "inflection1" and inflection2" because xLtr already redirected to rootword.
+We get the first situation when the inflections come from the dictionary look-up.  We get the 2nd situation when
+words are all connected to the same rootword through the same ".indx" within the xLtr.
+
+references used: 
+   https://ned.ipac.caltech.edu/level5/March01/Franceschini/Fran5.html
+   http://www.danehkar.net/papers/2018pasa/node8.html
+   //https://www.researchgate.net/publication/1787843_A_Spectroscopic_Study_of_the_Near-IR_SIII_Lines_in_a_Sample_of_HII_Galaxies_chemical_abundances
+   Table 6 of http://www.danehkar.net/papers/2018pasa/node8.html
+
+
+// come back to
+// need to add 21cm line emission!  (the need to add the normalization of "cm" to units in the coding. 
+
+
+1         2     3    4   5                                                                                                     6         7
+============================================================================================================================================================
+HI       938    5    ang lymanepsilon|lymane|lyepsilon|lepsilon|lye                                                            |        |
+HI       950    5    ang lymandelta|lymand|lydelta|ldelta|lyd                                                                  |        |
+HI       973    5    ang lymangamma|lymang|lygamma|lgamma|lyg                                                                  |        |
+CIII     977    5    ang |                                                                                                     |        |
+NIII     991    5    ang |                                                                                                     |        |
+HI       1026   5    ang lymanbeta|lymanb|lybeta|lbeta|lyb                                                                     |        |
+OVI      1033   5    ang |                                                                                                     doublet  OVI1038ang
+OVI      1038   5    ang |                                                                                                     doublet  OVI1033ang
+HeII     1085   5    ang |                                                                                                     |        |
+HI       1215   5    ang lymanalpha|lymana|lyalpha|lalpha|lya                                                                  forest   |
+NV       1240   5    ang |                                                                                                     |        |
+SiIV     1394   5    ang |                                                                                                     doublet  SiIV1403ang
+SiIV     1403   5    ang |                                                                                                     doublet  SiIV1394ang
+OIV]     1407   5    ang |                                                                                                     |        |
+NIV]     1488   5    ang |                                                                                                     |        |
+CIV      1549   5    ang |                                                                                                     |        |
+HeII     1640   5    ang |                                                                                                     |        |
+OIII]    1664   5    ang |                                                                                                     |        |
+NIII]    1750   5    ang |                                                                                                     |        |
+SiIII    1895   5    ang |                                                                                                     |        |
+CIII]    1909   5    ang |                                                                                                     |        |
+FeII     2080   5    ang |                                                                                                     |        |
+CII]     2326   5    ang |                                                                                                     |        |
+SiII     2336   5    ang |                                                                                                     |        |
+[NeIV]   2422   5    ang |                                                                                                     triplet  [NeIV]2424ang|[NeIV]2431ang
+[NeIV]   2424   5    ang |                                                                                                     triplet  [NeIV]2422ang|[NeIV]2431ang
+[NeIV]   2431   5    ang |                                                                                                     triplet  [NeIV]2422ang|[NeIV]2424ang
+[OII]    2470   5    ang |                                                                                                     |        |
+FeII     2500   5    ang |                                                                                                     |        |
+[MgV]    2750   5    ang |                                                                                                     |        |
+MgII     2798   5    ang |                                                                                                     |        |
+MgI      2852   5    ang |                                                                                                     |        |
+[NeV]    2972   5    ang |                                                                                                     |        |
+FeII     3300   5    ang |                                                                                                     |        |
+[NeIII]  3342   5    ang |                                                                                                     |        |
+[NeV]    3346   5    ang |                                                                                                     |        |
+[NeV]    3426   5    ang |                                                                                                     |        |
+[NI]     3466   5    ang |                                                                                                     |        |
+[MgVI]   3488   5    ang |                                                                                                     |        |
+[FeVII]  3588   5    ang |                                                                                                     |        |
+[SIII]   3722   5    ang |                                                                                                     |        |
+[OII]    3727   5    ang OIIemissionlinedoublet|OIIforbiddenlinedoublet                                                        doublet  [OII]3729ang
+[OII]    3729   5    ang OIIemissionlinedoublet|OIIforbiddenlinedoublet                                                        doublet  [OII]3727ang
+OII      3749   5    ang |                                                                                                     |        |
+[FeVII]  3760   5    ang |                                                                                                     |        |
+HeI      3805   5    ang |                                                                                                     |        |
+HI       3835   5    ang H9                                                                                                    |        |
+[FeV]    3840   5    ang |                                                                                                     |        |
+[NeIII]  3868   5    ang |                                                                                                     |        |
+HeI      3889   5    ang |                                                                                                     |        |
+[FeV]    3893   5    ang |                                                                                                     |        |
+CaII     3934   5    ang CaIIk|calciumk|CaIIhk|CaIIhandk|calciumhk|Cahk|calciumhandk|Cahandk                                   doublet  CaII3969ang
+[NeIII]  3967   5    ang |                                                                                                     |        |
+CaII     3969   5    ang CaIIh|calciumh|CaIIhk|CaIIhandk|calciumhk|Cahk|calciumhandk|Cahandk                                   doublet  CaII3934ang
+HI       3970   5    ang hydrogenepsilon|hydrogene|hepsilon|balmerepsilon|balmere|bepsilon|baepsilon|H7                        |        |
+HeI      4026   5    ang |                                                                                                     |        |
+[SII]    4068   5    ang |                                                                                                     doublet  [SII]4076ang
+[FeV]    4071   5    ang |                                                                                                     |        |
+OII      4072   5    ang |                                                                                                     |        |
+OII      4076   5    ang |                                                                                                     |        |
+[SII]    4076   5    ang |                                                                                                     doublet  [SII]4068ang
+OII      4085   5    ang |                                                                                                     |        |
+HI       4102   5    ang hydrogendelta|hydrogend|hdelta|balmerdelta|balmerd|bdelta|badelta|H6                                  |        |
+OII      4111   5    ang |                                                                                                     |        |
+OII      4119   5    ang |                                                                                                     |        |
+OII      4121   5    ang |                                                                                                     |        |
+OII      4133   5    ang |                                                                                                     |        |
+OII      4153   5    ang |                                                                                                     |        |
+CII      4267   5    ang |                                                                                                     |        |
+OII      4320   5    ang |                                                                                                     |        |
+OII      4337   5    ang |                                                                                                     |        |
+HI       4340   5    ang hydrogengamma|hydrogeng|hgamma|balmergamma|balmerg|bgamma|bagamma|H5                                  |        |
+OII      4349   5    ang |                                                                                                     |        |
+[OIII]   4363   5    ang |                                                                                                     |        |
+OII      4415   5    ang |                                                                                                     |        |
+OII      4417   5    ang |                                                                                                     |        |
+HeI      4471   5    ang |                                                                                                     |        |
+FeII     4500   5    ang |                                                                                                     |        |
+HeII     4540   5    ang |                                                                                                     |        |
+NII      4601   5    ang |                                                                                                     |        |
+NII      4607   5    ang |                                                                                                     |        |
+NII      4614   5    ang |                                                                                                     |        |
+NII      4621   5    ang |                                                                                                     |        |
+NII      4631   5    ang |                                                                                                     |        |
+NIII     4634   5    ang NIIItripletemission                                                                                   triplet  NIII4640ang|NIII4642ang
+NIII     4640   5    ang NIIItripletemission                                                                                   triplet  NIII4634ang|NIII4642ang
+NIII     4642   5    ang NIIItripletemission                                                                                   triplet  NIII4634ang|NIII4640ang
+NII      4643   5    ang |                                                                                                     |        |
+CIII     4647   5    ang |                                                                                                     doublet  CIII4650ang
+CIII     4650   5    ang |                                                                                                     doublet  CIII4647ang
+CIV      4658   5    ang |                                                                                                     |        |
+OII      4639   5    ang |                                                                                                     |        |
+OII      4642   5    ang |                                                                                                     |        |
+OII      4649   5    ang |                                                                                                     |        |
+OII      4651   5    ang |                                                                                                     |        |
+OII      4662   5    ang |                                                                                                     |        |
+OII      4676   5    ang |                                                                                                     |        |
+HeII     4686   5    ang |                                                                                                     |        |
+OII      4699   5    ang |                                                                                                     |        |
+[ArIV]   4713   5    ang |                                                                                                     |        |
+HeI      4711   5    ang |                                                                                                     |        |
+[NeIV]   4724   5    ang |                                                                                                     |        |
+[ArIV]   4740   5    ang |                                                                                                     |        |
+HI       4861   5    ang hydrogenbeta|hydrogenb|hbeta|balmerbeta|balmerb|bbeta|babeta|H4                                       |        |
+OII      4907   5    ang |                                                                                                     |        |
+HeI      4922   5    ang |                                                                                                     |        |
+OII      4925   5    ang |                                                                                                     |        |
+[OIII]   4959   5    ang OIIIemissionlinedoublet                                                                               doublet  [OIII]5007ang
+[OIII]   5007   5    ang OIIIemissionlinedoublet                                                                               doublet  [OIII]4959ang
+MgI      5167   5    ang Mgb|magnesiumb|magnesiumtriplet|Mgtriplet|magnesiumtriplet                                            triplet  MgI5173ang|MgI5184ang
+MgI      5173   5    ang Mgb|magnesiumb|magnesiumtriplet|Mgtriplet|magnesiumtriplet                                            triplet  MgI5167ang|MgI5184ang
+MgI      5184   5    ang Mgb|magnesiumb|magnesiumtriplet|Mgtriplet|magnesiumtriplet                                            triplet  MgI5167ang|MgI5173ang
+FeII     5190   5    ang |                                                                                                     |        |
+[NI]     5200   5    ang |                                                                                                     |        |
+FeII     5300   5    ang |                                                                                                     |        |
+[FeXIV]  5303   5    ang |                                                                                                     |        |
+HeII     5412   5    ang |                                                                                                     |        |
+[ClIII]  5518   5    ang |                                                                                                     doublet  [ClIII]5538ang
+[ClIII]  5538   5    ang |                                                                                                     doublet  [ClIII]5518ang
+[OI]     5577   5    ang |                                                                                                     |        |
+NII      5667   5    ang |                                                                                                     |        |
+NII      5676   5    ang |                                                                                                     |        |
+NII      5680   5    ang |                                                                                                     |        |
+[FeVII]  5721   5    ang |                                                                                                     |        |
+[NII]    5755   5    ang |                                                                                                     |        |
+CIV      5801   5    ang |                                                                                                     |        |
+HeI      5876   5    ang |                                                                                                     |        |
+NaI      5890   5    ang NaIresonancedoublet                                                                                   doublet  NaI5896ang
+NaI      5896   5    ang NaIresonancedoublet                                                                                   doublet  NaI5890ang
+NII      5932   5    ang |                                                                                                     |        |
+NII      5942   5    ang |                                                                                                     |        |
+[FeVII]  6087   5    ang |                                                                                                     |        |
+[OI]     6300   5    ang |                                                                                                     |        |
+[OI]     6363   5    ang |                                                                                                     |        |
+[SIII]   6312   5    ang |                                                                                                     |        |
+[FeX]    6375   5    ang |                                                                                                     |        |
+[NII]    6548   5    ang NIIdoublet|HaNIIdoublet|halphaNIIdoublet                                                              doublet  [NII]6584ang|HI6563ang
+HI       6563   5    ang hydrogenalpha|hydrogena|halpha|ha|balmeralpha|balmera|balpha|baalpha|H3|HaNIIdoublet|halphaNIIdoublet |        |
+CII      6578   5    ang |                                                                                                     |        |
+[NII]    6584   5    ang NIIdoublet|HaNIIdoublet|halphaNIIdoublet                                                              doublet  [NII]6548ang|HI6563ang
+[HeI]    6678   5    ang |                                                                                                     |        |
+[SII]    6717   5    ang |                                                                                                     doublet  [SII]6731ang
+[SII]    6731   5    ang |                                                                                                     doublet  [SII]6717ang
+[ArV]    7005   5    ang |                                                                                                     |        |
+[HeI]    7065   5    ang |                                                                                                     |        |
+[ArIII]  7136   5    ang |                                                                                                     |        |
+CII      7231   5    ang |                                                                                                     |        |
+CII      7236   5    ang |                                                                                                     |        |
+HeI      7281   5    ang |                                                                                                     |        |
+[OII]    7320   5    ang |                                                                                                     doublet  [OII]7330ang
+[OII]    7330   5    ang |                                                                                                     doublet  [OII]7320ang
+[SI]     7725   5    ang |                                                                                                     |        |
+[ArIII]  7751   5    ang |                                                                                                     |        |
+[FeXI]   7892   5    ang |                                                                                                     |        |
+CaII     8498   5    ang calciumtriplet|Catriplet|CaIItriplet|CaIIinfraredtriplet|CaIInearirtriplet|CaIIirtriplet              triplet  CaII8542ang|CaII8662ang
+CaII     8542   5    ang calciumtriplet|Catriplet|CaIItriplet|CaIIinfraredtriplet|CaIInearirtriplet|CaIIirtriplet              triplet  CaII8498ang|CaII8662ang
+CaII     8662   5    ang calciumtriplet|Catriplet|CaIItriplet|CaIIinfraredtriplet|CaIInearirtriplet|CaIIirtriplet              triplet  CaII8498ang|CaII8542ang
+[CI]     8727   5    ang |                                                                                                     triplet  [CI]9824ang|[CI]9850ang
+HI       9014   5    ang  Pa10                                                                                                 |        |
+HI       9229   5    ang  Pa9                                                                                                  |        |
+[CI]     9824   5    ang |                                                                                                     triplet  [CI]8727ang|[CI]9850ang
+HI       9548   5    ang  Pa8                                                                                                  |        |
+[CI]     9850   5    ang |                                                                                                     triplet  [CI]8727ang|[CI]9824ang
+[SIII]   9069   5    ang |                                                                                                     |        |
+[SIII]   9531   5    ang |                                                                                                     |        | 
+HI       0.955  0.2  um  paschenepsilon|paschene|paepsilon|pae                                                                 |        |
+[NI]     1.04   0.2  um    |                                                                                                   |        |
+HI       1.005  0.2  um  paschendelta|paschend|padelta|pad                                                                     |        |
+[SII]    1.032  0.2  um  |                                                                                                     |        |
+HI       1.094  0.2  um  paschengamma|pascheng|pagamma|pag                                                                     |        |
+HI       1.282  0.2  um  paschenbeta|paschenb|pabeta|pab                                                                       |        |
+[SIX]    1.252  0.2  um  |                                                                                                     |        |
+[SiX]    1.43   0.2  um  |                                                                                                     |        |
+HI       1.817  0.2  um  brackettepsilon|brackette|brepsilon|bepsilon|bre                                                      |        |
+HI       1.875  0.2  um  paschenalpha|paschena|paalpha|paa                                                                     |        |
+[SiXI]   1.932  0.2  um  |                                                                                                     |        |
+HI       1.944  0.2  um  brackettdelta|brackettd|brdelta|bdelta|brd                                                            |        |
+[SiVI]   1.962  0.2  um  |                                                                                                     |        |
+HI       2.166  0.2  um  brackettgamma|brackettg|brgamma|bgamma|brg                                                            |        |
+[CaVIII] 2.321  0.2  um  |                                                                                                     |        |
+[SiVII]  2.483  0.2  um  |                                                                                                     |        |
+HI       2.625  0.2  um  brackettbeta|brackettb|brbeta|bbeta|brb                                                               |        |
+[SiIX]   2.84   0.2  um  |                                                                                                     |        |
+[MgVIII] 3.03   0.2  um  |                                                                                                     |        |
+HI       3.039  0.2  um  pfundepsilon|pfunde|pfepsilon|pfe                                                                     |        |
+[CaIV]   3.21   0.2  um  |                                                                                                     |        |
+HI       3.297  0.2  um  pfunddelta|pfundd|pfdelta|pfd                                                                         |        |
+HI       3.741  0.2  um  pfundgamma|pfundg|pfgamma|pfg                                                                         |        |
+[SiIX]   3.935  0.2  um  |                                                                                                     |        |
+HI       4.051  0.2  um  brackettalpha|bracketta|bralpha|balpha|bra                                                            |        |
+[MgIV]   4.487  0.2  um  |                                                                                                     |        |
+[ArVI]   4.529  0.2  um  |                                                                                                     |        |
+HI       4.654  0.2  um  pfundbeta|pfundb|pfbeta|pfb                                                                           |        |
+HI       4.673  0.2  um  humphreysepsilon|humphreyse|huepsilon|hue                                                             |        |
+HI       5.129  0.2  um  humphreysdelta|humphreysd|hudelta|hud                                                                 |        |
+[MgV]    5.610  0.2  um  |                                                                                                     |        |
+HI       5.908  0.2  um  humphreysgamma|humphreysg|hugamma|hug                                                                 |        |
+[ArII]   6.985  0.2  um  |                                                                                                     |        |
+HI       7.460  0.2  um  pfundalpha|pfunda|pfalpha|pfa                                                                         |        |
+HI       7.503  0.2  um  humphreysbeta|humphreysb|hubeta|hub                                                                   |        |
+[NeVI]   7.652  0.2  um  |                                                                                                     |        |
+[ArV]    7.902  0.2  um  |                                                                                                     |        |
+[ArIII]  8.99   0.2  um  |                                                                                                     |        |
+[SIV]    10.5   0.2  um  |                                                                                                     |        |
+HI       12.37  0.2  um  humphreysalpha|humphreysa|hualpha|hua                                                                 |        |
+[NeII]   12.82  0.2  um  |                                                                                                     |        |
+[ArV]    13.102 0.2  um  |                                                                                                     |        |
+[NeV]    14.3   0.2  um  |                                                                                                     |        |
+[NeIII]  15.55  0.2  um  |                                                                                                     |        |
+[SIII]   18.71  0.2  um  |                                                                                                     doublet  [SIII]33.65um
+[ArIII]  21.8   0.2  um  |                                                                                                     |        |
+[NeV]    24.2   0.2  um  |                                                                                                     |        |
+[OIV]    25.87  0.2  um  |                                                                                                     |        |
+[FeII]   25.99  0.2  um  |                                                                                                     |        |
+[SIII]   33.48  0.2  um  |                                                                                                     doublet  [SIII]18.7um
+[SiII]   34.81  0.2  um  |                                                                                                     |        |
+[NeIII]  36.02  0.2  um  |                                                                                                     |        |
+[OIII]   51.82  0.2  um  |                                                                                                     doublet  [OIII]88.4um
+[NIII]   57.32  0.2  um  |                                                                                                     |        |
+[OI]     63.18  0.2  um  |                                                                                                     |        |
+[OIII]   88.4   0.2  um  |                                                                                                     doublet  [OIII]51.8um
+[NII]    121.9  0.2  um  |                                                                                                     doublet  [NII]203.5um
+[OI]     145.5  0.2  um  |                                                                                                     |        |
+[CII]    157.7  0.2  um  |                                                                                                     |        |
+[NII]    203.5  0.2  um  |                                                                                                     doublet  [NII]121.9um

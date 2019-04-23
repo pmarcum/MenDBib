@@ -1,0 +1,376 @@
+COME BACK TO 
+
+thoughts while I showered -- VERY IMPORTANT!
+
+(1) forget all the weird index words below in column 2 -- instead, have arrays of words.  for example, instead of "adu", have "analog|digital|unit", 
+so that every time an "adu" or "adus" is encountered, all three words in the index (analog, digital, unit) will record the location/paper/page/sector
+of "adu".  
+
+(2) when a search is conducted for a phrase, like analog_digital_unit, here's how to handle the extended search:  the extended search words should be
+the UNION of the extended search words of those 3 words!!  Eliminates the need to put conditionals on the extended search like I was thinking of 
+earlier, like adu=analog_digital_unit.  Just forget about doing that now.  The union takes care of EVREYTHING! 
+
+(3) The reason we don't record arrays of words as index words for the spectral lines is because we need to have additional info regarding the 
+lines available so that we can match up to other lines whose identities are not known OR lines that are actually the same as an indexed line but
+maybe slightly different wavelength, so the code will recognize that indeed the lines match to within some delta and group them together.  HOWEVER, 
+we can possibly use the "union" idea to get around the need for made-up spectral line identification.  In other words, instead of "HIL1.88" (how
+the h-alpha line would be identifified), how about instead we record the page, sector, paper locations of an occurace of an h-alpha line into each 
+of the following words: hydrogen, I, 1.88, allowed.  And then have a field called something like "supp" that would be an encoded array of all the
+additional info we'd want to be able to retrieve about this line, say something like:  "0.05" which would be the accuracy of the energy value, and
+this supp info would go into these 3 words (NOT all the other search words that might be involved with this line, like "optical", "spectral", "line", "balmer")
+Although "hydrogen" will have a lot of various "supp" values, as will "I", and perhaps 1.88 will have a few (for exmaple, the nearby nitrogen
+line could fall close enough for the '1.88 eV' bucket to catch it), the UNION of the "supp" field between these 3 words will produce exactly
+1 match, the acccuracy of the halpha energy to be used to determine a match to a search for that line. 
+For lines whose identities are not yet nown, they could be listed in the index in something like a HIL1343 syntax, which in and of itself would
+indicate that the line had "unfinished business" and needs to be identified, so that a constant comparison to already-IDd lines in the index
+would be done. 
+
+I like the "clean" approach of the above, not cluttering the index with all these made-up words. 
+
+
+COMMENTS: should only include letters, numbers, periods, slashes and regex. Literal periods and slashes need to be prefaced with a \. Used https://en.wikipedia.org/wiki/List_of_astronomy_acronyms
+COLUMN 1: the word(s) to go into the index as word entries (each word will be a separate index entry). Multiple words in phrases delimited by
+  underscore, multiple phrases delimited by |
+COLUMN 2: if any of these words are found in the paper text while indexing, the locations will be recorded under ALL the index words in
+  COLUMN 1. If these words are found in a search text box, all the words in COLUMN 1 for a given phrase will be looked up in the index
+  and the locations common to all will be what are reported in results.  If there are multiple phrases in COLUMN 1, then the results of 
+  the search for one phrase will be added to the results from the other separately.
+COLUMN 3: word, phrases, or multiple phrases that should list the phrase(s)/word in COLUMN 1 under their extended search fields (.x)
+  When the words in COLUMN 3 are used as the search words, in extended search mode, the phrases in COLUMN 1 will also be searched for
+  and reported in the results.
+COLUMN 4: word, phrase, or multiple phrases to use in the extended search fields (.x) of each of the words provided in COLUMN 1, when
+  the words in COLUMN 2 are detected. 
+
+Think of COLUMN 3 as the topic under which the word/phrase/phrases in COLUMN 1 would be filed, and COLUMN 4 as the topic that would be
+filed under the word/phrase/phrases of COLUMN 1.
+
+To continue a line for any field, just make sure that a | or _ is the last character of that field followed by at least 1 white space,
+then put the remaining information directly underneath the same column of data.
+
+Astericks in front of a word indicate that the word is not to be searched in the online dictionary but rather goes straight into
+the index.  This notation saves some networking resources.  For such words, make sure that all forms of that word are included in
+COLUMN 2, because the various inflections will not be automatically inserted since the word is not being looked up in the dictionary.
+If a word is astericked at least once in the below columns, the code will insure that all other occurances of that word is also astericked.
+
+Index or Substitute?  INDEX
+ 1                                   2                                                    3                                        4                                         
+=====================================================================================================================================================================
+*a_einstein_coefficient              acoefficient|acoefficients|acoeff|acoeffs|           b_einstein_coefficent                    b_einstein_coefficient
+                                     einsteincoeff|einsteincoeffs|einsteincoefficients    
+a_star                               astar|astars|atypestar|atypestars|atype|atypes       intermediate_mass|main_sequence          |
+*ab_flux                             fnu                                                  |                                        |
+ab_magnitude                         mnu                                                  |                                        |
+abundance                            metal|metals|metallicity|metalicity|metalicities|    |                                        |
+                                     metallicities|metalicitys|metallicitys           
+active_galaxy_nucleus                agn|agns                                             quasar                                   quasar
+adaptive_optics                      ao                                                   seeing|diffraction_limited|tip_tilt      |
+*alpha                               alp                                                  |                                        |
+analog_digital_unit                  adu|adus|dn|dns|datanumber|datanumbers               charge_coupled_device|                   |
+                                                                                          data_reduction_processing            
+astronomical_image_                  aips                                                 radio|data_reduction_processing          |
+processing_system                                                                                                                
+astronomical_observation_request     aor                                                  |                                        |
+asymptotic_giant_branch_star         agb|agbs                                             circumstellar_envelope|maser_emission|   red_giant|mira_variable|*ohir_star
+                                                                                              thermal_pulse                        
+*b_*einstein_coefficient             bcoefficient|bcoefficients|bcoeff|bcoeffs|           a_einstein_coefficient                   a_einstein_coefficient
+                                     einsteincoeff|einsteincoeffs|einsteincoefficients
+b_star                               bstar|bstars|btypestar|btypestars|btype|btypes|      massive|main_sequence                    |
+                                     oandbstar|oandbstars|obassociation|               
+                                     obassociations|obstar|obstars                    
+*balmer                              ba|balm|balmers                                      |                                        |
+balmer_absorption_dominated_         bad|bads                                             |                                        post_star_burst_galaxy
+nucleus_galaxy
+balmer_break_galaxy                  bbg|bbgs                                             |                                        |
+*beta                                beta                                                 |                                        |
+black_hole                           bh|bhs                                               active_galactic_nucleus|o_star|b_star    |
+black_hole_x_ray_transient           bhxrt|bhxrts                                         |                                        |
+*blazar                              blazars|bllac|bll                                    active_galactic_nucleus                  |
+blue_compact_dwarf_galaxy            bcd|bcds                                             |                                        |
+blue_compact_galaxy                  bcg|bcgs|bluecg                                      |                                        |
+blue_horizontal_branch_star          bhb|bhbs                                             |                                        |
+blue_straggler_star                  bss|bsss                                             |                                        |
+blue_super_giant_star                bsg|bsgs                                             |                                        |
+*bpt_diagram                         bpt|baldwinphillipsandterlevich|                     active_galactic_nucleus|star_burst|      |
+                                     baldwinphillipsterlevich                             spectral_diagnostics                 
+brightest_cluster_galaxy             bcg|bcgs|centraldominant|cdtype|typecd|              bright_elliptical|fossil_group|          large_halo|extended_halo|
+                                     supergiantelliptical|cD|giantelliptical|             intra_cluster_light|                     extended_diffuse_envelope
+                                     clusterdominant|brightestcentralgalaxies|gE|         galactic_cannibalism                  
+                                     gEs|dgalaxy|dgalaxies|brightestcentralgalaxy|                                             
+                                     supergiantellipticals|giantellipticals|brcig                                              
+broad_absorption_line_galaxy         bal                                                  active_galactic_nucleus                  |
+broad_emission_line_galaxy           bel|bels                                             active_galactic_nucleus                  |
+broad_line_active_galactic_nucleus   blagn|blagns                                         |                                        |
+broad_line_region                    blr|blrs                                             active_galactic_nucleus                  |
+broad_line_radio_galaxy              blrg|blrgs                                           active_galactic_nucleus                  |
+carbon_nitrogen_oxygen               cno                                                  nucleosynthesis                          |
+*centi_meter                         centimeter|centimeters|cm                            |                                        |
+charge_coupled_device                ccd                                                  |                                        |
+circular                             circ                                                 |                                        |
+circular_speed                       circularvelocity|rotationspeed|rotationalspeed|      |                                        |                                        
+                                     rotationvelocity|rotationalvelocity|                                                      
+                                     circvelocity|circspeed|circularvel|circvel|                                              
+                                     angularvelocity|angularvel|angularspeed|                                                 
+                                     angvelocity|angspeed|vcircular|vangular|                                                 
+                                     velcirc|velangular|rotvel|rotv|vcirc                                                     
+*cmos                                cmoss|complementarymetaloxidesemiconductor           detector                                 |
+coefficient                          coefficient|coefficients|coeff|coeffs                |                                        |                             
+cold_dark_matter                     cdm|cdms                                             |                                        |
+color_diagram                        ccd|ccds                                             |                                        |
+color_magnitude_diagram              cmd|cmds|cmdiagram|cmdiagrams                        |                                        |
+compact_narrow_emission_line_galaxy  cnelg|cnelgs                                         |                                        | 
+cool_galactic_carbon_star            cgcs                                                 |                                        |
+coronal_mass_ejection                cme|cmes                                             |                                        | 
+cosmic_background_radiation          cbr                                                  |                                        |
+cosmic_infrared_background_radiation cib|cibr                                             |                                        |
+cosmic_microwave_background_         cmb|cmbr|mbr                                         |                                        |
+radiation                                                                                                                     
+cosmic_neutrino_background           cnb                                                  |                                        | 
+cosmic_ray                           cr                                                   |                                        |
+cosmic_x_ray_background_radiation    cxbr                                                 |                                        |       
+*cpu                                 cpus|centralprocessingunit|centralprocessingunits    |                                        |
+curve_of_growth                      cog|cogs                                             |                                        | 
+damped_lyman_alpha                   dla|dlas|dlya|dlyas                                  |                                        | 
+dark_matter                          dm|dms                                               |                                        | 
+declination                          dec                                                  |                                        |
+*delta                               deltas|del                                           |                                        |
+*devauc                              devaucouleur|devaucouleurs|                          |                                        surface_brightness_profile|bulge
+                                     devaucouleursr0\.25|devaucouleursr1/4|         
+                                     devaucouleurr0\.25|devaucouleurr1/4|             
+                                     devaucr0\.25|devaucr1/4|r0\.25|r1/4            
+*dex                                 dexs|dexes                                           |                                        |
+diffuse_interstellar_band            dib|dibs                                             |                                        |
+distance                             cz                                                   |                                        redshift|recessional_velocity
+dumbbell_galaxy                      dbgalaxy|dbgalaxies|db|dgs|doublegalaxy|             |                                        |
+                                     doublegalaxies                                                                                
+dust_obscured_galaxy                 dog|dogs                                             |                                        | 
+dwarf                                dwf|dwfs                                             |                                        |
+dwarf_amorphous_nuclear_star_burst   dans                                                 |                                        |
+effective|radius                     effectiverad|reff|reffective|effectiver|effrad|      |                                        galaxy_diameter|galaxy_size
+                                     effradius|radeff|radeffective                                                             
+early_type_galaxy                    etg|etgs|bulgedominated|etype|etypes|                |                                        elliptical|lenticular
+                                     etypegalaxy|etypegalaxies|etypegalaxys                                                     
+elliptical_galaxy                    ell|ells|ellgalaxy|ellgalaxies|ellgalaxys|           early_type                               early_type
+                                     elliptical|ellipticals|e7|e6|e5|e4|e3|e2|e1|e0|                                           
+                                     ellipt|ellipts                                                                            
+equivalent_width                     ew|ews                                               |                                        |
+evaporation_gaseous_globule          egg|eggs                                             |                                        |
+extreme_horizontal_branch_star       ehb|ehbs                                             |                                        |
+extremely_luminous_far_              elf|elfs|ultraelf                                    |                                        |
+infrared_galaxy                                                                                                              
+extremely_metal_poor_galaxy          xmpg|xmpgs
+extremely_red_object_galaxy          ero|eros                                             |                                        |
+extreme_ultraviolet                  euv                                                  |                                        |
+exposure_time_calculator             ETC                                                  |                                        |
+*f_star                              fstar|fstars|ftypestar|ftypestars|ftype|ftypes       intermediate_mass|main_sequence          |
+far_infrared                         fir                                                  |                                        |
+far_ultraviolet                      fuv                                                  |                                        |
+field_of_view                        fov                                                  |                                        |
+flux                                 flambda                                              |                                        |
+fast_radio_burst                     frb|frbs                                             |                                        |
+fast_rise_exponential_decay          fred                                                 *gamma_ray                               |
+flat_spectrum_radio_quasar           fsrq                                                 |                                        |
+full_width_half_maximum              fwhm                                                 resolution|seeing|                       resolution|seeing|
+                                                                                          full_width_zero_intensity                full_width_zero_intensity
+full_width_zero_intensity            fwzi                                                 resolution|seeing                        resolution|seeing
+*g_star                              gstar|gstars|gtypestar|gtypestars|gtype|gtypes       solar_mass|main_sequence                 |
+galactic_cosmic_ray                  gcr|gcrs                                             |                                        |
+galactic_magnetic_field              gmf|gmfs                                             |                                        |
+*gamma                               gamma|gam                                            |                                        |
+gamma_ray                            gray|grays                                           |                                        |
+*giga                                giga|gig                                             |                                        |
+giga_hertz                           ghz                                                  |                                        |
+giga_hertz_peaked_spectrum           gps|gpss                                             |                                        |
+giant_molecular_cloud                gmc|gmcs                                             |                                        |
+gravitationally_interacting_         gimp|gimps                                           dark_matter                              |
+massive_particle                                                                                                              
+group                                grp|grps                                             |                                        |
+*hertz                               hertz|hertzs|hz|hzs                                  |                                        |
+high_excitation_galaxy               heg|hegs|hex|hexs                                    radio_galaxy|low_excitation_galaxy       |
+high_polarization_quasar             hpq|hpqs|hpquasar|hpquasars                          |                                        |
+high_magnetic_field_radio_pulsar     hbrp|hbrps                                           |                                        |
+high_mass_proto_stellar_object       hmpo|hmpos                                           |                                        |
+high_mass_x_ray_binary_star          hmxb|hmxbs                                           |                                        |
+high_surface_brightness              hsb                                                  |                                        |
+high_velocity_cloud                  hvc|hvcs                                             |                                        |
+horizontal_branch_star               hb|hbs                                               red_giant_star                           |
+hot_dark_matter                      hdm|hdms                                             |                                        |
+*hr_diagram                          hertzsprungrusselldiagram|                           |                                        stellar_evolution
+                                     hertzsprungrusselldiagrams|hertzsprungrussell                                             
+*hubble_constant                     h0|hubblesconstant                                   |                                        |
+*hyper_luminous_infrared_galaxy      hlirg|hlirgs                                         star_burst                               star_burst
+inclination_corrected_isophotal_     d025                                                 |                                        galaxy_diameter|galaxy_size
+diameter                                                                                                                       
+*infrared                            ir                                                   |                                        |
+infrared_dark_cloud                  irdc|irdcs                                           |                                        |
+infrared_excess                      irx                                                  |                                        |
+initial_mass_function                imf|imfs                                             |                                        |
+integral_field_spectroscopy          ifs|ifsu|ifsus                                       |                                        |
+integrated_spectral_energy_          ised|iseds                                           |                                        |
+distribution                                                                                                                   
+*inter_galactic_cluster_             icm|icms|igm|igms|icmedium|igmedium                  |                                        |
+medium                                                                                                                       
+inter_stellar_medium                 ism|isms                                             |                                        |
+irregular_galaxy                     irr|irrs                                             |                                        late_type
+isolated_early_type_galaxy|          ieg|iegs                                             field_galaxy                             void_galaxy|fossil_group
+isolated_elliptical_galaxy|
+isolated_lenticular_galaxy                                                                                                             
+isophotal_diameter                   d25|mu25                                             |                                        galaxy_diameter|galaxy_size 
+isophotal_diameter_visible           mub25|mupg                                           |                                        galaxy_diameter|galaxy_size
+isophotal_ratio                      r25                                                  |                                        galaxy_eccentricity|galaxy_ellipticity
+*k_star                              kstar|kstars|ktypestar|ktypestars|ktype|ktypes       solar_mass|main_sequence                 |
+*kilo_*hertz                         kilohertz|khz                                        |                                        |
+*kilo_electron_volt                  kev                                                  |                                        |
+*lambda_cold_dark_matter             lcdm                                                 |                                        |
+large_magellanic_cloud_galaxy        lmc                                                  |                                        |
+lenticular_galaxy                    lenticular|lenticulars|s0|s0s                        early_type                               early_type
+local_thermodynamic_equilibrium      lte                                                  |                                        |
+long_period_variable_star            lpv|lpvs                                             |                                        |
+low_excitation_galaxy                leg|lerg|lex|lexs                                    radio_galaxy|high_excitation_galaxy      |
+low_ionization_nuclear_emission_     liner|liners                                         active_galactic_nuclei                   |
+region                                                                                                                       
+low_luminosity_active_galactic_      llagn|llagns                                         |                                        |
+nucleus                                                                                                                      
+low_mass_x_ray_binary_star           lmxb|lmxbs                                           |                                        |
+low_polarization_quasar              lpq|lpqs                                             active_galactic_nucleus                  |
+low_surface_brightness               lsb                                                  |                                        |
+lower_main_sequence_star             lms                                                  |                                        |
+luminous_blue_compact_galaxy         lbcg|lbcgs                                           |                                        |
+luminous_blue_variable_star          lbv|lbvs                                             |                                        |
+luminous_infrared_galaxy             lirg|lirgs                                           |                                        |
+luminosity_function                  lf|lfs                                               |                                        |
+luminous_red_galaxy                  lrg|lrgs                                             |                                        |
+*lyman                               lyman|lymans|ly                                      |                                        |
+lyman_alpha_emitter                  lae|laes                                             |                                        |
+lyman_break_galaxy                   lbg|lbgs                                             |                                        |
+*m_star                              mstar|mstars|mtypestar|mtypestars|mtype|mtypes       low_mass|main_sequence                   |
+*m31                                 andromedagalaxy|messier31                            local_group_galaxy                       |
+magellanic                           magellanic                                           |                                        |
+magnetic_white_dwarf                 mwd|mwds                                             |                                        |
+magnetohydrodynamics                 mhd                                                  dynamics|magnetic                        |
+magnetorotational|instability        mri                                                  dynamics|magnetic|rotation               accretion_disk
+magnitude                            mlambda|mlam                                         |                                        |
+main_sequence                        ms|mainseq                                           |                                        |
+mass_to_light_ratio                  msolarlsolar|msollsol|msunlsun                       |                                        |
+massive_black_hole                   mbh|mbhs                                             |                                        |
+massive_x_ray_binary_star            mxrb|mxrbs                                           |                                        |
+massive_young_stellar_object         myso|mysos                                           |                                        |
+*mega_hertz                          mhz                                                  |                                        |
+*micro_meter                         micrometer|micrometers|microns|um|mum                |                                        |
+*mid_infrared                        midir|mir                                            |                                        |
+mid_ultraviolet                      miduv|muv                                            |                                        |
+milky_way_galaxy                     mw                                                   |                                        local_group
+*milli_meter                         millimeter|millimeters|mm                            |                                        |
+modified_newtonian_dynamics          mond|monds                                           |                                        |
+molecular_hydrogen_flux              fh2                                                  |                                        |
+molecular_hydrogen_mass              mh2                                                  |                                        |
+narrow_emission_line_active_         nelg|nelgs|nlagn|nlagns                              |                                        narrow_line_galaxy 
+galactic_nucleus                                                                                                              
+*nano_meter                          nanometer|nanometers|nm                              |                                        |
+narrow_line_radio_galaxy             nlrg|nlrgs                                           active_galactic_nucleus                  narrow_line_galaxy
+narrow_line_seyfert_galaxy           nlsy1|nlsy1s                                         active_galactic_nucleus                  narrow_line_galaxy
+*nbody                               nbody                                                |                                        |
+near_earth_object                    neo|neos                                             |                                        |
+near_infrared                        nir|nearir                                           |                                        |
+near_ultraviolet                     nuv|nearuv                                           |                                        |
+neutral_hydrogen_flux                f21|f21cm|fhi21|fhi21cm                              |                                        HI21cm
+neutral_hydrogen_luminosity          l21|l21cm                                            |                                        |
+neutral_hydrogen_luminosity          lhi21|lhi21cm                                        |                                        |
+neutral_hydrogen_mass                m21|mhi|mhi21|m21cm                                  |                                        |
+neutral_hydrogen_profile_width       w10|w50|w80                                          |                                        |
+neutral_hydrogen_self_absorption     hisa|hisas                                           cold_atomic_phase|                       cold_atomic_phase|
+                                                                                          cold_interstellar_medium                 cold_interstellar_medium
+*non_local_thermodynamic_equilibrium  nlte                                                |                                        | 
+*nova                                nova|novas|novae|novaes                              |                                        |
+nucleosynthesis                      nucleosynthesis                                      |                                        |
+*o_star                              ostar|ostars|otypestar|otypestars|otype|otypes|      massive|main_sequence                    |
+                                     oandbstar|oandbstars|obassociation|                                                       
+                                     obassociations|obstar|obstars                                                             
+observed                             obs                                                  |                                        |
+optical_faint_radio_galaxy           ofrg|ofrgs                                           |                                        |
+passive_elliptical_galaxy            peg|pegs                                             |                                        |
+peculiar                             pec                                                  |                                        |
+peculiar_velocity                    pecvel|pecvelocity|vpec|vpecular|velpecular|velpec   |                                        |
+photodissociation_region_photon_     pdr|pdrs                                             |                                        |
+dominated                                                                                                                     
+planetary_nebula_luminosity_function pnfl|pnfls                                           |                                        |
+planetary_nebula_nucleus             pnn|pnns                                             |                                        |
+point_spread_function                psf|psfs                                             |                                        |
+position_angle                       pa|pas                                               |                                        |
+*pre_main_sequence_star              pms|pmss                                             |                                        |
+pre_white_dwarf_star                 pwd|pwds                                             |                                        |
+*proto_planetary_nebula              ppn|ppns                                             |                                        |
+proto_planetary_disk                 proplyd|proplyds                                     |                                        |
+*pulsar                              pulsars|psr|psrs                                     |                                        |
+quantum_efficiency                   qe                                                   detector                                 |
+quasar                               quasar|qso|qsos|quasars                              active_galactic_nucleus                  active_galactic_nucleus
+*r_process                           rprocess                                             nucleosynthesis                          s_process
+radial                               rad                                                  |                                        |
+radial|velocity                      rv                                                   redshift|distance                        redshift|distance
+radio_galaxy                         rg|rgs                                               |                                        |
+radio_loud_quasar                    rlq|rlqs                                             active_galactic_nucleus                  |
+radio_quiet_quasar                   rqq|rqqs                                             |                                        |
+radio_super_nova                     rsn|rsns                                             |                                        |
+red_giant_branch_star                rgb|rgbs                                             |                                        |
+red_giant_branch_tip                 trgb                                                 |                                        |
+red_super_giant                      rsg|rsgs                                             |                                        |
+resolution                           res                                                  |                                        |
+right_ascension                      ra                                                   |                                        |
+*s_process                           sprocess                                             nucleosynthesis                          r_process
+seyfert_galaxy                       seyfert|seyferts|sey|seys|sy|sys                     active_galactic_nucleus                  |
+simulation                           sim|sims                                             |                                        |
+signal_noise_ratio                   sn|snr|snrs                                          |                                        |
+single_stellar_population            ssp|ssps|sbsp|sbsps                                  |                                        |
+small_magellanic_cloud               smc                                                  |                                        |
+specific_star_formation_history      ssfh|ssfhs                                           |                                        star_formation_rate
+specific_star_formation_rate         ssfr|ssfrs                                           |                                        |
+spectral_energy_distribution         sed|seds                                             |                                        |
+spiral_galaxy                        sptype|sptypes|spiralmorphology|spiralmorphologies   |                                        |
+spiral_galaxy_early                  typesa|typesb|typesab                                |                                        |
+spiral_galaxy_early_bar              typesba|typesbb|typesbab                             |                                        |
+spiral_galaxy_late                   typesc|typesd|typescd                                |                                        |
+spiral_galaxy_late_bar               typesbc|typesbd|typesbcd                             |                                        |
+*star                                stars|stellar                                        |                                        |
+star_burst                           sb|sbs|sbrst                                         |                                        |
+star_formation                       sf                                                   |                                        |
+star_formation_history_rate          sfh|sfhs                                             |                                        |
+star_formation_rate                  sfr|sfrs                                             |                                        |
+stellar_population_synthesis         sps                                                  |                                        star_formation_rate|star_formation_history
+*sub_milli_meter_faint_radio_galaxy  sfrg|sfrgs                                           star_burst                               |
+*super_massive_black_hole            smbh|smbhs                                           active_galactic_nucleus|quasar           active_galactic_nucleus|quasar
+super_*nova                          supernova|supernovas|supernovae|supernovaes|         |                                        |
+                                     sn|sns|sne                                                                                                        
+super_nova_type_*i_a_b               sniab|sniabs|supernovatypeiab|supernovaetypeiab|     |                                        |
+                                     typeiab|typesiab|Iab                                                                     
+super_nova_type_i_a                  snia|snias|supernovatypeia|supernovaetypeia|         |                                        |
+                                     typeia|typesia|Ia                                                                        
+super_nova_type_i_b                  snib|snibs|supernovatypeib|supernovaetypeib|         |                                        |
+                                     typeib|typesib|Ib                                                                        
+super_nova_type_i                    sni|snis|supernovatypei|supernovaetypei|             |                                        |
+                                     typeI|typesI                                                                             
+super_nova_type_*ii_a_b              sniiab|sniiabs|supernovatypeiiab|supernovaetypeiiab| |                                        |
+                                     typeiiab|typesiiab|IIab                                                                  
+super_nova_type_ii_a                 sniia|sniias|supernovatypeiia|supernovaetypeiia|     |                                        |
+                                     typeiia|typesiia|IIa                                                                     
+super_nova_type_ii_b                 sniib|sniibs|supernovatypeiib|supernovaetypeiib|     |                                        |
+                                     typeiib|typesiib|IIb                                                                     
+super_nova_type_ii                   snii|sniis|supernovatypeii|supernovaetypeii|         |                                        |
+                                     typeII|typesII                                                                           
+terminal_age_main_sequence_star      tams                                                 |                                        |
+total_infrared                       tir                                                  |                                        |
+*tullyfisher_relation                tullyfisher|tfrelation                               |                                        |
+*ultraviolet                         uv                                                   |                                        |
+*ultra_luminous_far_infrared_galaxy  ulirg|ulirgs                                         |                                        |
+ultra_luminous_x_ray_source          ulx|ulxs                                             |                                        |
+ultraviolet_visible                  uvis                                                 |                                        |
+upper_main_sequence_star             ums                                                  |                                        |
+velocity                             vel|speed                                            |                                        |
+*visible                             vis|optical|opt|optically|visibly                    |                                        |
+warm_dark_matter                     wdm                                                  |                                        |
+weakly_interacting_massive_particle  wimp                                                 dark_matter                              dark_matter
+white_dwarf_star                     wd|wds                                               |                                        |
+*wolfrayet_star                      wolfrayet|wr|wrs                                     |                                        |
+*x_ray                               xray                                                 |                                        |
+yellow_super_giant_star              ysg|ysgs                                             |                                        |
+young_stellar_object                 yso|ysos                                             |                                        |
+zero_age_horizontal_branch_star      zahb|zahbs                                           |                                        |
+zero_age_main_sequence_star          zams                                                 |                                        |

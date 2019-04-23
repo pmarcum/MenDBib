@@ -1,84 +1,89 @@
-var fullJournalName =
-   [
-     ["ACTa Astronomica", "actaa", ""],
-     ["Advances in Space Research", "asr", ""],
-     ["the American Astronomical Society meeting abstracts", "aas", ""],
-     ["the american astronomical society Division for Planetary Sciences meeting abstracts", "dps", ""],
-     ["the aas Division for Planetary Sciences meeting abstracts", "dps", ""],
-     ["the American Institute of Physics CONFerence proceedings", "aipconf", ""],
-     ["the Annual Review of Astronomy and Astrophysics", "araa", ""],
-     ["Applied Optics", "ao", ""],
-     ["AstroFiZika", "afz", ""], // (english translation: astrophysics)
-     ["ASTROPhysics", "afz", ""],// english translation of Astrofizika
-     ["Astronomicheskii ZHurnal", "azh", ""], // (english translation: ASTRONOMY LETTERS)
-     ["ASTRONomy Letters", "azh", ""], // engl translation of Astronomicheskii Zhurnal
-     ["the Astronomical Journal", "aj", ""],
-     ["the Astronomical Society of the Pacific CONFerence series", "aspconf", ""],
-     ["Astronomische Nachrichten", "an", ""],
-     ["Astronomy REPorts", "arep", ""], // (until 1992, this journal was known as Soviet Astronomy)
-     ["Astronomy And Astrophysics", "aap", ""],
-     ["the Astronomy and AstroPhysics Letters", "aap", "L"], // aap with an "L" in front of page number
-     ["the Astronomy and AstroPhysics Reviews", "aapr", ""],
-     ["the Astronomy and AstroPhysics Supplemental series", "aaps", ""],
-     ["AstroPhysics Space Physics Research", "apspr", ""],
-     ["the AstroPhysical Journal", "apj", ""],
-     ["the AstroPhysical Journal Letters", "apjl", "L"], // be sure the page also has an "L" in front
-     ["the AstroPhysical Journal Supplemental series", "apjs", ""],
-     ["the AstroPhysics LETTers", "aplett", ""],
-     ["AstroPhysics and Space Science", "apss", ""],
-     ["the Bulletin of the American Astronomical Society", "baas", ""],
-     ["the Bulletin of the Astronomical Institutes of the Netherlands", "bain", ""],
-     ["the Bulletin of the Astronomical Institutes of Czechoslovakia", "bac", ""],
-     ["Chinese Astronomy and Astrophysics", "caa", ""],
-     ["the Chinese Journal of Astronomy and Astrophysics", "cjaa", ""],
-     ["Comptes Rendus Academia Science Paris", "crasp", ""],
-     ["Fundamental Cosmic Physics", "fcp", ""],
-     ["Geochimica Cosmochimica Acta", "gca", ""],
-     ["Geophysics Research Letters", "grl", ""],
-     ["ICARus", "icarus", ""],
-     ["the Information Bulletin of Variable Stars", "ibvs", ""],
-     ["the International Astronomical Union Circulars", "iaucirc", ""],
-     ["the Irish Astronomical Journal", "iaj", ""],
-     ["the Journal of AstroPhysics and Astronomy", "japa", ""], // Indian publication
-     ["the Journal of Cosmology and Astroparticle Physics", "jcap", ""],
-     ["the Journal of Chemical Physics", "jcp", ""],
-     ["the Journal of Geophysics Research", "jgr", ""],
-     ["the Journal of Quantitative Spectroscopy and Radiative Transfer", "jqsrt", ""],
-     ["the Journal of the Royal Astronomical Society of Canada", "jrasc", ""],
-     ["Lecture Notes in Physics", "lnp", ""],
-     ["the MEMoirs of the Royal Astronomical Society", "memras", ""],
-     ["MEMoire della Societa Astronomica Italiana", "memsai", ""],
-     ["Meteoritics and Planetary Science", "maps", ""],
-     ["the Monthly Notes of the Astronomical Society of Southern Africa", "mnassa", ""],
-     ["the Monthly Notices of the Royal Astronomical Society", "mnras", ""],
-     ["the Monthly Notices of the Royal Astronomical Society: Letters", "mnras", "L"], // with "L" on page numbers
-     ["NATure", "nat", ""],
-     ["New Astronomy", "na", ""],
-     ["the New Astronomy Reviews", "nar", ""],
-     ["the OBServatory", "obs", ""],
-     ["PHYSica SCRipta", "physscr", ""],
-     ["the Physical Review A", "pra", ""],
-     ["the Physical Review B", "prb", ""],
-     ["the Physical Review C", "prc", ""],
-     ["the Physical Review D", "prd", ""],
-     ["the Physical Review E", "pre", ""],
-     ["the Physical Review Letters", "prl", ""],
-     ["the PHYSics REPorts", "physrep", ""],
-     ["Pis'ma v Astronomicheskii Zhurnal", "paz", ""], // (english tranlation: Astronomy Letters)
-     ["PLANetary and Space Science", "planss", ""],
-     ["the PROCeedings of the Society of Photo-optical Instrumentation Engineers", "procspie", ""],
-     ["the Publications of the Astronomical Society of Japan", "pasj", ""],
-     ["the Publications of the Astronomical Society of the Pacific", "pasp", ""],
-     ["the Publications of the Astronomical Society of Australia", "pasa", ""],
-     ["the Quarterly Journal of the Royal Astronomical Society", "qjras", ""],
-     ["Revista MeXicana de Astronomia y Astrofisica", "rmxaa", ""],
-     ["the Reviews of Modern Astronomy", "rma", ""],
-     ["the Reviews of Modern Physics", "rmp", ""],
-     ["SCIence", "sci", ""],
-     ["SKY and TELescope", "skytel", ""],
-     ["SOLar PHYSics", "solphys", ""],
-     ["SOViet ASTronomy", "sovast", ""],
-     ["Space Science Reviews", "ssr", ""],
-     ["Vistas In Astronomy", "via", ""],
-     ["Zeitschrift fuer AstroPhysik", "zap", ""]
-  ];
+Astronomy journal names with their abbreviations as prescribed byAASTex.
+COLUMN 1: full journal name, with words delimited by underscores.  Any required letters
+must appear as uppercase.  Letters that do not have to appear in the text are shown in 
+lowercase. 
+COLUMN 2: the abbrevation
+COLUMN 3: if the page number is just a number, put a vertical bar here.  Otherwise, put
+the designation (usually a letter) that should accompany the page number.
+1                                                                                   2       3
+===============================================================================================
+ACTa_Astronomica                                                                    actaa    |
+Advances_in_Space_Research                                                          asr      |
+the_American_Astronomical_Society_meeting_abstracts                                 aas      |
+the_american_astronomical_society_Division_for_Planetary_Sciences_meeting_abstracts dps      |
+the_aas_Division_for_Planetary_Sciences_meeting_abstracts                           dps      |
+the_American_Institute_of_Physics_CONFerence_proceedings                            aipconf  |
+the_Annual_Review_of_Astronomy_and_Astrophysics                                     araa     |
+Applied_Optics                                                                      ao       |
+AstroFiZika                                                                         afz      |
+ASTROPhysics                                                                        afz      |
+Astronomicheskii_ZHurnal                                                            azh      |
+ASTRONomy_Letters                                                                   azh      |
+the_Astronomical_Journal                                                            aj       |
+the_Astronomical_Society_of_the_Pacific_CONFerence_series                           aspconf  |
+Astronomische_Nachrichten                                                           an       |
+Astronomy_REPorts                                                                   arep     |
+Astronomy_And_Astrophysics                                                          aap      |
+the_Astronomy_and_AstroPhysics_Letters                                              aap      L
+the_Astronomy_and_AstroPhysics_Reviews                                              aapr     |
+the_Astronomy_and_AstroPhysics_Supplemental_series                                  aaps     |
+AstroPhysics_Space_Physics_Research                                                 apspr    |
+the_AstroPhysical_Journal                                                           apj      |
+the_AstroPhysical_Journal_Letters                                                   apjl     L
+the_AstroPhysical_Journal_Supplemental_series                                       apjs     |
+the_AstroPhysics_LETTers                                                            aplett   |
+AstroPhysics_and_Space_Science                                                      apss     |
+the_Bulletin_of_the_American_Astronomical_Society                                   baas     |
+the_Bulletin_of_the_Astronomical_Institutes_of_the_Netherlands                      bain     |
+the_Bulletin_of_the_Astronomical_Institutes_of_Czechoslovakia                       bac      |
+Chinese_Astronomy_and_Astrophysics                                                  caa      |
+the_Chinese_Journal_of_Astronomy_and_Astrophysics                                   cjaa     |
+Comptes_Rendus_Academia_Science_Paris                                               crasp    |
+Fundamental_Cosmic_Physics                                                          fcp      |
+Geochimica_Cosmochimica_Acta                                                        gca      |
+Geophysics_Research_Letters                                                         grl      |
+ICARus                                                                              icarus   |
+the_Information_Bulletin_of_Variable_Stars                                          ibvs     |
+the_International_Astronomical_Union_Circulars                                      iaucirc  |
+the_Irish_Astronomical_Journal                                                      iaj      |
+the_Journal_of_AstroPhysics_and_Astronomy                                           japa     |
+the_Journal_of_Cosmology_and_Astroparticle_Physics                                  jcap     |
+the_Journal_of_Chemical_Physics                                                     jcp      |
+the_Journal_of_Geophysics_Research                                                  jgr      |
+the_Journal_of_Quantitative_Spectroscopy_and_Radiative_Transfer                     jqsrt    |
+the_Journal_of_the_Royal_Astronomical_Society_of_Canada                             jrasc    |
+Lecture_Notes_in_Physics                                                            lnp      |
+the_MEMoirs_of_the_Royal_Astronomical_Society                                       memras   |
+MEMoire_della_Societa_Astronomica_Italiana                                          memsai   |
+Meteoritics_and_Planetary_Science                                                   maps     |
+the_Monthly_Notes_of_the_Astronomical_Society_of_Southern_Africa                    mnassa   |
+the_Monthly_Notices_of_the_Royal_Astronomical_Society                               mnras    |
+the_Monthly_Notices_of_the_Royal_Astronomical_Society:_Letters                      mnras    L
+NATure                                                                              nat      |
+New_Astronomy                                                                       na       |
+the_New_Astronomy_Reviews                                                           nar      |
+the_OBServatory                                                                     obs      |
+PHYSica_SCRipta                                                                     physscr  |
+the_Physical_Review_A                                                               pra      |
+the_Physical_Review_B                                                               prb      |
+the_Physical_Review_C                                                               prc      |
+the_Physical_Review_D                                                               prd      |
+the_Physical_Review_E                                                               pre      |
+the_Physical_Review_Letters                                                         prl      |
+the_PHYSics_REPorts                                                                 physrep  |
+Pis'ma_v_Astronomicheskii_Zhurnal                                                   paz      |
+PLANetary_and_Space_Science                                                         planss   |
+the_PROCeedings_of_the_Society_of_Photo-optical_Instrumentation_Engineers           procspie |
+the_Publications_of_the_Astronomical_Society_of_Japan                               pasj     |
+the_Publications_of_the_Astronomical_Society_of_the_Pacific                         pasp     |
+the_Publications_of_the_Astronomical_Society_of_Australia                           pasa     |
+the_Quarterly_Journal_of_the_Royal_Astronomical_Society                             qjras    |
+Revista_MeXicana_de_Astronomia_y_Astrofisica                                        rmxaa    |
+the_Reviews_of_Modern_Astronomy                                                     rma      |
+the_Reviews_of_Modern_Physics                                                       rmp      |
+SCIence                                                                             sci      |
+SKY_and_TELescope                                                                   skytel   |
+SOViet_ASTronomy                                                                    sovast   |
+Space_Science_Reviews                                                               ssr      |
+Vistas_In_Astronomy                                                                 via      |
+Zeitschrift_fuer_AstroPhysik                                                        zap      |

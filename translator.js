@@ -84,6 +84,7 @@
 // points to all places in which "ionized", "ion", "ionization", ionizes", etc is mentioned.
 // ///////////////////////////////////////////////////////////////////////////////////
 // do not match the word if it begins a sentence (if the word is at beginning or if preceded by a period then whitespace).
+function translator() {
   var NNNNNdotN = /(\d\d\d\d\d\.\d+)/.source;  // (12345.6789)
   var NNNNN =     /(\d\d\d\d\d)/.source;  // (12345);
   var NNNNdotN =  /(\d\d\d\d\.\d+)/.source;  // (1234.6789)
@@ -3097,4 +3098,6 @@
          }
      }
   }
+  return xLtr;
+}
 // ////////////////////////// end TRANSLATOR ///////////////////////////////////

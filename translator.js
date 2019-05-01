@@ -169,7 +169,6 @@
 // the translator is done, consider this a one-time-only call for the calling code.
 // Note that if the translator is stringified and/or saved  in some fashion, all the functions
 // embedded in "indx" will be lost.
- // return xLtr;
 
 // COME BACK TO
 // make sure that can recognize declination written as DDd
@@ -2808,27 +2807,6 @@
       return JSON.stringify([filtered, charPos, keepTheseChars.source]);
    }
 // - - - - - - - - - - - end FILTERTHETEXT - - - - - - - - - - -
-// - - - - - - - - - - -  TESTMATCH - - - - - - - - - - -
- function testMatch(reg, text, startPos) {
-     var inCheck = false;
-     var endMatch = -1;
-     var inText = '';
-     var t = JSON.parse(filterTheText(reg, text.slice(startPos)));
-     var m = t[0].match(new RegExp('^' + '(?:' + reg + ')'));
-     if (m) {
-         endMatch = t[1][m[0].length-1] + 1 + startPos;
-         inText = text.slice(startPos,endMatch);
-// determine if the original, unfiltered text spanning the filtered match text is
-// compliant with the set of permitted characters, where "permitted" includes all characters allowed
-// in the matched text as well as some other standard characters such as dashes and white space:
-         inText = inText.replace(new RegExp(t[2], 'g'), '').replace(/[\- a-zA-Z0-9]/g,'');
-         if (inText == '') {
-            inCheck = true;
-         } else {endMatch = -1; }
-     }
-     return JSON.stringify([inCheck, endMatch]);
-  }
-// - - - - - - - - - - - end TESTMATCH - - - - - - - - - - -
 // =============== XLTRCHECK ===================
 //  %%%%%%%%%%%%%%%%%%%%%%%%  passed 3/22/2019
   function xLtrCheck() {

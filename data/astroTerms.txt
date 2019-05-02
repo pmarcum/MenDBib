@@ -57,6 +57,7 @@ Index or Substitute?  INDEX
 =====================================================================================================================================================================
 *a_einstein_coefficient              acoefficient|acoefficients|acoeff|acoeffs|           b_einstein_coefficent                    b_einstein_coefficient
                                      einsteincoeff|einsteincoeffs|einsteincoefficients    
+analog_to_digital_converter          ADC                                                  |                                        |
 a_star                               astar|astars|atypestar|atypestars|atype|atypes       intermediate_mass|main_sequence          |
 *ab_flux                             fnu                                                  |                                        |
 ab_magnitude                         mnu                                                  |                                        |
@@ -164,6 +165,8 @@ exposure_time_calculator             ETC                                        
 *f_star                              fstar|fstars|ftypestar|ftypestars|ftype|ftypes       intermediate_mass|main_sequence          |
 far_infrared                         fir                                                  |                                        |
 far_ultraviolet                      fuv                                                  |                                        |
+fast_*fourier_transform              fft                                                  |                                        |
+fast_*fourier_transform_spectrometer ffts                                                 |                                        |
 field_of_view                        fov                                                  |                                        |
 flux                                 flambda                                              |                                        |
 fast_radio_burst                     frb|frbs                                             |                                        |

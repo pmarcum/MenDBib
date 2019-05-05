@@ -1,33 +1,3 @@
-COME BACK TO 
-
-thoughts while I showered -- VERY IMPORTANT!
-
-(1) forget all the weird index words below in column 2 -- instead, have arrays of words.  for example, instead of "adu", have "analog|digital|unit", 
-so that every time an "adu" or "adus" is encountered, all three words in the index (analog, digital, unit) will record the location/paper/page/sector
-of "adu".  
-
-(2) when a search is conducted for a phrase, like analog_digital_unit, here's how to handle the extended search:  the extended search words should be
-the UNION of the extended search words of those 3 words!!  Eliminates the need to put conditionals on the extended search like I was thinking of 
-earlier, like adu=analog_digital_unit.  Just forget about doing that now.  The union takes care of EVREYTHING! 
-
-(3) The reason we don't record arrays of words as index words for the spectral lines is because we need to have additional info regarding the 
-lines available so that we can match up to other lines whose identities are not known OR lines that are actually the same as an indexed line but
-maybe slightly different wavelength, so the code will recognize that indeed the lines match to within some delta and group them together.  HOWEVER, 
-we can possibly use the "union" idea to get around the need for made-up spectral line identification.  In other words, instead of "HIL1.88" (how
-the h-alpha line would be identifified), how about instead we record the page, sector, paper locations of an occurace of an h-alpha line into each 
-of the following words: hydrogen, I, 1.88, allowed.  And then have a field called something like "supp" that would be an encoded array of all the
-additional info we'd want to be able to retrieve about this line, say something like:  "0.05" which would be the accuracy of the energy value, and
-this supp info would go into these 3 words (NOT all the other search words that might be involved with this line, like "optical", "spectral", "line", "balmer")
-Although "hydrogen" will have a lot of various "supp" values, as will "I", and perhaps 1.88 will have a few (for exmaple, the nearby nitrogen
-line could fall close enough for the '1.88 eV' bucket to catch it), the UNION of the "supp" field between these 3 words will produce exactly
-1 match, the acccuracy of the halpha energy to be used to determine a match to a search for that line. 
-For lines whose identities are not yet nown, they could be listed in the index in something like a HIL1343 syntax, which in and of itself would
-indicate that the line had "unfinished business" and needs to be identified, so that a constant comparison to already-IDd lines in the index
-would be done. 
-
-I like the "clean" approach of the above, not cluttering the index with all these made-up words. 
-
-
 COMMENTS: should only include letters, numbers, periods, slashes and regex. Literal periods and slashes need to be prefaced with a \. Used https://en.wikipedia.org/wiki/List_of_astronomy_acronyms
 COLUMN 1: the word(s) to go into the index as word entries (each word will be a separate index entry). Multiple words in phrases delimited by
   underscore, multiple phrases delimited by |
@@ -175,7 +145,7 @@ flat_spectrum_radio_quasar           fsrq                                       
 full_width_half_maximum              fwhm                                                 resolution|seeing|                       resolution|seeing|
                                                                                           full_width_zero_intensity                full_width_zero_intensity
 full_width_zero_intensity            fwzi                                                 resolution|seeing                        resolution|seeing
-*g_star                              gstar|gstars|gtypestar|gtypestars|gtype|gtypes       solar_mass|main_sequence                 |
+*milky_way_galaxy                    galactic                                             |                                        *g_star                              gstar|gstars|gtypestar|gtypestars|gtype|gtypes       solar_mass|main_sequence                 |
 galactic_cosmic_ray                  gcr|gcrs                                             |                                        |
 galactic_magnetic_field              gmf|gmfs                                             |                                        |
 *gamma                               gamma|gam                                            |                                        |

@@ -1,0 +1,151 @@
+
+COLUMN 1: the catalog number to search for, in regular expression format.  The catalog itself should be
+in one captured group, the id number and/or coordinate in the other
+COLUMN 2: not used by the algorithm, but a human-readable reminder of what format the catalog number is in
+COLUMN 3: word, phrase, or multiple phrases to use in the extended search fields (.x) of each of the "words"
+indexed when the catalog number in Column 1 is found in the text. 
+https://lambda.gsfc.nasa.gov/product/lss/
+https://heasarc.gsfc.nasa.gov/docs/cgro/db-perl/W3Browse/w3table.pl?MissionHelp=galaxy_catalog
+https://ned.ipac.caltech.edu/level5/CATALOGS/pgc.html
+http://cds.u-strasbg.fr/cgi-bin/Dic-Simbad?/542196
+http://cdsweb.u-strasbg.fr/cgi-bin/Dic-Simbad?4C
+
+Index or Substitute?  INDEX
+ 1                                                                   2                         3         
+===============================================================================================================================
+([12]rxhj?)([0-9]+)                                                  HHMMSS.s+DDMMSS           ROSAT_high_resolution_catalog|*x_ray_image_catalog             
+([12]rxsj?)([0-9]+)                                                  HHMMSS.s+DDMMSS           ROSAT_point_source_catalog|*x_ray_point_source_catalog             
+tg[sn][0-9]{3}z[0-9]{3}                                              tgsNNNzNNN                visible_spectroscopy_catalog|2dfgrs_catalog
+(2maspj?)([0-9]+)                                                    HHMMSSs+DDMMSS            near_infrared_image_catalog|2mass_catalog  
+(2massij?)([0-9]+)                                                   HHMMSSs+DDMMSS            near_infrared_image_catalog|2mass_catalog
+(2massj?)([0-9]+)                                                    HHMMSSss+DDMMSSs          near_infrared_image_catalog|2mass_catalog
+(2masssj?)([0-9]+)                                                   HHMMSSs+DDMMSS            near_infrared_image_catalog|2mass_catalog
+(2masswj?)([0-9]+)                                                   HHMMSSs+DDMMSS            near_infrared_image_catalog|2mass_catalog  
+(2masxsj?)([0-9]+)                                                   HHMMSSss+DDMMSSs          near_infrared_image_catalog|2mass_catalog
+(2masxj?)([0-9]+)                                                    HHMMSSss+DDMMSSs          near_infrared_image_catalog|2mass_catalog
+2mfgc[0-9]+                                                          NNNNN                     near_infrared_image_catalog|disk_galaxy_catalog
+(2slaqj?)([0-9]+)                                                    HHMMSS.ss+DDMMSS.s        radio_catalog|luminous_red_galaxy_catalog|quasar_spectroscopic_catalog
+3cr*[0-9]+                                                           NNN.N                     radio_galaxy_catalog
+4c[0-9]+                                                             +DD.NN.N                  radio_galaxy_catalog
+5c1[0-9]+                                                            NNN                       radio_galaxy_catalog
+5c2[0-9]+                                                            NNN                       radio_galaxy_catalog
+5c3[0-9]+                                                            NNN                       radio_galaxy_catalog
+5c4[0-9]+                                                            NNN                       radio_galaxy_catalog
+5c5[0-9]+                                                            NNN                       radio_galaxy_catalog
+5c6[0-9]+                                                            NNN                       radio_galaxy_catalog
+5c7[0-9]+                                                            NNN                       radio_galaxy_catalog
+5c8[0-9]+                                                            NNN                       radio_galaxy_catalog
+5c9[0-9]+                                                            NNN                       radio_galaxy_catalog
+5c10[0-9]+                                                           NNN                       radio_galaxy_catalog
+5c12[0-9]+                                                           NNN                       radio_galaxy_catalog
+5c13[0-9]+                                                           NNN                       radio_galaxy_catalog
+5c20[0-9]+                                                           NNN                       radio_galaxy_catalog
+(6cj?)([0-9]+)                                                       HHMM+DDMMSS.s             radio_galaxy_catalog
+((?:(?:6dfgrs)|(?:6dfgrsg))j?)([0-9]+)                               HHMMSS.s+DDMMSS           visible_galaxy_spectroscopy_catalog|galaxy_redshift_catalog   
+(7cj?)([0-9]+)                                                       HHMMSS.ss+DDMMSS.ss       radio_galaxy_catalog
+(8cj?)([0-9]+)                                                       HHMM+DDd                  radio_galaxy_catalog
+(9cj?)([0-9]+)                                                       HHMM+DDMM                 radio_galaxy_catalog
+(10cj?)([0-9]+)                                                      HHMMSS+|DDMMSS            radio_galaxy_catalog
+aao[0-9]+                                                            +DDNNN                    star_catalog
+(?:(?:acos?)|(?:abell)|(?:abcg)|(?:abgc)|(?:AC)|(?:A))(?:[0-9]+)     NNNN                      galaxy_cluster_catalog      
+agc[0-9]+                                                            NNNNNN                    radio_galaxy_catalog|*arecibo_catalog
+(akariircv[12]j?)([0-9]+)                                            HHMMSSs+DDMMSS            mid_infrared_catalog|far_infrared_catalog|AKARI_IRC_point_source_catalog     
+(almaj?)([0-9]+)                                                     HHMMSS.ssss+DDMMSS.sss    milli_meter_catalog|sub_milli_meter_catalog|alma_catalog     
+(amj?)([0-9]+)                                                       HHMM+DDMM                 southern_peculiar_galaxies_catalog 
+(?:(?:apg)|(?:arp))(?:[0-9]+)                                        NNN                       *arp_peculiar_galaxy_catalog    
+(?:(?:apmbgc)|(?:apm))(?:[0-9]+)                                     NNN+NNN+NNN               bright_galaxy_catalog 
+(?:(?:ark)|(?:akn)|(?:arak))(?:[0-9]+)                               NNN                       high_surface_brightness_galaxy_catalog_catalog                            
+(?:(?:bd)|(?:dm)|(?:sd))(?:[0-9]+)                                   +DDNNNNN                  star_catalog                         
+BRj?([0-9]+)                                                         HHMM+DDMM                 blue_red_band_quasar_catalog                                 
+(?:(?:cd)|(?:cdm))(?:[0-9]+)                                         +DDNNNNN                  star_catalog                           
+cfrs[0-9]+[0-9]+                                                     NN.NNNN                   red_shift_galaxy_catalog                               
+cgcg[0-9]+[0-9]+                                                     NNN-NNN                   galaxy_catalog|galaxy_cluster_catalog
+(?:(?:cgss)|(?:css))(?:[0-9]+)                                       NNNN                      galactic_*s_star_catalog                                     
+(?:(?:cgpg)|(?:zgc))(?:j?([0-9]+))                                   HHMM.m+DDMM               compact_galaxy_catalog|post_eruptive_galaxy_catalog    
+cgmw[1-5][0-9]+                                                      NNNNN                     galaxy_behind_*milky_way_catalog             
+(?:(?:cig)|(?:kig))(?:[0-9]+})                                       NNN                       isolated_galaxy_catalog                                                         
+(?:(?:cmc)|(?:camc))(?:[0-9]+)                                       NNNNNN                    star_catalog
+(?:(?:cpd)|(?:cp))(?:[0-9]+)                                         -DDNNNNN                  catalog_star
+(?:(?:cpg)|(?:kpg))(?:[0-9]+)                                        NNN                       catalog_isolated_galaxy_pair
+csi[0-9]+                                                            +DD-HHMMmNN               star_catalog
+(?:(?:ctg)|(?:ktg)|(k79))(?:[0-9]+)                                  NN                        *ktg_catalog_isolated_galaxy_triple
+(cxoj?)([0-9]+)                                                      HHMMSS.s+DDMMSS           *chandra_catalog|x_ray_catalog
+ddo[0-9]+                                                            NNN                       dwarf_galaxy_catalog
+elais[wxab][0-9]+                                                    NNNNNN                    far_infrared_catalog|iso_catalog
+(eqj?)([0-9]+)                                                       HHMMSS+DDMMSS             catalog_galaxy
+eso[0-9]{1,3}[a-z][0-9]{1,3}                                         NNN-gNNN                  |
+(esoj?)([0-9]+)                                                      NNN-NNN_or_HHMMSS+DDMM.m  |
+fcc[0-9BG]+                                                          NNNN                      *fornax_galaxy_cluster
+((?:(?:FIRST)|(?:frs))j?)([0-9]+)                                    HHMMSS.s+DDMMSS           radio_catalog|*vla_catalog|20cm_catalog
+(galexascj?)([0-9]+)                                                 HHMMSS.ss+DDMMSS.s        ultraviolet_catalog|*galex_catalog
+(galexmscj?)([0-9]+)                                                 HHMMSS.ss|DDMMSS.s        ultraviolet_catalog|*galex_catalog
+(?:(?:gj)|(?:gls)|(?:gl)|(?:gliese))(?:[0-9]+)                       NNNN                      star_catalog
+gsc[0-9]+                                                            NNNNN-NNNNN               guide_star_catalog|*hst_catalog
+hcg[0-9]+                                                            NNN                       compact_galaxy_group_catalog|*hickson_group
+(?:(?:hd)|(?:hde))(?:[0-9]+)                                         NNNNNN                    star_catalog
+hdce[0-9]+                                                           NNNN                      galaxy_catalog
+hip[0-9]+                                                            NNNNNN                    star_catalog
+(hipassj?)([0-9]+)                                                   HHMM+DD                   radio_catalog|neutral_hydrogen_catalog
+hr[0-9]+                                                             NNNNNN                    star_catalog
+ic[0-9]+                                                             NNNN                      galaxy_catalog
+(igrj?)([0-9]+)                                                      HHMMm+DDMM                gamma_ray_catalog|*INTEGRAL_catalog
+(iras[rfzsx]?j?)([0-9]+)                                             HHMMS+DDMM                *iras_catalog|infrared_catalog
+(isossj?)([0-9]+)                                                    HHMMs+DDMM                infrared_catalog|*iso_catalog
+(kugj?)([0-9]+)                                                      HHMM+DDd                  galaxy_catalog|ultraviolet_excess_catalog
+(lbqsj?)([0-9]+)                                                     HHMM+DDMM                 quasar_catalog
+ldc[0-9]+                                                            NNNN                      low_density_contrast_galaxy_catalog|field_galaxy_catalog|2mass_catalog
+ldce[0-9]+                                                           NNNN                      galaxy_group_catalog
+leda[0-9]+                                                           NNNNNNN                   galaxy_catalog
+lgs[0-9]+                                                            NN                        local_group_galaxy_catalog
+lp[0-9]+                                                             NNN-NNNN                  star_proper_motion_catalog
+(?:(?:messier)|(?:mess)|(?:M))(?:[0-9]+)                             NNN                       galaxy_catalog
+malin[0-9]+                                                          NNN                       low_surface_brightness_galaxy_catalog
+mcg[0-9]+                                                            +NN-NN-NNNN               galaxy_catalog
+(?:(?:mk)|(?:mkn)|(?:mkr)|(?:markarian)|(?:mark)|(?:mrk))(?:[0-9]+)  NNNN                      *mrk_catalog_galaxy
+(?:(?:ngc)|(?:N))(?:[0-9]+)                                          NNNN                      galaxy_catalog
+((?:(?:nhicat)|(?:hicat))j?)([0-9]+)                                 HHMM+DD                   radio_catalog|neutral_hydrogen_catalog|galaxy_catalog
+(nsaj?)([0-9]+)                                                      HHMMSS+DDMMSS             galaxy_catalog
+pgc[0-9]+                                                            NNNNNN                    galaxy_catalog
+(pksj?)([0-9+])                                                      HHMM+DDM                  radio_catalog|galaxy_catalog
+(rxj?)([0-9]+)                                                       HHMM.m+DDMM               x_ray_catalog|*rosat_catalog
+sao[0-9]+                                                            NNNNNN                    star_catalog
+(sbsgj?)([0-9]+)                                                     HHMM+DDd                  galaxy_catalog
+(sdfj?)([0-9]+)                                                      HHMMSS.s+DDMMSS           galaxy_catalog|*subaru_catalog
+(sdssj?)([0-9]+)                                                     HHMMSS.ss+DDMMSS.s        *sdss_catalog
+(sgcj?)([0-9]+)                                                      HHMMSS+DDMM.m             galaxy_catalog
+(sptclj?)([0-9]+)                                                    HHMM+DD                   galaxy_cluster_catalog|sub_milli_meter_catalog|milli_meter_catalog
+(sstj?)([0-9]+)                                                      HHMMSS.sss+DDMMSS.s       *spitzer_catalog|infrared_catalog
+(sstglmaj?)([0-9]+)                                                  HHMMSS.sss+DDMMSS.s       *GLIMPSE_catalog|*spitzer_catalog
+(sstglmcj?)([0-9]+)                                                  HHMMSS.sss+DDMMSS.s       *GLIMPSE_catalog|*spitzer_catalog
+(sstgdsj?)([0-9]+)                                                   HHMMSS.sss+DDMMSS.s       *GOODS_catalog|*spitzer_catalog
+(sstfpsj?)([0-9]+)                                                   HHMMSS.sss+DDMMSS.s       *spitzer_catalog
+(sstsngj?)([0-9]+)                                                   HHMMSS.sss+DDMMSS.s       *SINGS_catalog|*spitzer_catalog
+(sstc2dj?)([0-9]+)                                                   HHMMSS.sss+DDMMSS.s       *spitzer_catalog
+(sstswrj?)([0-9]+)                                                   HHMMSS.sss+DDMMSS.s       *swire_catalog|*spitzer_catalog
+(sstgflsj?)([0-9]+)                                                  HHMMSS.sss+DDMMSS.s       *milky_way_catalog|*spitzer_catalog
+(sstxflsj?)([0-9]+)                                                  HHMMSS.sss+DDMMSS.s       *galaxy_catalog|*spitzer_catalog
+(sstvelaj?)([0-9]+)                                                  HHMMSS.sss+DDMMSS.s       *spitzer_catalog
+(sstvelcj?)([0-9]+)                                                  HHMMSS.sss+DDMMSS.s       *spitzer_catalog
+(sstglmdpaj?)([0-9]+)                                                HHMMSS.sss+DDMMSS.s       *spitzer_catalog
+(sstglmdpcj?)([0-9]+)                                                HHMMSS.sss+DDMMSS.s       *spitzer_catalog
+(sstglmdpraj?)([0-9]+)                                               HHMMSS.sss+DDMMSS.s       *spitzer_catalog
+(sstglmdprcj?)([0-9]+)                                               HHMMSS.sss+DDMMSS.s       *spitzer_catalog
+(sstsmogaj?)([0-9]+)                                                 HHMMSS.sss+DDMMSS.s       *spitzer_catalog
+(sstsmogcj?)([0-9]+)                                                 HHMMSS.sss+DDMMSS.s       *spitzer_catalog
+tn[ns][0-9]+                                                         NNNNNNNNN-NNNN            variable_star_catalog
+ugc[0-9]+                                                            NNNNN                     galaxy_catalog
+(ulasj?)([0-9]+)                                                     HHMMSS.ss+DDMMSS.s        near_infrared_catalog
+(ugcsj?)([0-9]+)                                                     HHMMSS.ss+DDMMSS.s        near_infrared_catalog
+(udxsj?)([0-9]+)                                                     HHMMSS.ss+DDMMSS.s        near_infrared_catalog
+(ugpsj?)([0-9]+)                                                     HHMMSS.ss+DDMMSS.s        near_infrared_catalog
+(uudsj?)([0-9]+)                                                     HHMMSS.ss+DDMMSS.s        near_infrared_catalog
+(ulas2massj?)([0-9]+)                                                HHMM+DDMM                 near_infrared_catalog|low_mass_star_catalog|brown_dwarf_star_catalog
+(uzcj?)([0-9]+)                                                      HHMMSS.s+DDMMSS           galaxy_catalog
+vcc[0-9]+                                                            NNNN                      *virgo_galaxy_cluster_catalog
+vgs[0-9]+                                                            NNNN                      void_galaxy_catalog|isolated_galaxy_catalog
+vv[0-9]+                                                             NNNN                      galaxy_catalog
+wbl[0-9]+                                                            NNN                       galaxy_catalog
+(wisej?)([0-9]+)                                                     HHMMDDSS.ss+DDMMSS.s      mid_infrared_catalog|*wise_catalog|near_infrared_catalog
+(?:(?:[iv]+zwicky)|(?:zwicky[iv]+)|(?:zwick[0-9]+))(?:[0-9]+)        NNN                       compact_galaxy_catalog|pos_eruptive_galaxy_catalog
+(?:(?:[iv]+zg)|(?:zg[iv]+)|(?:zg))(?:[0-9]+)                         NNN                       compact_galaxy_catalog|pos_eruptive_galaxy_catalog
+(?:(?:[iv]+zw)|(?:zw[iv]+)|(?:zw))(?:[0-9]+)                         NNN                       compact_galaxy_catalog|pos_eruptive_galaxy_catalog

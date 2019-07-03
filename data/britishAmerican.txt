@@ -440,8 +440,8 @@ dishonoring          dishonouring
 dishonors            dishonours
 disorganization      disorganisation
 disorganized         disorganised
-distil               distill
-distils              distills
+distill              distil
+distills             distils
 dramatization        dramatisation
 dramatizations       dramatisations
 dramatize            dramatise

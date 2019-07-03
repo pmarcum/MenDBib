@@ -4,7 +4,7 @@ COLUMN 1:  the correct spelling; COLUMN 2: misspelled word
 =============================================
 additionally                  additinally                   
 additionally                  aditionally                   
-celcius                       celcious                      
+celsius                       celcious|celcius|centigrade                      
 abandon                       abanden                       
 abandoned                     abandonned                    
 aberration                    abberation                    
@@ -313,14 +313,13 @@ adjoin                        ajoin
 adjoined                      ajoined                       
 adjoining                     ajoining                      
 adjustment                    ajustment                     
-albeit                        albiet                        
 allege                        aledge                        
 alleged                       aledged                       
 alleges                       aledges                       
 allegiance                    alegance                      
 allege                        alege                         
 alleged                       aleged                        
-allegiance                    alegience                     
+allegiance                    alegience           
 algorithm                     algoritm                      
 algorithms                    algoritms                     
 align                         aline                         
@@ -1728,7 +1727,7 @@ philippines                   phillippines
 pitch                         pich                          
 planned                       planed                        
 plateau                       plattoe                       
-pneumonic                     pneumonic                     
+pneumonic                     pnuemonic                     
 possession                    pocession                     
 people                        poeple                        
 popular                       polular                       
@@ -1975,7 +1974,7 @@ receiver                      reciever
 receivers                     recievers                     
 receives                      recieves                      
 receiving                     recieving                     
-recognise                     recogise                      
+recognize                     recogise                      
 recognize                     recogize                      
 recommend                     recomend                      
 recommendable                 recomendable                  

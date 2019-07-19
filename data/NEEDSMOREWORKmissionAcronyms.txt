@@ -1,0 +1,508 @@
+COME BACK HERE
+make sure that 1st column is added to 2nd column for things to look for
+
+uk = england = english
+moon = lunar 
+american = america 
+european = europe 
+germany = german
+french = france
+canadian = canada
+...
+
+instrument = instrumentation 
+
+terrestrial = earth
+Galactic = milky way
+
+soft gamma rays:  0.2-15 MeV
+
+organization = institution
+
+camera=imager
+
+Galactic = milkyway
+
+could have function that occassionally goes through index and if the words in the phrases in column 1 show up with same sector lcoation, then add the corresponding x words to those indexed words
+
+if there are 2 different entries for the same thing in column 2, do not attempt to combine them ... each of the entries needs to have
+their respective "x" words assigned to the correct set of words in column 1
+
+need to check that any words appearing in column 3, 4 and column1 are NOT words indicated for substitution in some other xLtr entry. for example
+if "hst" is mentioned as an "x" word or as a word within a phrase in column 1, should be replaced with "hubble space telescope" as the words that 
+get indexed in that entry (but dont do substitution before the words in column 1 are copied over into column 2 to serve as part of the words to be searched)
+
+
+COMMENTS: should only include letters, numbers, periods, slashes and regex. Literal periods and slashes need to be prefaced with a \. Used https://en.wikipedia.org/wiki/List_of_astronomy_acronyms
+COLUMN 1: the word(s) to go into the index as word entries (each word will be a separate index entry). Multiple words in phrases delimited by
+  underscore, multiple phrases delimited by |
+COLUMN 2: if any of these words are found in the paper text while indexing, the locations will be recorded under ALL the index words in
+  COLUMN 1. If these words are found in a search text box, all the words in COLUMN 1 for a given phrase will be looked up in the index
+  and the locations common to all will be what are reported in results.  If there are multiple phrases in COLUMN 1, then the results of 
+  the search for one phrase will be added to the results from the other separately.
+COLUMN 3: word, phrases, or multiple phrases that should list the phrase(s)/word in COLUMN 1 under their extended search fields (.x)
+  When the words in COLUMN 3 are used as the search words, in extended search mode, the phrases in COLUMN 1 will also be searched for
+  and reported in the results.
+COLUMN 4: word, phrase, or multiple phrases to use in the extended search fields (.x) of each of the words provided in COLUMN 1, when
+  the words in COLUMN 2 are detected.
+COLUMN 5: definition of acronym with words delimited by _ and multiple definitions delimited by |
+COLUMN 6: words that are synonymous with the word in column 1 and have no alternative meanings.
+
+Think of COLUMN 3 as the topic under which the word/phrase/phrases in COLUMN 1 would be filed, and COLUMN 4 as the topic that would be
+filed under the word/phrase/phrases of COLUMN 1.
+
+To continue a line for any field, just make sure that a | or _ is the last character of that field followed by at least 1 white space,
+then put the remaining information directly underneath the same column of data. 
+https://lambda.gsfc.nasa.gov/product/lss/
+https://heasarc.gsfc.nasa.gov/docs/cgro/db-perl/W3Browse/w3table.pl?MissionHelp=galaxy_catalog
+https://ned.ipac.caltech.edu/level5/CATALOGS/pgc.html
+http://cds.u-strasbg.fr/cgi-bin/Dic-Simbad?/542196
+https://www.cfa.harvard.edu/~gpetitpas/Links/Astroacro.html
+
+Index or Substitute?  INDEX    
+ 1                                                                                 2                                                         3                                                                           4
+============================================================================================================================================================================================================================
+two_degree_field                                                                   2df                                                                        visible_spectrograph|ground_based_instrument|              |
+|                                                                                  |                                                                          spectrograph|*anglo_*australia_telescope_instrument        |
+two_dimensional_photon_counting_system                                             2dfrutti                                                                   visible_spectrograph|ground_based_instrument               | 
+two_degree_field_galaxy_redshift_survey                                            2dfgrs                                                                     |                                                          |
+two_micron_all_sky_survey                                                          2mass|2masp|2massi|2massw                                                  near_infrared_survey                                       |
+six_degree_field                                                                   6df                                                                        visible_spectrograph|ground_based_instrument               |
+american_astronomical_society                                                      aas                                                                        organization                                               |
+australian_astronomical_observatory                                                aao|anglo_australian_observatory                                           |                                                          |
+anglo_australian_telescope                                                         aat                                                                        |                                                          |
+american_association_of_varable_star_observers                                     aavso                                                                      organization                                               |
+adc_backend_for_bolometer_array                                                    abba                                                                       ground_based_instrument|radio|*APEX_instrument|bolometer   |
+a_broadband_imaging_*x_ray_all_sky_survey                                          abrixas                                                                    |                                                          |
+advanced_composition_explorer                                                      ACE                                                                        solar_wind|space_based_telescope                           |
+advanced_ccd_imaging_spectrometer                                                  acis                                                                       *x_ray_spectrograph|*x_ray_imaging|space_based_instrument| |
+|                                                                                  |                                                                          *chandra_instrument
+advanced_camera_for_surveys                                                        ACS                                                                        space_based_instrument|visible_image|*hst_instrument       |
+advection_dominated_accretion_flow                                                 adaf                                                                       black_hole_accretion                                       |
+astronomical_data_center                                                           ADC                                                                        |                                                          |
+astrophysics_data_centers_executive_council                                        adec                                                                       organization                                               |
+astrophysics_data_facility                                                         ADF                                                                        organization                                               |
+astrophysics_data_and_information_services                                         adis                                                                       organization                                               |
+*smithsonian_astrophysical_observatory_nasa_astrophysics_data_system               ADS|sao_nasa_astrophysics_data_system|                                     publication_database                                       |
+|                                                                                  nasa_astrophysics_data_system|nasa_ads
+all_wavelength_extended_*groth_strip_international_survey                          aegis                                                                      |                                                          |
+air_force_geophysics_laboratory                                                    afgl|rafgl|revised_air_force_grophysical_laboratory                        |                                                          |
+french_association_of_variable_star_observers                                      afoev|association_francaise_des_observateurs_detoiles_variables            organization                                               |
+andromeda_galaxy_and_amplified_pixels_experiment                                   agape                                                                      *micro_lens_*m31                                           |
+*arecibo_general_catalog                                                           AGC                                                                        |                                                          |
+american_geophysical_union                                                         AGU                                                                        |                                                          |
+aeronomy_of_ice_in_the_mesosphere                                                  AIM                                                                        noctilucent_cloud|space_based_telescope                    |
+astronomical_image_processing_system                                               aips                                                                       radio_data_reduction_software                              |
+automated_lunar_and_meteor_observatory                                             alamo                                                                      |                                                          |
+array_of_low_energy_*x_ray_imaging_sensors                                         ALEXIS                                                                     |                                                          |
+*atacama_large_*milli_meter_sub_milli_meter_array                                  alma|atacama_large_milli_meter_array                                       ground_based_telescope|*sub_milli_meter_interferometer     |
+association_of_lunar_and_planetary_observers                                       alpo                                                                       organization                                               |
+antarctic_muon_and_neutrino_detector_array                                         AMANDA                                                                     ground_based_telescope                                     |
+astronomical_multi_beam_recombiner                                                 AMBER                                                                      near_infrared_interferometer|*vlt_instrument               |
+astrophysics_multi_spectral_archive_search_engine                                  amase                                                                      software                                                   |
+american_meteor_society                                                            AMS                                                                        organization                                               |
+astronomical_netherlands_satellite                                                 ANS                                                                        space_based_telescope                                      |
+american_national_standards_institute                                              ansi                                                                       organization                                               |
+*atacama_pathfinder_experiment                                                     APEX                                                                       radio_telescope|ground_based_telescope                     |
+automatic_plate_measuring_machine                                                  APM                                                                        photography|scan                                           |
+*apache_point_observatory                                                          apo                                                                        ground_based_telescope|*visible_telescope                  |
+astronomy_picture_of_the_day                                                       APOD                                                                       |                                                          |
+automated_patrol_telescope                                                         APT                                                                        ground_based_telescope|*visible_telescope|wide_field_image |
+*nasa_*ames_research_center                                                        ARC|ames_research_center                                                   organization                                               |
+absolute_radiometer_for_cosmology_astrophysics_and_diffuse_emission                ARCADE                                                                     balloon_based_telescope|micro_wave_telescope|              |
+|                                                                                  |                                                                          cosmic_dark_age|first_stars|cosmic_dawn|
+|                                                                                  |                                                                          first_galaxies
+astronomical_society_of_the_atlantic                                               ASA                                                                        organization                                               |
+astrophysics_source_code_library                                                   ascl                                                                       software_database                                          |
+italian_space_agency                                                               ASI|agenzia_spaziale_italiana                                              organization                                               |
+*sinica_institute_of_astronomy_and_astrophysics                                    asiaa|academia_sinica_institute_of_astronomy_and_astrophysics              organization                                               |
+australian_square_kilometer_array_pathfinder                                       askap|australian_square_kilometre_array_pathfinder                         radio_telescope|ground_based_telescope                     |
+astronomical_society_of_the_pacific                                                ASP                                                                        organization                                               |
+autonomous_space_transport_robotic_operations                                      ASTRO                                                                      space_based_telescope                                      |
+*allen_telescope_array                                                             ATA                                                                        radio_telescope|radio_interferometer|                      | 
+|                                                                                  |                                                                          extra_terrestrial_life|ground_based_telescope
+australia_telescope_compact_array                                                  atca                                                                       radio_telescope|ground_based_telescope                     |
+australia_telescope_large_area_survey                                              ATLAS                                                                      radio_telescope|ground_based_telescope|*swire_survey       |
+arab_union_for_astronomy_and_space_sciences                                        auass                                                                      organization                                               |
+association_of_universities_for_research_in_astronomy                              aura                                                                       organization                                               |
+american_workshop_on_cometary_astronomy|                                           awca                                                                       organization                                               |
+international_workshop_on_cometary_astronomy                       
+british_astronomical_association                                                   BAA                                                                        organization                                               |
+burst_alert_telescope                                                              BAT                                                                        gamma_ray_instrument|*SWIFT                                |
+burst_and_transient_source_experiment                                              batse                                                                      gamma_ray_instrument|                                      |
+|                                                                                  |                                                                          compton_gamma_ray_telescope_instrument
+*bisei_asteroid_tracking_telescope_for_rapid_survey                                batters                                                                    |                                                          |
+background_imaging_of_cosmic_extra_galactic_polarization                           BICEP|BICEP1|BICEP2|BICEP3                                                 cosmic_micro_wave_background                               |
+*berkeley_*illinois_*maryland_array                                                bima                                                                       *micro_wave|radio|telescope|array                          |
+british_inter_planetary_society                                                    BIS                                                                        organization                                               |
+balloon_borne_large_aperture_*sub_*milli_meter_telescope                           BLAST                                                                      |                                                          |
+*bohyunsan_optical_astronomy_observatory                                           BOAO                                                                       |                                                          |
+balloon_observations_of_milli_meter_extra_galactic_radiation_and geophysics        boomerang|                                                                 comic_micro_wave_background                                |
+|                                                                                  balloon_observations_of_millimetric_extragalactic_radiation_and_geophysics 
+canadian_astronomy_data_center                                                     cadc|canadian_astronomy_data_centre                                        organization                                               |
+german_spanish_astronomical_center                                                 CAHA|centro_astronomico_hispano_aleman|german_spanish_astronomical_centre  organization                                               |
+*california_institute_of_technology                                                caltech|california_inst_of_technology                                      |                                                          |
+cosmic_assembly_near_infrared_deep_extra_galactic_legacy_survey|                   candels                                                                    *hst_galaxy_survey|near_infrared_galaxy_survey             |
+cosmic_assembly_and_dark_energy_legacy_survey   
+collaboration_between_australian_and_nippon_for_a_gamma_ray_observatory            cangaroo                                                                   |                                                          |
+center_for_astrophysical_research_in_antarctica                                    CARA                                                                       organization                                               |
+canadian_astronomical_society                                                      casca|societe_canadienne_dastronomie                                       organization                                               |
+combined_array_for_research_in_milli_meter_astronomy                               carma                                                                      *milli_meter_wave-telescope|ground_based_telescope         |
+center_for_advanced_space_studies                                                  CASS                                                                       organization                                               |
+central_bureau_for_astronomical_telegrams                                          cbat                                                                       organization                                               |
+cape_*canaveral_air_force_station                                                  ccafs                                                                      organization                                               |
+*chandra_deep_field_south_survey                                                   cdfs                                                                       *x_ray_image                                               |
+*strasbourg_astronomical_data_center                                               CDS|centre_de_donnees_astronomiques_de_strasbourg                          organization                                               |
+center_for_earth_and_planetary_studies                                             ceps                                                                       organization                                               |
+center_for_astrophysics                                                            cfa                                                                        organization                                               |
+canada_france_hawaii_telescope                                                     cfht                                                                       ground_based_telescope                                     |
+canada_france_redshift_survey                                                      cfrs                                                                       |                                                          |
+*compton_gamma_ray_observatory                                                     cgro|egret|compton_telescope|compton_observatory|gamma_ray_observatory|GRO gamma_ray_telescope|space_based_telescope                  |
+*chandra                                                                           chandra|axaf|advanced_x_ray_astrophysics_facility                          *x_ray_telescope|space_based_telescope                     |
+center_for_high_angular_resolution_astronomy                                       chara                                                                      organization                                               |
+cosmic_hot_inter_stellar_plasma_spectrometer_satellite                             chipsat                                                                    extreme_ultra_violet_spectroscopy|space_based_telescope    |
+*chandra_interactive_analysis_of_observations                                      ciao                                                                       *x_ray_software                                            |
+coronagraphic_imager_with_adaptive_optics                                          ciao                                                                       occulter|mask|infrared_instrument|                         |
+|                                                                                  |                                                                          high_resolution_near_infrared_images|*subaru_instrument    |
+cooled_infrared_spectrograph_and_camera_for_OH_suppressor                          cisco                                                                      near_infrared_image|near_infrared_instrument|              |
+|                                                                                  |                                                                          OH_air_glow|*subaru_instrument                             |
+french_space_agency                                                                cnes|centre_nationale_detudes_spatiales                                    organization                                               |
+cosmic_background_explorer                                                         cobe                                                                       cosmic_micro_wave_background|space_based_telescope         |
+*cambridge_OH_suppression_instrument                                               COHSI                                                                      OH_air_glow                                                |
+cooled_mid_infrared_camera_and_spectrometer                                        COMICS                                                                     *subaru_instrument                                         |
+convection_rotation_and_planetary_transits                                         corot                                                                      extra_solar_planet|space_based_telescope                   |
+cosmic_evolution_survey                                                            COSMOS                                                                     *hst_*ACS_survey                                           |
+committee_on_space_research                                                        cospar                                                                     organization                                               |
+corrective_optics_space_telescope_axial_replacement                                costar                                                                     *hst_instrument                                            |
+canadian_space_agency                                                              CSA                                                                        organization                                               |
+*chandra_science_center                                                            CSC                                                                        organization                                               |
+*california_institute_of_technology_sub_milli_meter_observatory                    CSO                                                                        ground_based_telescope                                     |
+*parkes_observatory                                                                pks|csiro                                                                  radio_telescope|ground_based_telescope                     |
+*cerro_*tololo_inter_american_observatory                                          ctio                                                                       ground_based_telescope                                     |
+*dominion_astrophysical_observatory                                                dao                                                                        organization                                               |  
+deep_near_infrared_survey                                                          DENIS|denisp                                                               |                                                          |
+dark_energy_survey|deep_ecliptic_survey                                            DES                                                                        |                                                          |
+diffuse_infrared_background_experiment                                             dirbe                                                                      cosmic_infrared_background|*cobe_instrument|               |
+|                                                                                  |                                                                          infrared_instrument|dust_emission 
+deep_investigation_of_neutral_gas_origins                                          DINGO                                                                      *SKA_instrument|HI21cm_survey                              |
+digitized_*palomar_observatory_sky_survey                                          dposs|dss|dss1|dss2||ngsposs|poss                                          visible_image|all_sky_survey                               |
+european_association_for_astronomy_education                                       eaae                                                                       organization                                               |
+east_asian_core_observatories_association                                          eacoa                                                                      organization                                               |
+east_asian_observatory                                                             EAO                                                                        |                                                          jcmt
+european_extremely_large_telescope                                                 eelt|european_elt                                                          |                                                          |
+extended_*groth_strip_survey                                                       EGS                                                                        hst_ACS_survey                                             |
+eurpean_large_area_infrared_space_observatory_survey                               ELIAS|european_large_area_iso_survey                                       high_redshift_galaxy                                       |
+european_space_agency                                                              ESA                                                                        organization                                               |
+european_southern_observatory                                                      ESO                                                                        organization                                               |
+european_space_research_and_technology_center                                      estec                                                                      organization                                               |
+european_space_tracking                                                            estrack                                                                    communications_network                                     |
+extreme_ultra_violet_explorer                                                      euve                                                                       space_based_telescope                                      |
+european_very_large_baseline_interferometer_network                                evn|european_vbli_network                                                  organization                                               |
+full_sky_astrometric_mapping_explorer                                              FAME                                                                       space_based_telescope                                      |
+*flagstaff_astrometric_scanning_transit_telescope                                  FASTT                                                                      ground_based_telescope                                     |
+fine_guidance_sensors                                                              fgs                                                                        hst_instrument                                             |
+*fermi                                                                             fermi|fgst|                                                                *gamma_ray_telescope|space_based_telescope                 |
+|                                                                                  gamma_ray_large_area_space_telescope|  
+|                                                                                  glast 
+faint_images_of_the_radio_sky_at_twenty_centimeters                                FIRST|faint_images_of_the_radio_sky_at_twenty_cm                           radio_survey|very_large_array_survey                       |
+far_infrared_and_sub_millimeter_space_telescope                                    FIRST                                                                      space_based_telescope                                      |
+far_infrared_absolute_spectrophotometer                                            firas                                                                      cobe_instrument                                            |
+feedback_in_realistic_environments                                                 FIRE                                                                       computer_simulation|galaxy_formation|galaxy_feedback       |
+flexible_image_transport_system                                                    FITS                                                                       image_format                                               |
+fiber_large_array_multi_element_spectrograph                                       FLAMES|fibre_large_array_multi_element_spectrograph                        multi_object_spectrograph|integral_field_spectrograph|     |
+|                                                                                  |                                                                          very_large_telescope_instrument|visible_spectroscopy                 
+fiber_linked_optical_array_telescope                                               FLOAT|fibre_linked_optical_array_telescope                                 ground_based_telescope|fred_whipple_observatory_instrument |
+*fred_*whipple_observatory                                                         FLWO                                                                       ground_based_telescope                                     |
+faint_object_camera                                                                FOC                                                                        hst_instrument                                             |
+faint_object_camera_and_spectrograph                                               FOCAS                                                                      *subaru_instrument                                         |
+faint_object_spectrograph                                                          FOS                                                                        visible_spectroscopy|hst_instrument                        |
+faint_source_catalog                                                               FSC                                                                        iras_source_catalog                                        |
+far_ultra_violet_spectroscopic_explorer                                            FUSE                                                                       space_based_telescope                                      |
+far_ultra_violet_imaging_telescope_array                                           fuvita                                                                     spectrum_*x_gamma_instrument                               |
+global_astrometric_interferometer_for_astrophysics                                 gaia                                                                       space_based_telescope                                      |
+galaxy_evolution_explorer                                                          galex                                                                      ultraviolet_telescope|space_based_telescope                |
+guide_star_astrometric_support_package                                             GASP                                                                       software                                                   |
+gamma_ray_burst_monitor                                                            gbm                                                                        *fermi_instrument                                          |
+green_bank_telescope                                                               gbt                                                                        radio_telescope|ground_based_telescope                     |
+gas_chromatograph_and_mass_spectrometer                                            gcms                                                                       *huygens_instrument                                        |
+grb_coordinates_network                                                            GCN                                                                        organization                                               |
+galactic_emission_mapping                                                          GEM                                                                        |                                                          |
+*gemini                                                                            gemini                                                                     near_infrared_telescope|ground_based_telescope             |
+group_evolution_multi_wavelength_study|                                            GEMS                                                                       galaxy_spectral_energy_distribution|hst_ACS_survey         |
+galaxy_evolution_from_morphology_and_spectral_energy_distributions 
+graphics_processing_unit_enabled_high_resolution_micro_lensing_parameter_survey    gerlumph|gpu_enabled_high-resolution_micro_lensing_parameter_survey        |                                                          |
+*goddard_high_resolution_spectrograph                                              ghrd|hrs                                                                   hst_instrument|ultraviolet_spectroscopy                    |
+galactic_legacy_infrared_mid_plane_survey_extraordinaire                           GLIMPSE                                                                    *milkyway_survey|*spitzer_survey                           |
+giant_meter_wave_radio_telescope                                                   gmrt|giant_metrewave_radio_telescope                                       ground_based_telescope                                     |
+giant_*magellan_telescope                                                          gmt                                                                        optical_telescope|near_infrared_telescope                  |
+global_oscillation_network_group                                                   gong                                                                       organization|solar_oscillation                             |
+great_observatories_origins_deep_survey                                            GOODS                                                                      galaxy_formation|galaxy_evolution|multi_wavelength_survey| |
+|                                                                                  |                                                                          hst_galaxy_survey|spitzer_galaxy_survey|
+|                                                                                  |                                                                          chandra_galaxy_survey                                      |
+uide_star_catalog                                                                  gsc                                                                        hst_catalog                                                  
+gamma_ray_burst_optical_counterparts_search_experiment                             grosce                                                                     automated_telescope|optical_followup                       |
+*nasa_*goddard_space_flight_center                                                 gsfc                                                                       organization                                               |
+*gran_telescope_*canarias                                                          grantecan|GTC                                                              ground_based_telescope                                     |
+highly_advanced_laboratory_for_communications_and_astronomy                        halca                                                                      space_based_telescope|radio_telescope|                     |
+|                                                                                  |                                                                          very_large_baseline_interferometer
+high_altitude_observatory                                                          HAO                                                                        solar_telescope                                            |
+high_accuracy_radial_velocity_planet_searcher                                      harps                                                                      high_resolution_spectrograph                               |
+*harvard_college_observatory                                                       HCO                                                                        organization                                               |
+hubble_deep_field                                                                  hdf                                                                        survey                                                     |
+hubble_deep_field_south                                                            hdfs                                                                       survey                                                     |
+high_dispersion_spectrograph                                                       HDS                                                                        *subaru_instrument|optical_spectroscopy                    |
+high_energy_astronomical_observatory                                               heao                                                                       *x_ray_telescope|gamma_ray_telescope|cosmic_ray_telescope  |
+*nasa_high_energy_astrophysics_science_archive_research_center                     heasarc                                                                    |                                                          |
+high_energy_stereoscopic_system                                                    hess                                                                       cosmic_ray_telescope|ground_based_telescope                |
+*herschel                                                                          herschel|HSO                                                               far_infrared|sub_milli_meter|space_based_telescope         |
+*hobby_*ebberly_telescope                                                          HET                                                                        large_telescope|ground_based_telescope                     |
+high_energy_transient_explorer                                                     HETE                                                                       gamma_ray_telescope|space_based_telescope|gamma_ray_burst  |
+high_gain_antenna                                                                  HGA                                                                        |                                                          |
+hipparcos_input_catalog                                                            HIC                                                                        |                                                          |
+HI_*parkes_all_sky_survey                                                          HIPASS                                                                     HI_survey                                                  |
+high_precision_parallax_collecting_satellite                                       hipparcos                                                                  space_based_telescope                                      |
+*halley_multi_color_camera                                                         HMC                                                                        *giotto_instrument                                         |
+H2O_southern_galactic_plane_survey                                                 HOPS                                                                       |                                                          |
+high_resolution_camera                                                             HRCI                                                                       *x_ray_image|*chandra_instrument                           |
+high_rate_detector                                                                 HRD                                                                        *cassini_instrument                                        |
+high_resolution_micro_wave_survey                                                  HRMS                                                                       extra_terrestrial_life                                     |
+high_resolution_imager                                                             HRI                                                                        *rosat_instrument                                          |
+high_speed_photometer                                                              HSP                                                                        *hst_instrument                                            |
+hubble_space_telescope                                                             hst|hubble_telescope|hubble|                                               space_based_telescope                                      |
+|                                                                                  hubble_space_telescope     
+*hopkins_ultra_violet_telescope                                                    HUT                                                                        space_based_telescope                                      |
+hard_*x_ray_detector                                                               HXD                                                                        *x_ray_spectrometer|*suzaku_instrument                     |
+institute_of_astrophysics_of_*canarias                                             IAC|instituto_de_astrofisica_de_canarias                                   organization                                               |
+international_amateur_professional_photoelectric_photometry                        iappp                                                                      organization                                               |
+international_astronomical_union                                                   IAU|UAI|union_astronomique_internationale                                  organization                                               |
+*INTEGRAL_burst_alert_system                                                       ibas                                                                       *gamma_ray_burst|*INTEGRAL_instrument                      |
+imager_on_board_the_*INTEGRAL_satellite                                            ibis                                                                       *gamma_ray_imager|*INTEGRAL_instrument                     |
+institute_for_astronomy                                                            IfA                                                                        organization                                               |
+*isaac_*newton_group_of_telescopes                                                 ING                                                                        organization                                               |
+*isaac_*newton_telescope                                                           INT                                                                        ground_based_telescope                                     |
+*INTEGRAL                                                                          INTEGRAL                                                                   *gamma_ray_telescope|space_based_telescope|gamma_ray_burst |
+institution_of_astronomy                                                           IoA                                                                        organization                                               |
+infrared_optical_telescope_array                                                   IOTA                                                                       ground_based_telescope                                     |
+infrared_processing_analysis_center                                                ipac                                                                       organization                                               |
+infrared_array_camera                                                              irac                                                                       mid_infrared_imager|*spitzer_instrument                    |
+image_reduction_and_analysis_facility                                              iraf                                                                       image_reduction|software                                   |
+international_robotic_antarctic_infrared_telescope                                 irait                                                                      |                                                          |
+institute_of_milli_meter_radio_astronomy                                           iram|institut_de_radio_astronomie_millimetrique                            organization                                               |
+infrared_astronomical_satellite                                                    iras                                                                       space_based_telescope                                      |
+infrared_camera_and_spectrograph                                                   ircs                                                                       *subaru_instrument                                         |
+infrared_spectrograph                                                              irs                                                                        mid_infrared_spectrograph|*spitzer_instrument              |
+infrared_science_archive                                                           irsa                                                                       organization                                               |
+infrared_telescope_facility                                                        irtf                                                                       infrared_telescope|ground_based_telescope                  |
+institute_of_space_and_astronautical_science                                       isas                                                                       organization                                               |
+*INTEGRAL_soft_gamma_ray_imager                                                    isgri                                                                      *INTEGRAL_instrument                                       |
+infrared_space_observatory                                                         ISO                                                                        infrared_telescope|space_based_telescope                   |
+international_scientific_optical_network                                           ISON                                                                       organization                                               |
+indian_space_research_organization                                                 isro                                                                       organization                                               |
+infrared_sky_survey_atlas                                                          issa                                                                       all_sky_survey|iras_survey                                 |
+international_small_telescope_cooperative                                          istec                                                                      organization                                               |
+international_ultra_violet_explorer                                                IUE                                                                        ultra_violet_telescope|space_based_telescope               |
+IUE_satellite_data_analysis_center                                                 iuedac                                                                     organization                                               |
+*inter_university_center_for_astronomy_and_astrophysics                            iucaa|inter_university-centre_for_astronomy_and_astrophysics               organization                                               |
+joint_astronomy_center                                                             JAC|joint_astronomy_centre                                                 organization                                               |
+*japan_amateur_photelectric_observers_association                                  japoa                                                                      organization                                               |
+*japan_aerospace_exploration_agency                                                jaxa                                                                       organization                                               |
+*jodrell_bank_observatory                                                          jbo|jodrell_bank_observatory|                                              radio_telescope|ground_based_telescope                     |
+|                                                                                  jodrell_bank|nral|nuffield_radio_astronomy_laboratory
+*james_*clerk_*maxwell_telescope                                                   jcmt                                                                       sub_milli_meter_telescope|ground_based_telescope           |
+joint_institute_for_laboratory_astrophysics                                        jila                                                                       organization                                               |
+joint_institute_for_vlbi_in_europe                                                 jive                                                                       organization                                               |
+*jacobus_*kapteyn_telescope                                                        JKT                                                                        ground_based_telescope                                     |
+*nasa_jet_propulsion_laboratory                                                    jpl|                                                                       organization                                               |
+|                                                                                  jet_propulsion_laboratory|
+|                                                                                  jet_propulsion_lab
+*james_*webb_space_telescope                                                       jwst|                                                                      infrared_telescope|space_based_telescope                   |
+|                                                                                  james_webb_telescope|
+|                                                                                  james_webb|ngst|
+|                                                                                  next_generation_space_telescope
+*katzman_automatic_imaging_telescope                                               kait                                                                       ground_based_telescope                                     |
+*kuiper_airborne_observatory                                                       kao|kuiper                                                                 telescope_infrared                                         |
+*kumamoto_civil_astronomical_observatory                                           kcao                                                                       ground_based_telescope                                     |
+*kitt_peak_national_observatory                                                    kpno|kitt_peak                                                             ground_based_telescope                                     |
+laboratory_for_space_astrophysics_and_fundamental_physics                          LAEFF|laboratorio_de_astrofiscica_espacial_y_fisica_fundamental            organization                                               |
+large_sky_area_multi_object_fiber_spectroscopic_telescope                          lamost                                                                     ground_based_telescope                                     |
+*los_*alamos_national_laboratory                                                   lanl                                                                       organization                                               |
+large_area_telescope                                                               LAT                                                                        *gamma_ray_imager|*fermi_instrument                        |
+*lawrence_*berkeley_national_laboratoy                                             lbnl                                                                       organization                                               |
+large_binocular_telescope                                                          lbt                                                                        ground_based_telescope                                     |
+*los_*campanas_redshift_survey                                                     lcrs                                                                       galaxy_catalog                                             |
+low_energy_transmission_gratings_spectrometer                                      letgs|letg                                                                 *chandra_instrument                                        |
+low_gain_antenna                                                                   LGA                                                                        |                                                          |
+laboratory_for_high_energy_astrophysics                                            LHEA                                                                       organization                                               |
+laser_interferometer_gravitational_wave_observatory                                ligo                                                                       ground_based_telescope                                     |
+laser_interferometer_space_antenna                                                 lisa                                                                       space_based_telescope                                      |
+*lawrence_*livermore_national_laboratory                                           llnl                                                                       organization                                               |
+low_frequency_array                                                                lofar                                                                      radio                                                      |
+*livermore_optical_transient_imaging_system                                        lotis                                                                      ground_based_telescope|gamma_ray_burst_follow_up           |
+*lick_observatory_and*tenagra_observatory_supernova_searches                       lotoss                                                                     |                                                          |
+*lick_observatory_super_nova_search                                                LOSS                                                                       |                                                          |
+lunar_and_planetary_institute                                                      LPI                                                                        organization                                               |
+lunar_and_planetary_laboratory                                                     LPL                                                                        organization                                               |
+*la_*palma_observatory                                                             LPO                                                                        |                                                          |
+lunar_reconnaissance_orbiter                                                       LRO                                                                        |                                                          |
+large_synoptic_survey_telescope                                                    lsst                                                                       ground_based_telescope                                     |
+multi_object_*apache_point_observatory_radial_velocity_exoplanet_large_area_survey marvel                                                                     |                                                          |
+major_atmospheric_*gamma_ray_imaging_cherenkov_telescope                           magic                                                                      ground_based_telescope                                     |
+micro_wave_background_anisotropy_probe                                             wilkinson_microwave_anisotropy_probe|wmap|MAP                              space_based_telescope                                      |
+medium_deep_survey                                                                 MDS                                                                        high_redshift_galaxy|hst_survey                            |
+multi_element_radio_linked_interferometer                                          merlin                                                                     ground_based_telescope                                     |
+mid_infrared_instrument                                                            midi                                                                       mid_infrared_interferometer|vlti_instrument                |
+multi_band_imaging_photometer                                                      mips                                                                       far_infrared_photometer|*spitzer_instrument                |
+mid_infrared_instrument                                                            miri                                                                       mid_infrared_imager|*jwst_instrument                       |
+multiple_mirror_telescope                                                          MMT                                                                        ground_based_telescope                                     |
+micro_variability_and_oscillations_of_stars                                        MOST                                                                       space_based_telescope|extra_solar_planets                  |
+*molonglo_observatory_synthesis_telescope                                          MOST                                                                       radio_telecope|ground_based_telescope                      |
+monitoring_*x_ray_experiment                                                       MOXE                                                                       all_sky|spectrum_x_gamma_instrument                        |
+mid_course_space_experiment                                                        MSX                                                                        space_based_telescope|infrared_telescope                   |
+mount_*stromlo_and_*siding_spring_observatories                                    MSSSO                                                                      organization                                               |
+*munich_near_infrared_cluster_survey                                               munics                                                                     galaxy_cluster_survey                                      |
+*mu_space_engineering_spacecraft                                                   muses                                                                      space_based_telescope                                      |
+multi_plexed_sqiid_tes_array_at_ninety_ghz                                         mustang                                                                    bolometer_imager|green_bank_telescope_instrument|radio     |  
+multi_wavelength_survey_by_*yale_*chile                                            musyc                                                                      galaxy_survey|galaxy_spectral_energy_distribution          |
+national_aeronautics_and_space_administration                                      nasa|NACA|national_advisory_committee_on_aeronautics                       organization                                               |
+national_astronomical_observatory_of_*japan                                        naoj                                                                       organization                                               |
+*norwegian_astronomical_society                                                    NAS|norsk_astronomisk_selskap                                              organization                                               |
+national_space_development_agency                                                  nasda                                                                      organization                                               |
+national_institute_of_standards_and_technology                                     nist|NBS|national_bureau_of_standards                                      organization                                               |
+nuclear_*compton_telescope                                                         NCT                                                                        balloon_borne_telecope|soft_gamma_ray_telescope            |
+next_generation_very_large_array                                                   ngvla|next_generation_vla                                                  radio_telescope|ground_based_telescope                     |
+northern_hipass_catalog                                                            nhicat                                                                     hi_survey|radio_survey                                     |
+near_infrared_camera_multi_object_spectrometer                                     nicmos                                                                     hst_instrument                                             |
+near_infrared_camera                                                               nircam                                                                     jwst_instrument                                            |
+near_infrared_spectrograph                                                         nirspec                                                                    jwst_instrument                                            |
+national_oceanic_and_atmospheric_administration                                    noaa                                                                       organization                                               |
+national_optical_astronomy_observatories                                           noao                                                                       organization                                               |
+nordic_telescope                                                                   NOT                                                                        ground_based_telescope                                     |
+national_radio_astronomy_observatory                                               nrao                                                                       organization                                               |
+naval_research_laboratory                                                          nrl                                                                        organization                                               |
+national_science_foundation                                                        nsf                                                                        organization                                               |
+national_solar_observatory                                                         NSO                                                                        organization                                               |
+national_space_science_data_center                                                 nssdc                                                                      organization                                               |
+new_technology_telescope                                                           ntt                                                                        ground_based_telescope|adaptive_optics                     |
+nrao_vla_sky_survey                                                                nvss                                                                       radio_survey                                               |
+nuclear_spectroscopic_telescope_array                                              nustar                                                                     *x_ray_telescope|space_based_telescope                     |
+*okayama_astrophysical_observatory                                                 OAO                                                                        ground_based_telescope                                     |
+orbiting_astronomical_observatory                                                  OAO                                                                        space_based_telescope                                      |
+observatory_of_*cote_dazur                                                         observatoire_de_la_cote_dazur|OCA                                          organization                                               |
+optical_gravitational_lensing_experiment                                           ogle                                                                       micro_lenses                                               |
+orbiting_and_retrievable_far_and_extreme_ultra_violet_sprectrometer                orfeus                                                                     space_based_telescope                                      |
+*ohio_sky_survey                                                                   OSS                                                                        galaxy_survey|radio_survey                                 |
+oriented_scintillation_spectrometer_experiment                                     OSSE                                                                       comptom_gamma_ray_observatory_instrument                   |
+*palomar_telescope                                                                 P60                                                                        ground_based_telescope                                     |
+payload_for_anti_matter_exploration_and_ligh_nuclei_astrophysics                   PAMELA                                                                     space_based_telescope|cosmic_ray_telescope                 |
+panoramic_survey_telescope_and_rapid_response_system                               panstarrs                                                                  all_sky_visible_survey                                     |
+proportional_counter_array                                                         PCA                                                                        *rossi_*x_ray_timing_explorer_instrument                   |
+plateau_de_bure_interferometer                                                     PDBI                                                                       ground_based_telescope|radio_telescope                     |
+*parkes_multi_beam_pulsar_survey                                                   PMPS                                                                       |                                                          |
+polarization_sky_survey_of_the_universe_magnetism                                  possum|polarisation_sky_survey_of_the_universes_magnetism                  radio_survey|*faraday_rotation|galaxy_survey|              |
+|                                                                                  |                                                                          galaxy_cluster|inter_galactic_medium
+particle_physics_and_astronomy_research_council                                    pparc                                                                      organization                                               |
+prism_multi_object_survey                                                          primus                                                                     spectroscopic_survey|galaxy_survey|galaxy_redshift         |
+rapid_telescopes_for_optical_response_project                                      raptor                                                                     ground_based_telescope                                     |
+royal_astronomical_society                                                         RAS                                                                        organization                                               |
+royal_astronomical_society_of_*canada                                              RASC                                                                       organization                                               |
+rosat_all_sky_survey                                                               RASS                                                                       *x_ray_survey                                              |
+research_consortium_on_nearby_stars                                                recons                                                                     star_survey                                                |
+royal_*greenwich_observatory                                                       RGO                                                                        organization                                               |
+*roentgen_satellite                                                                rosat                                                                      *x_ray_telescope|space_based_telescope                     |
+robotic_optical_transient_search_experiment                                        rotse                                                                      follow_up_gamma_ray_burst                                  |
+russian_space_agency                                                               RSA                                                                        organization                                               |
+research_school_of_astronomy_and_astrophysics                                      RSAA                                                                       organization                                               |
+rossi_x_ray_timing_explorer                                                        rxte                                                                       space_based_telescope|*x_ray_telescope                     |
+south_african_large_telescope                                                      SALT                                                                       ground_based_telescope                                     |
+soiuth_african_astronomical_observatory                                            SAAO                                                                       organization                                               |
+*smithsonian_astrophysical_observatory                                             SAO                                                                        organization                                               |
+science_analysis_software                                                          SAS                                                                        x_ray_data_reduction|software                              |
+french_astronomical_society                                                        SAF|societe_astronomique_de_france                                         organization                                               |
+synthetic_aperture_telescope                                                       SAT                                                                        |                                                          |
+*santa_*barbara_instrument_group                                                   SBIG                                                                       organization                                               |
+super_nova_cosmology_project                                                       SCP                                                                        super_nova_survey|high_redshift_survey                     |
+sub_milli_meter_common_user_bolometer_array                                        scuba|scuba2|submillimetre_common_user_bolometer_array|                    sub_milli_meter_imager                                     |
+|                                                                                  submillimetre_common_user_bolometer_array
+*sloan_digital_sky_survey                                                          SDSS|SDSSp                                                                 all_sky_survey                                             |
+southeast_asia_astronomy_network                                                   SEAAN                                                                      organization                                               |
+science_and_engineering_research_council                                           SERC                                                                       organization                                               |
+swedish_eso_sub_milli_meter_telescope                                              SEST|swedish_eso_submillimetre_telescope                                   ground_based_telescope                                     |
+search_for_extra_terrestrial_intelligence                                          SETI                                                                       organization                                               |
+set_of_identifications_measurements_and_bibliography_for_astronomical_data         simbad                                                                     software                                                   |
+survey_of_ionization_in_neutral_gas_galaxies                                       SINGG                                                                      galaxy_survey|halpha_survey|ultra_violet_survey            |
+*spitzer_infrared_nearby_galaxies_survey                                           SINGS                                                                      |                                                          |
+southern_infrared_proper_motion_survey                                             SIPS                                                                       star_survey|high_proper_motion                             |
+*spitzer                                                                           spitzer|sirtf|SST|                                                         infrared_telescope|space_based_telescope                   |
+|                                                                                  shuttle_infrared_telescope_facility|
+|                                                                                  space_infrared_telescope_facility
+square_kilo_meter_array                                                            SKA                                                                        radio_telescope|ground_based_telescope                     |
+sub_milli_meter_array                                                              SMA                                                                        ground_based_telescope                                     |
+spectrum_*x_gamma                                                                  srg_sxg_spektrrg_spektr                                                    space_based_telescope                                      |
+stratospheric_observatory_for_infrared_astronomy                                   sofia                                                                      infrared_telescope                                         |
+south_pole_telescope                                                               SPT                                                                        ground_based_telescope|cosmic_micro_wave_background        |
+simultaneous_quad_infrared_imaging_device                                          sqiid                                                                      |                                                          |
+space_research_organization_of_the_netherlands                                     SRON                                                                       organization                                               |
+space_studies_institute                                                            SSI                                                                        organization                                               |
+super_cosmos_sky_surveys                                                           SSS                                                                        digitized_image|photographic_plate|BRI_filters             |
+super_cosmos_sly_survey_proper_motion                                              ssspm                                                                      digitized_image|photographic_plate|BRI_filters             |
+spectroscopic_survey_telescope                                                     SST                                                                        ground_based_telescope                                     |
+star_light_absorption_reduction_through_a_survey_of_multiple_occulting_galaxies    STARSMOG                                                                   hst_survey|galaxy_survey                                   |
+space_telescope_imaging_spectrograph                                               stis                                                                       hst_instrument                                             |
+space_telescope_science_institute                                                  stsci                                                                      organization                                               |
+space_telescope_science_data_analysis_system                                       stsdas                                                                     software                                                   |
+subaru_prime_focuse_camera                                                         suprime                                                                    subaru_instrument                                          |
+*sydney_university_stellar_interferometer                                          susi                                                                       optical_interferometer                                     |
+sub_milli_meter_wave_astronomy_satellite                                           swas                                                                       space_based_telescope                                      |
+*sagittarius_window_eclipsing_extra_solar_planet_search                            SWEEPS                                                                     hst_survey                                                 |
+*spitzer_wide_area_infrared_extra_galactic_survey                                  swire                                                                      spitzer_instrument|mid_infrared_galaxy_survey              |
+south_west_research_institute                                                      swri                                                                       organization                                               |
+time_allocation_committee|                                                         TAC                                                                        |                                                          |
+telescope_allocation_committee
+*tata_institute_of_fundamental_research                                            tifr                                                                       organization                                               |
+thirty_meter_telescope                                                             TMT|california_extremely_large_telescope|celt                              ground_based_telescope                                     |
+*subaru                                                                            subaru                                                                     ground_based_telescope                                     |
+*suzaku                                                                            suzaku|astroeii                                                            x_ray_telescope|space_based_telescope                      |
+ultraviolet_imaging_telescope                                                      uit                                                                        space_based_telescope                                      |
+united_kingdom_infrared_telescope                                                  ukirt                                                                      near_infrared_telescope|ground_based_telescope             |
+ukirt_infrared_deep_sky_survey                                                     ukidss                                                                     |                                                          |
+united_kingdom_space_agency                                                        bnsc|uksa|uk_space_agency                                                  organization                                               |
+united_kingdom_*schmidt_telescope                                                  ukst                                                                       ground_based_telescope                                     |
+united_states_air_force                                                            usaf                                                                       organization                                               |
+united_states_geological_survey                                                    usgs                                                                       organization                                               |
+united_states_naval_observatory                                                    usno                                                                       organization                                               |
+*vainu_*bappu_observatory                                                          VBO                                                                        organization                                               |
+*vainu_*bappu_telescope                                                            vbt                                                                        ground_based_telescope                                     |
+vlbi_exploration_of_radio_astrometry                                               vera                                                                       space_based_telescope|radio_telescope                      |
+visible_multi_object_spectrograph                                                  vimos                                                                      vlt_instrument                                             |
+vimos_public_extra_galactic_redshift_survey                                        vipers                                                                     |                                                          |
+very_large_array                                                                   VLA                                                                        ground_based_telescope|radio_telescope|                    |
+|                                                                                  |                                                                          radio_interferometer
+very_long_baseline_array                                                           vlba                                                                       radio_telescope|ground_based_telescope|                    |
+|                                                                                  |                                                                          radio_interferometer
+very_long_baseline_interferometry                                                  vlbi                                                                       radio_telescope|ground_based_telescope                     |
+very_large_telescope|very_large_telescope_interferometer                           vlt|vlti                                                                   ground_based_telescope|optical_telescope|                  |
+|                                                                                  |                                                                          infrared_telescope
+virtual_observatory                                                                VO                                                                         software                                                   |
+vlbi_space_observatory_program                                                     vsop                                                                       ground_based_telescope|radio_telescope|interferometer|     |
+|                                                                                  |                                                                          space_based_telescope
+vlt_survey_telescope                                                               VST                                                                        ground_based_telescope|optical_telescope                   |
+vimos_vlt_deep_survey                                                              vvds                                                                       redshift_survey                                            |
+*wallaby                                                                           wallaby|askap_hi_all_sky_survey                                            galaxy_survey|hi_survey                                    |
+wide_field_camera                                                                  wfcam                                                                      *ukirt_instrument|near_infrared_imager                     |
+wide_field_multi_object_spectrograph                                               wfmos                                                                      *gemini_instrument|near_infrared_spectrograph              |
+wide_field_and_planetary_camera                                                    wfpc                                                                       *hst_instrument|visible_imager                             |
+wide_field_and_plenetary_camera_2                                                  wfpc2                                                                      *hst_instrument|visbile_imager                             |
+wide_field_channel                                                                 wfc                                                                        *hst_instrument|visible_imager                             ACS
+*william_*hershel_telescope                                                        WHT                                                                        ground_based_telescope|optical_telescope|                  |
+|                                                                                  |                                                                          near_infrared_telescope 
+wide_field_infrared_camera                                                         wircam                                                                     ground_based_telescope|cfht_instrument                     |
+wide_field_infrared_explorer                                                       WIRE                                                                       space_based_telescope                                      |
+web_interface_for_searching_archival_research_data                                 wisard                                                                     software                                                   |
+wide_field_infrared_survey_explorer                                                WISE                                                                       space_based_telescope                                      |
+*wisconsin_*indiana_*yale_noao                                                     wiyn                                                                       ground_based_telescope                                     |
+*wilkinson_micro_wave_anisotropy_probe                                             wmap                                                                       cosmic_micro_wave_background|space_based_telescope         |
+*westerbork_synthesis_radio_telescope                                              wsrt                                                                       radio_telescope|ground_based_telescope|                    |
+|                                                                                  |                                                                          radio_interferometer
+xmm_cluster_survey                                                                 xcs                                                                        x_ray_galaxy_cluster_survey|xmm_survey                     |
+*x_ray_multi_mirror                                                                xmm|xmm_newton                                                             x_ray_telescope|space_based_telescope                      |
+four_star_galaxy_evolution_survey                                                  zfourge                                                                    galaxy_survey|high_redshift                                |
